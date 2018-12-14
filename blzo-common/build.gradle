@@ -1,0 +1,6 @@
+jar {
+    baseName = "blzo-common"
+}
+dependencies {
+    compile project(":blzo-ex-basic")
+}

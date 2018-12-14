@@ -1,0 +1,7 @@
+jar {
+    baseName = "blzo-ex-basic"
+}
+dependencies {
+
+
+}
