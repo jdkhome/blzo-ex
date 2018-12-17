@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.manage.common.aop.authj;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdkhome.blzo.common.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import com.jdkhome.blzo.manage.common.aop.authj.menu.LayerDTO;
 import com.jdkhome.blzo.manage.generator.model.*;
 import com.jdkhome.blzo.manage.service.manage.AdminBasicService;

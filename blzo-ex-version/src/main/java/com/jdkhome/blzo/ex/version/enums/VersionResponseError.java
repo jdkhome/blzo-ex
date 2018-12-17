@@ -1,0 +1,23 @@
+package com.jdkhome.blzo.ex.version.enums;
+
+import com.jdkhome.blzo.ex.basic.pojo.BaseError;
+import lombok.Getter;
+
+/**
+ * author link.ji
+ * createTime 下午7:28 2018/6/21
+ */
+@Getter
+public enum VersionResponseError implements BaseError {
+
+    //===========通用返回==============
+    VERSION_UPGRADE(101, "版本过低");
+
+    private Integer code;
+    private String msg;
+
+    VersionResponseError(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+}

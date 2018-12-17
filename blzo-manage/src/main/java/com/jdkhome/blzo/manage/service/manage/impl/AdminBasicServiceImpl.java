@@ -2,12 +2,12 @@ package com.jdkhome.blzo.manage.service.manage.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jdkhome.blzo.common.component.coder.PasswordEncoder;
-import com.jdkhome.blzo.common.component.generator.SaltGenerator;
+import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
+import com.jdkhome.blzo.ex.utils.generator.SaltGenerator;
 import com.jdkhome.blzo.common.constants.SqlTemplate;
 import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
-import com.jdkhome.blzo.common.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import com.jdkhome.blzo.manage.common.aop.authj.AuthjConstants;
 import com.jdkhome.blzo.manage.common.aop.authj.menu.LayerDTO;
 import com.jdkhome.blzo.manage.common.enums.ResponseError;
@@ -60,7 +60,7 @@ public class AdminBasicServiceImpl implements AdminBasicService {
 
         Admin admin = new Admin();
         admin.setUsername(username);
-        admin.setSalt(SaltGenerator.generateUUIDSalt());
+        admin.setSalt(SaltGenerator.get());
         admin.setPassword(PasswordEncoder.toMD5(password, admin.getSalt()));
         admin.setNickName(nickName);
         admin.setPhone(phone);

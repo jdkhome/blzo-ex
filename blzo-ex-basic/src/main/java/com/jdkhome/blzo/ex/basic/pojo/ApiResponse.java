@@ -10,11 +10,12 @@ import lombok.Data;
  * 基础返回
  */
 @Data
-public class ApiResponse {
+public class ApiResponse<T> {
 
     private Integer code;
     private String msg;
-    private Object data;
+    private Object debug;
+    private T data;
 
     /**
      * 禁用直接创建
@@ -37,7 +38,7 @@ public class ApiResponse {
      *
      * @param baseError
      */
-    public ApiResponse(BaseError baseError, Object data) {
+    public ApiResponse(BaseError baseError, T data) {
         this.code = baseError.getCode();
         this.msg = baseError.getMsg();
         this.data = data;
@@ -51,7 +52,7 @@ public class ApiResponse {
     public ApiResponse(ServiceException se) {
         this.code = se.getErrorCode();
         this.msg = se.getErrorMsg();
-        this.data = se.getData();
+        this.debug = se.getDebug();
     }
 
     /**
@@ -103,8 +104,8 @@ public class ApiResponse {
      * @param baseError
      * @return
      */
-    static public ApiResponse error(BaseError baseError, Object data) {
-        return new ApiResponse(baseError, data);
+    static public ApiResponse error(BaseError baseError, Object debug) {
+        return new ApiResponse(baseError, debug);
     }
 
     /**
@@ -115,7 +116,7 @@ public class ApiResponse {
      */
     static public ApiResponse error(Exception e) {
         ApiResponse result = new ApiResponse(CommonResponseError.SERVER_ERROR);
-        result.setData(e.getMessage());
+        result.setDebug(e.getMessage());
         return result;
     }
 

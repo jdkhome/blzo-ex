@@ -9,12 +9,25 @@
 
 rootProject.name = 'blzo'
 
-// 核心api模块
+// blzo 项目基础模块
 include 'blzo-core'
 include 'blzo-manage'
 include 'blzo-common'
 
-// blzo-ex
-include 'blzo-ex-version'
+// blzo-ex 扩展
+
+// 基础包
 include 'blzo-ex-basic'
+
+// 常用工具包
+include 'blzo-ex-utils'
+
+// ip 获取城市 封装自https://gitee.com/lionsoul/ip2region
+include 'blzo-ex-ip2region'
+
+// blzo版本管理
+include 'blzo-ex-version'
+
+// 用户登录功能
+include 'blzo-ex-usignin'
 

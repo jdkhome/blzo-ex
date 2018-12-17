@@ -1,6 +1,6 @@
 package com.jdkhome.blzo.manage.common.aop.authj;
 
-import com.alibaba.fastjson.JSONObject;
+import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -92,7 +92,7 @@ public class AuthjManager {
             log.error("[Authj - 鉴权] uri:{} -> authjCache未命中,请检查");
             return true;
         }
-        log.debug("[Authj - 鉴权] uri:{} -> authjBean:{}", uri, JSONObject.toJSONString(authjBean));
+        log.debug("[Authj - 鉴权] uri:{} -> authjBean:{}", uri, PerfectGson.getGson().toJson(authjBean));
 
 
         if (!authjBean.getAuth()) {

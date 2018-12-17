@@ -1,10 +1,10 @@
 package com.jdkhome.blzo.manage.common.aop.authj;
 
-import com.alibaba.fastjson.JSONObject;
 import com.jdkhome.blzo.common.aop.log.controller.ApiRecordAspect;
 import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
-import com.jdkhome.blzo.common.tools.IpTools;
+import com.jdkhome.blzo.ex.utils.tools.IpTools;
+import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import com.jdkhome.blzo.manage.service.manage.LogBasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,7 +54,7 @@ public class AuthjInterceptor extends HandlerInterceptorAdapter {
                     response.setCharacterEncoding("utf-8");
                     response.setContentType("application/json");
                     PrintWriter pw = response.getWriter();
-                    pw.write(JSONObject.toJSONString(resp));
+                    pw.write(PerfectGson.getGson().toJson(resp));
                     pw.flush();
                 } else {
                     // page 跳转到错误页面

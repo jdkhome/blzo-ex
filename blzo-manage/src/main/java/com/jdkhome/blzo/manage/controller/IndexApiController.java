@@ -2,7 +2,7 @@ package com.jdkhome.blzo.manage.controller;
 
 import com.jdkhome.blzo.common.aop.log.controller.Api;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
-import com.jdkhome.blzo.common.tools.IpTools;
+import com.jdkhome.blzo.ex.utils.tools.IpTools;
 import com.jdkhome.blzo.manage.common.aop.authj.AuthjManager;
 import com.jdkhome.blzo.manage.generator.model.Admin;
 import com.jdkhome.blzo.manage.service.manage.AdminService;

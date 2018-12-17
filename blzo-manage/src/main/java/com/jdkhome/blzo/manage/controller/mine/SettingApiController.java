@@ -1,9 +1,9 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
 import com.jdkhome.blzo.common.aop.log.controller.Api;
-import com.jdkhome.blzo.common.component.coder.PasswordEncoder;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
+import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
 import com.jdkhome.blzo.manage.common.aop.authj.Authj;
 import com.jdkhome.blzo.manage.common.aop.authj.AuthjManager;
 import com.jdkhome.blzo.manage.common.enums.ResponseError;

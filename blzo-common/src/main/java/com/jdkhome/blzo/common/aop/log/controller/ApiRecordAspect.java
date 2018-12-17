@@ -1,10 +1,10 @@
 package com.jdkhome.blzo.common.aop.log.controller;
 
-import com.jdkhome.blzo.common.constants.SystemConstants;
+import com.jdkhome.blzo.ex.basic.constants.BasicSystemConstants;
 import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
-import com.jdkhome.blzo.common.tools.IpTools;
-import com.jdkhome.blzo.common.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.utils.tools.IpTools;
+import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -103,7 +103,7 @@ public class ApiRecordAspect {
         HttpServletRequest request = requestAttributes.getRequest();
 
         // 请求保存接口名称
-        request.setAttribute(SystemConstants.controllerName, api.value());
+        request.setAttribute(BasicSystemConstants.controllerName, api.value());
 
         String ip = IpTools.getIp(request);
 

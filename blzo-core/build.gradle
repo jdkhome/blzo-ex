@@ -4,4 +4,8 @@ jar {
 dependencies {
     // 公共依赖
     compile project(":blzo-common")
+
+    compile project(":blzo-ex-usignin")
+    compile project(":blzo-ex-version")
+
 }

@@ -1,8 +1,8 @@
 package com.jdkhome.blzo.manage.service.manage.impl;
 
-import com.jdkhome.blzo.common.component.coder.PasswordEncoder;
-import com.jdkhome.blzo.common.component.generator.SaltGenerator;
-import com.jdkhome.blzo.common.component.generator.UUIDGenerator;
+import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
+import com.jdkhome.blzo.ex.utils.generator.SaltGenerator;
+import com.jdkhome.blzo.ex.utils.generator.UUIDGenerator;
 import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.manage.common.aop.authj.AuthjConstants;
@@ -83,11 +83,11 @@ public class AdminServiceImpl implements AdminService {
 
             admin = new Admin();
 
-            String pwd = UUIDGenerator.generateUUIDToken();
+            String pwd = UUIDGenerator.get();
 
             admin.setId(AuthjConstants.ROOT_ID);
             admin.setUsername(AuthjConstants.ROOT_INIT_USERNAME);
-            admin.setSalt(SaltGenerator.generateUUIDSalt());
+            admin.setSalt(SaltGenerator.get());
             admin.setPassword(PasswordEncoder.toMD5(pwd, admin.getSalt()));
             admin.setNickName(AuthjConstants.ROOT_INIT_NICKNAME);
             admin.setStatus(AdminStatusEnum.NORMAL.getCode());

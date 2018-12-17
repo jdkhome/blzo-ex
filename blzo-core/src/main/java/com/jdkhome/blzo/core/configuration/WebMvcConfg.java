@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.core.configuration;
 
-import com.jdkhome.blzo.core.common.aop.version.VersionInterceptor;
-import com.jdkhome.blzo.core.common.aop.version.VersionMethodArgumentResolver;
+import com.jdkhome.blzo.ex.version.VersionInterceptor;
+import com.jdkhome.blzo.ex.version.VersionMethodArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

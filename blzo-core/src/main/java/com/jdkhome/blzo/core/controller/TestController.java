@@ -1,11 +1,12 @@
 package com.jdkhome.blzo.core.controller;
 
+import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
 import com.jdkhome.blzo.common.aop.log.controller.Api;
 import com.jdkhome.blzo.common.constants.ErrorMsg;
-import com.jdkhome.blzo.common.constants.RegularExpression;
+import com.jdkhome.blzo.ex.utils.constants.RegularExpression;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
-import com.jdkhome.blzo.core.common.aop.version.MinVersion;
-import com.jdkhome.blzo.core.common.aop.version.Version;
+import com.jdkhome.blzo.ex.version.annotation.MinVersion;
+import com.jdkhome.blzo.ex.version.annotation.Version;
 import lombok.Data;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,7 @@ public class TestController {
         String email;
     }
 
+    @UserSignin
     @MinVersion("1.5.0")
     @Api("测试用接口")
     @RequestMapping(value = "/aaa", method = RequestMethod.POST)

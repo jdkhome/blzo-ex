@@ -2,7 +2,8 @@ package com.jdkhome.blzo.manage.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.jdkhome.blzo.ex.basic.pojo.PageRequest;
-import com.jdkhome.blzo.common.tools.IpTools;
+import com.jdkhome.blzo.ex.utils.tools.IpTools;
+import com.jdkhome.blzo.ex.ip2region.ip_tool.IpRegionTools;
 import com.jdkhome.blzo.manage.common.aop.authj.Authj;
 import com.jdkhome.blzo.manage.common.enums.AdminStatusEnum;
 import com.jdkhome.blzo.manage.generator.model.Admin;
@@ -60,7 +61,7 @@ public class AdminPageController {
             AdminStatusEnum statusEnum = AdminStatusEnum.getByCode(admin.getStatus());
 
             vo.setStatusStr(statusEnum.getName());
-            vo.setIpCity(IpTools.getCity(IpTools.getIp(request)));
+            vo.setIpCity(IpRegionTools.getCity(IpTools.getIp(request)));
 
             vos.add(vo);
 

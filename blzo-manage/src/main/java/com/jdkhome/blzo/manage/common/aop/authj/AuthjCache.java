@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.manage.common.aop.authj;
 
-import com.alibaba.fastjson.JSONObject;
 import com.jdkhome.blzo.common.aop.log.controller.Api;
+import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,7 +65,7 @@ public class AuthjCache {
                             authjBean = new AuthjBean(uriSb.toString(), authj);
                         }
                         authjCache.put(uriSb.toString(), authjBean);
-                        log.info("addAuthj：{}", JSONObject.toJSONString(authjBean));
+                        log.info("addAuthj：{}", PerfectGson.getGson().toJson(authjBean));
                     }));
         } else {
             Arrays.stream(methodUris).forEach(methodUri -> {
@@ -80,7 +80,7 @@ public class AuthjCache {
                     authjBean = new AuthjBean(uriSb.toString(), authj);
                 }
                 authjCache.put(uriSb.toString(), authjBean);
-                log.info("addAuthj：{}", JSONObject.toJSONString(authjBean));
+                log.info("addAuthj：{}", PerfectGson.getGson().toJson(authjBean));
             });
         }
 
