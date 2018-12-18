@@ -1,6 +1,6 @@
 package com.jdkhome.blzo.manage;
 
-import com.jdkhome.blzo.manage.service.manage.AdminService;
+import com.jdkhome.blzo.ex.authj.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

@@ -5,6 +5,8 @@ dependencies {
     // 公共依赖
     compile project(":blzo-common")
 
+    compile project(":blzo-ex-authj")
+
     // thymeleaf
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 

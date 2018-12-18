@@ -1,14 +1,14 @@
 package com.jdkhome.blzo.manage.controller.system;
 
 import com.github.pagehelper.PageInfo;
+import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.authj.enums.AdminStatusEnum;
+import com.jdkhome.blzo.ex.authj.generator.model.Admin;
+import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import com.jdkhome.blzo.ex.basic.pojo.PageRequest;
 import com.jdkhome.blzo.ex.utils.tools.IpTools;
 import com.jdkhome.blzo.ex.ip2region.ip_tool.IpRegionTools;
-import com.jdkhome.blzo.manage.common.aop.authj.Authj;
-import com.jdkhome.blzo.manage.common.enums.AdminStatusEnum;
-import com.jdkhome.blzo.manage.generator.model.Admin;
 import com.jdkhome.blzo.manage.pojo.vo.system.AdminVO;
-import com.jdkhome.blzo.manage.service.manage.AdminBasicService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

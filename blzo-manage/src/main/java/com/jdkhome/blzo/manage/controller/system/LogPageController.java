@@ -1,9 +1,9 @@
 package com.jdkhome.blzo.manage.controller.system;
 
 import com.github.pagehelper.PageInfo;
+import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.authj.service.LogBasicService;
 import com.jdkhome.blzo.ex.basic.pojo.PageRequest;
-import com.jdkhome.blzo.manage.common.aop.authj.Authj;
-import com.jdkhome.blzo.manage.service.manage.LogBasicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

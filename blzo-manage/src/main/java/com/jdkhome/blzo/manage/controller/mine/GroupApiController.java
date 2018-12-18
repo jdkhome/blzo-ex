@@ -1,13 +1,13 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
-import com.jdkhome.blzo.common.aop.log.controller.Api;
+import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.authj.core.AuthjManager;
+import com.jdkhome.blzo.ex.authj.generator.model.Group;
+import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
+import com.jdkhome.blzo.ex.basic.aop.api.Api;
 import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
-import com.jdkhome.blzo.manage.common.aop.authj.Authj;
-import com.jdkhome.blzo.manage.common.aop.authj.AuthjManager;
-import com.jdkhome.blzo.manage.generator.model.Group;
-import com.jdkhome.blzo.manage.service.manage.GroupBasicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

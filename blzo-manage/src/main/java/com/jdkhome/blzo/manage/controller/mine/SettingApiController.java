@@ -1,14 +1,14 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
-import com.jdkhome.blzo.common.aop.log.controller.Api;
+import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.authj.core.AuthjManager;
+import com.jdkhome.blzo.ex.authj.enums.AuthjResponseError;
+import com.jdkhome.blzo.ex.authj.generator.model.Admin;
+import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
+import com.jdkhome.blzo.ex.basic.aop.api.Api;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
-import com.jdkhome.blzo.manage.common.aop.authj.Authj;
-import com.jdkhome.blzo.manage.common.aop.authj.AuthjManager;
-import com.jdkhome.blzo.manage.common.enums.ResponseError;
-import com.jdkhome.blzo.manage.generator.model.Admin;
-import com.jdkhome.blzo.manage.service.manage.AdminBasicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,7 +68,7 @@ public class SettingApiController {
         Admin admin = adminBasicService.getAdminById(adminId);
         if (!admin.getPassword().equals(PasswordEncoder.toMD5(oldPwd, admin.getSalt()))) {
             log.error("修改密码->老密码错误");
-            throw new ServiceException(ResponseError.RESP_ERROR_PASSWORD_ERROR);
+            throw new ServiceException(AuthjResponseError.RESP_ERROR_PASSWORD_ERROR);
         }
 
         adminBasicService.editAdmin(adminId, null, newPwd, null, null, null, null, null);

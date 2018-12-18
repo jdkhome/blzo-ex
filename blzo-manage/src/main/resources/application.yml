@@ -74,6 +74,11 @@ mybatis:
 logging:
   file: /tmp/logs/blzo-manage.log
 
+blzo:
+  project_name: BLZO
+  authj:
+    controller-package_name: com.jdkhome.blzo.manage.controller
+
 
 
 

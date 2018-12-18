@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.core.controller;
 
+import com.jdkhome.blzo.ex.basic.aop.api.Api;
 import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
-import com.jdkhome.blzo.common.aop.log.controller.Api;
 import com.jdkhome.blzo.common.constants.ErrorMsg;
 import com.jdkhome.blzo.ex.utils.constants.RegularExpression;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;

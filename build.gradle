@@ -27,6 +27,7 @@ allprojects {
     apply plugin: 'signing'  // 签名插件
 
 
+    version '0.0.3'
     group 'com.jdkhome.blzo'
 
     sourceCompatibility = 1.10

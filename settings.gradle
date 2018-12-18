@@ -31,3 +31,7 @@ include 'blzo-ex-version'
 // 用户登录功能
 include 'blzo-ex-usignin'
 
+// 管理后台authj
+include 'blzo-ex-authj'
+include 'blzo-ex-authj'
+

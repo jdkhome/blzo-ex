@@ -11,18 +11,18 @@ jar {
 //  组 和 版本配置
 //group 'com.jdkhome.blzo'
 //version '0.0.2-SNAPSHOT'
-version '0.0.2'
+//version '0.0.2'
 
 // 编译版本和编码配置
-sourceCompatibility = 1.10
+sourceCompatibility = 1.8
 compileJava {
-    sourceCompatibility = 1.10
-    targetCompatibility = 1.10
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
     [compileJava]*.options*.encoding = 'UTF-8'
 }
 compileTestJava {
-    sourceCompatibility = 1.10
-    targetCompatibility = 1.10
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
     [compileTestJava]*.options*.encoding = 'UTF-8'
 }
 
