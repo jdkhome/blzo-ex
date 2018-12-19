@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@ComponentScan(basePackages = {"com.jdkhome.blzo"})
+@ComponentScan(basePackages = {"com.jdkhome.blzo.ex", "com.jdkhome.blzo"})
 @EnableScheduling
 @EnableTransactionManagement
 @SpringBootApplication

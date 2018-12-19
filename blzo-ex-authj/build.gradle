@@ -52,7 +52,7 @@ task javadocJar(type: Jar) {
 }
 // javadoc 配置，这里是自定义了 java doc 的一些配置
 javadoc {
-    description = "blzo-ex-authj"
+    description = "${project.name}"
 
     options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
     options.author = true
@@ -80,9 +80,9 @@ publishing {
 
             // https://docs.gradle.org/current/dsl/org.gradle.api.publish.maven.MavenPublication.html
             pom {
-                name = "blzo-ex-authj"
-                description = "blzo-ex-authj"
-                url = "https://github.com/jdkhome/blzo-ex/tree/master/blzo-ex-basic"
+                name = "${project.name}"
+                description = "${project.name}"
+                url = "https://github.com/jdkhome/blzo-ex/tree/master/${project.name}"
                 licenses {
                     license {
                         name = "The Apache License, Version 2.0"
