@@ -2,134 +2,22 @@ jar {
     baseName = "blzo-ex-version"
 }
 
-//plugins {
-//    id 'java'
-//    id 'maven-publish'  // maven 发布插件
-//    id 'signing'  // 签名插件
-//}
-
-//  组 和 版本配置
-//group 'com.jdkhome.blzo'
-//version '0.0.2-SNAPSHOT'
-//version '0.0.2'
-
 // 编译版本和编码配置
-sourceCompatibility = 1.8
-compileJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-    [compileJava]*.options*.encoding = 'UTF-8'
-}
-compileTestJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-    [compileTestJava]*.options*.encoding = 'UTF-8'
-}
-
-// 测试用例没有写好，还不能自动测试
-// 跳过所有文件的编译测试；不是跳过compileTestJava task 而是在执行该task的时候，跳过所有的测试文件
-test {
-    exclude '**/*.class'
-}
-
-//repositories {
-//    mavenCentral()
+//sourceCompatibility = 1.8
+//compileJava {
+//    sourceCompatibility = 1.8
+//    targetCompatibility = 1.8
+//    [compileJava]*.options*.encoding = 'UTF-8'
 //}
+//compileTestJava {
+//    sourceCompatibility = 1.8
+//    targetCompatibility = 1.8
+//    [compileTestJava]*.options*.encoding = 'UTF-8'
+//}
+
 
 dependencies {
     compile project(":blzo-ex-utils")
 
     compile project(":blzo-ex-basic")
 }
-
-// 后面的都是打包的配置
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allJava
-}
-// 生成 javadoc jar
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-// javadoc 配置，这里是自定义了 java doc 的一些配置
-javadoc {
-    description = "blzo-ex-version"
-
-    options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
-    options.author = true
-    options.version = true
-    options.header = project.name
-    options.addStringOption('Xdoclint:none', '-quiet')
-
-    // suppress warnings due to cross-module @see and @link references;
-    // note that global 'api' task does display all warnings.
-    logging.captureStandardError LogLevel.INFO
-    logging.captureStandardOutput LogLevel.INFO // suppress "## warnings" message
-    options.encoding = "UTF-8"  //编码一定要配置否则直接出错
-    options.charSet = 'UTF-8'
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.name
-            version "${version}"
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-
-            // https://docs.gradle.org/current/dsl/org.gradle.api.publish.maven.MavenPublication.html
-            pom {
-                name = "blzo-ex-version"
-                description = "blzo-ex-version"
-                url = "https://github.com/jdkhome/blzo-ex/tree/master/blzo-ex-version"
-                licenses {
-                    license {
-                        name = "The Apache License, Version 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                    }
-                }
-                developers {
-                    developer {
-                        id = "jdkhome"
-                        name = "linkji"
-                        email = "main@jdkhome.com"
-                    }
-                }
-                scm {
-                    connection = "scm:git:https://github.com/jdkhome/blzo-ex.git"
-                    developerConnection = "scm:git:https://github.com/jdkhome/blzo-ex.git"
-                    url = "https://github.com/jdkhome/blzo-ex"
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            name 'sonatypeRepository'
-            url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username = "${NEXUS_USERNAME}"
-                password = "${NEXUS_PASSWORD}"
-            }
-        }
-        maven {
-            name = 'sonatypeSnapshotRepository'
-            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-            credentials {
-                username = "${NEXUS_USERNAME}"
-                password = "${NEXUS_PASSWORD}"
-            }
-        }
-    }
-}
-
-// 签名配置，注意这里的顺序，今天第一次知道 gradle 中的 task 等配置也是有顺序的
-// 必须在 publishing 配置之后
-signing {
-    sign publishing.publications.mavenJava
-}
-
-//gradle publishMavenJavaPublicationToSonatypeRepository
