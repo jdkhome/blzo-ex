@@ -42,6 +42,7 @@ allprojects {
         [compileTestJava]*.options*.encoding = 'UTF-8'
     }
 
+
     dependencies {
         // =========== Spring基础 =========== //
 
@@ -108,19 +109,19 @@ allprojects {
         enabled = true
     }
 
-    // 后面的都是打包的配置
+// 后面的都是打包的配置
     task sourcesJar(type: Jar) {
         classifier = 'sources'
         from sourceSets.main.allJava
     }
-    // 生成 javadoc jar
+// 生成 javadoc jar
     task javadocJar(type: Jar) {
         classifier = 'javadoc'
         from javadoc.destinationDir
     }
-    // javadoc 配置，这里是自定义了 java doc 的一些配置
+// javadoc 配置，这里是自定义了 java doc 的一些配置
     javadoc {
-        description = "${project.name}"
+        description = project.name
 
         options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
         options.author = true
@@ -148,9 +149,9 @@ allprojects {
 
                 // https://docs.gradle.org/current/dsl/org.gradle.api.publish.maven.MavenPublication.html
                 pom {
-                    name = "${project.name}"
-                    description = "${project.name}"
-                    url = "https://github.com/jdkhome/blzo-ex/tree/master/${project.name}"
+                    name = project.name
+                    description = project.name
+                    url = "https://github.com/jdkhome/blzo-ex/tree/master/" + project.name
                     licenses {
                         license {
                             name = "The Apache License, Version 2.0"
@@ -192,8 +193,8 @@ allprojects {
         }
     }
 
-    // 签名配置，注意这里的顺序，今天第一次知道 gradle 中的 task 等配置也是有顺序的
-    // 必须在 publishing 配置之后
+// 签名配置，注意这里的顺序，今天第一次知道 gradle 中的 task 等配置也是有顺序的
+// 必须在 publishing 配置之后
     signing {
         sign publishing.publications.mavenJava
     }

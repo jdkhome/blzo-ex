@@ -3,23 +3,11 @@ jar {
 }
 
 
-// 编译版本和编码配置
-sourceCompatibility = 1.8
-compileJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-    [compileJava]*.options*.encoding = 'UTF-8'
-}
-compileTestJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-    [compileTestJava]*.options*.encoding = 'UTF-8'
-}
-
 
 dependencies {
 
 
 
 }
+
 //gradle publishMavenJavaPublicationToSonatypeRepository
