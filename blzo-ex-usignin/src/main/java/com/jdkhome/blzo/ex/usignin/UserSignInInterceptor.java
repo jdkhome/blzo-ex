@@ -4,7 +4,7 @@ import com.jdkhome.blzo.ex.usignin.annotation.UserMaybeSignin;
 import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
 import com.jdkhome.blzo.ex.usignin.constants.UsigninConstants;
 import com.jdkhome.blzo.ex.usignin.token.TokenManager;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
@@ -81,7 +81,7 @@ public class UserSignInInterceptor extends HandlerInterceptorAdapter {
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json");
             PrintWriter pw = response.getWriter();
-            pw.write(PerfectGson.getGson().toJson(ApiResponse.error(CommonResponseError.NO_LOGIN)));
+            pw.write(PerfectGson.getGson().toJson(ApiResponse.error(BasicResponseError.NO_LOGIN)));
             pw.flush();
             return false;
         }

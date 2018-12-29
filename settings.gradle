@@ -33,5 +33,6 @@ include 'blzo-ex-usignin'
 
 // 管理后台authj
 include 'blzo-ex-authj'
-include 'blzo-ex-authj'
 
+// 基于redisson的分布式锁简单封装
+include 'blzo-ex-redission'

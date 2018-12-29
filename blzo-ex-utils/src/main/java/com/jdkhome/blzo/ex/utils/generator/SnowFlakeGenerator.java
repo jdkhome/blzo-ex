@@ -1,5 +1,6 @@
 package com.jdkhome.blzo.ex.utils.generator;
 
+import com.jdkhome.blzo.ex.utils.pojo.BaseSnowFlakePrefix;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,6 +24,10 @@ public class SnowFlakeGenerator {
         return String.valueOf(this.nextId());
     }
 
+    public String generate(BaseSnowFlakePrefix prefix) {
+        return String.format("%s%s", prefix.getPrefix(), String.valueOf(this.nextId()));
+    }
+    
     /**
      * 起始的时间戳
      * 作者写代码时的时间戳

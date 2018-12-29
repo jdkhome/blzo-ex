@@ -9,7 +9,7 @@ import com.jdkhome.blzo.ex.authj.generator.dao.GroupMapper;
 import com.jdkhome.blzo.ex.authj.generator.model.*;
 import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
 import com.jdkhome.blzo.ex.basic.constants.SqlTemplate;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -52,7 +52,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         //入参验证
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(remark)) {
             log.error("添加组->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         Group group = new Group();
@@ -76,7 +76,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         //入参验证
         if (groupId == null || adminId == null) {
             log.error("增加组管理员关联->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAdmin groupAdmin = new GroupAdmin();
@@ -99,7 +99,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         //入参验证
         if (groupId == null || StringUtils.isEmpty(uri)) {
             log.error("增加组权限关联->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAuth groupAuth = new GroupAuth();
@@ -122,7 +122,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
     public Integer editGroups(Integer groupId, String name, String remark) {
         if (groupId == null) {
             log.error("修改组->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         Group group = new Group();
@@ -151,7 +151,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
     public Integer delGroup(Integer groupId) {
         if (groupId == null) {
             log.error("删除组->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         // 删除这个组的所有关联！
@@ -172,7 +172,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
 
         if (adminId == null) {
             log.error("删除某管理员创建的所有组->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         List<Group>  list = this.getAllGroup(null, adminId);
@@ -195,7 +195,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         //入参验证
         if (groupId == null || adminId == null) {
             log.error("删除组管理员关联->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAdminExample example = new GroupAdminExample();
@@ -215,7 +215,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
 
         if (groupId == null) {
             log.error("删除某组的所有管理员关联->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAdminExample example = new GroupAdminExample();
@@ -234,7 +234,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
     public Integer delGroupAdminByAdminId(Integer adminId) {
         if (adminId == null) {
             log.error("删除某管理员的所有组关联->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAdminExample example = new GroupAdminExample();
@@ -256,7 +256,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         //入参验证
         if (groupId == null || StringUtils.isEmpty(uri)) {
             log.error("删除组权限关联->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAuthExample example = new GroupAuthExample();
@@ -277,7 +277,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         //入参验证
         if (groupId == null) {
             log.error("删除组所有权限关联->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAuthExample example = new GroupAuthExample();
@@ -330,7 +330,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         //入参验证
         if (page == null || size == null) {
             log.error("分页查询组->分页参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupExample example = this.getExample(name, createId);
@@ -362,7 +362,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
 
         if (adminId == null) {
             log.error("获取GroupAdmin 通过管理员Id->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAdminExample example = new GroupAdminExample();
@@ -382,7 +382,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
 
         if (groupId == null) {
             log.error("获取GroupAuth 通过组Id->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAuthExample example = new GroupAuthExample();
@@ -403,7 +403,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
 
         if (groupId == null) {
             log.error("获取GroupAdmin 通过组Id->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         GroupAdminExample example = new GroupAdminExample();

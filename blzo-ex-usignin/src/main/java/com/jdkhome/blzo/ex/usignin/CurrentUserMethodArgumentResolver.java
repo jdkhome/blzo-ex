@@ -26,8 +26,11 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
         //如果参数类型是Integer并包含@CurrentUser注解才执行解析
-        if (methodParameter.getParameterType().isAssignableFrom(Integer.class)
-                && methodParameter.hasParameterAnnotation(CurrentUser.class)) {
+        if (
+//                (methodParameter.getParameterType().isAssignableFrom(Integer.class)
+//                || methodParameter.getParameterType().isAssignableFrom(String.class))
+//                &&
+                methodParameter.hasParameterAnnotation(CurrentUser.class)) {
             return true;
         }
 
@@ -40,9 +43,10 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
                                   NativeWebRequest nativeWebRequest,
                                   WebDataBinderFactory webDataBinderFactory) throws Exception {
 
-        Integer currentUserId = (Integer) nativeWebRequest.getAttribute(UsigninConstants.USER_ID, RequestAttributes.SCOPE_REQUEST);
+        Object currentUserId = nativeWebRequest.getAttribute(UsigninConstants.USER_ID, RequestAttributes.SCOPE_REQUEST);
 
-        log.info("currentUserId:{}", currentUserId);
+
+        log.debug("currentUserId:{}", currentUserId);
 
 
         return currentUserId;

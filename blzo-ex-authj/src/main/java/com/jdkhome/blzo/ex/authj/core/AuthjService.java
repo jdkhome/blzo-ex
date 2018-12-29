@@ -69,7 +69,7 @@ public class AuthjService {
         });
 
 
-        adminBasicService.editAdmin(adminId, null, null, null, null, null, null, list);
+        adminBasicService.editAdmin(adminId, null, null, null, null, null, null, null, list);
     }
 
     private Set<String> allCommonMenuUri() {

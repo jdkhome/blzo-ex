@@ -1,6 +1,6 @@
 package com.jdkhome.blzo.ex.basic.pojo;
 
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import lombok.Data;
 
@@ -62,7 +62,7 @@ public class ApiResponse<T> {
      * @return
      */
     static public ApiResponse success(Object data) {
-        ApiResponse result = new ApiResponse(CommonResponseError.SUCCESS);
+        ApiResponse result = new ApiResponse(BasicResponseError.SUCCESS);
         result.setData(data);
         return result;
     }
@@ -73,7 +73,7 @@ public class ApiResponse<T> {
      * @return
      */
     static public ApiResponse success() {
-        ApiResponse result = new ApiResponse(CommonResponseError.SUCCESS);
+        ApiResponse result = new ApiResponse(BasicResponseError.SUCCESS);
         result.setData(null);
         return result;
     }
@@ -115,7 +115,7 @@ public class ApiResponse<T> {
      * @return
      */
     static public ApiResponse error(Exception e) {
-        ApiResponse result = new ApiResponse(CommonResponseError.SERVER_ERROR);
+        ApiResponse result = new ApiResponse(BasicResponseError.SERVER_ERROR);
         result.setDebug(e.getMessage());
         return result;
     }

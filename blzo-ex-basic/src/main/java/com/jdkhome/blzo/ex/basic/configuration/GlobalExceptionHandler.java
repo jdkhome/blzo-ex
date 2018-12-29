@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.ex.basic.configuration;
 
 import com.jdkhome.blzo.ex.basic.constants.BasicSystemConstants;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseBody
     ApiResponse handleException(MissingServletRequestParameterException e, HttpServletRequest request) {
-        ApiResponse result = ApiResponse.error(CommonResponseError.PARAMETER_ERROR, e.getMessage());
+        ApiResponse result = ApiResponse.error(BasicResponseError.PARAMETER_ERROR, e.getMessage());
         return result;
     }
 

@@ -41,7 +41,7 @@ public class AdminApiController {
                                                 @RequestParam(value = "phone", required = true) String phone,
                                                 @RequestParam(value = "remark", required = false) String remark
     ) {
-        adminBasicService.addAdmin(username, password, nickName, phone, remark);
+        adminBasicService.addAdmin(username, password, nickName, phone, null, remark);
         return ApiResponse.success();
 
     }
@@ -85,7 +85,7 @@ public class AdminApiController {
                                                  @RequestParam(value = "remark", required = false) String remark
     ) {
 
-        adminBasicService.editAdmin(adminId, username, password, nickName, phone, status, remark, null);
+        adminBasicService.editAdmin(adminId, username, password, nickName, phone, null, status, remark, null);
 
         return ApiResponse.success();
 

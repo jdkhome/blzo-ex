@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.ex.basic.aop.api;
 
 import com.jdkhome.blzo.ex.basic.constants.BasicSystemConstants;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.utils.tools.IpTools;
 import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
@@ -133,13 +133,13 @@ public class ApiRecordAspect {
         for (Object obj : joinPoint.getArgs()) {
             if (obj instanceof BindingResult) {
                 if (((BindingResult) obj).hasErrors()) {
-                    throw new ServiceException(CommonResponseError.PARAMETER_ERROR, ((BindingResult) obj).getAllErrors().get(0).getDefaultMessage());
+                    throw new ServiceException(BasicResponseError.PARAMETER_ERROR, ((BindingResult) obj).getAllErrors().get(0).getDefaultMessage());
                 }
             }
 
             if (obj instanceof Errors) {
                 if (((Errors) obj).hasErrors()) {
-                    throw new ServiceException(CommonResponseError.PARAMETER_ERROR, ((Errors) obj).getAllErrors().get(0).getDefaultMessage());
+                    throw new ServiceException(BasicResponseError.PARAMETER_ERROR, ((Errors) obj).getAllErrors().get(0).getDefaultMessage());
                 }
             }
         }

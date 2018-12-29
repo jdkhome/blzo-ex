@@ -11,7 +11,7 @@ import com.jdkhome.blzo.ex.authj.pojo.dto.LayerDTO;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
 import com.jdkhome.blzo.ex.basic.constants.SqlTemplate;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
 import com.jdkhome.blzo.ex.utils.generator.SaltGenerator;
@@ -22,7 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,12 +52,12 @@ public class AdminBasicServiceImpl implements AdminBasicService {
      * @return
      */
     @Override
-    public Integer addAdmin(String username, String password, String nickName, String phone, String remark) {
+    public Integer addAdmin(String username, String password, String nickName, String phone, String email, String remark) {
 
         //入参验证
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || StringUtils.isEmpty(nickName) || StringUtils.isEmpty(phone)) {
             log.error("添加管理员->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         Admin admin = new Admin();
@@ -64,6 +66,7 @@ public class AdminBasicServiceImpl implements AdminBasicService {
         admin.setPassword(PasswordEncoder.toMD5(password, admin.getSalt()));
         admin.setNickName(nickName);
         admin.setPhone(phone);
+        admin.setEmail(email);
         admin.setRemark(remark);
 
         return adminMapper.insertSelective(admin);
@@ -81,12 +84,12 @@ public class AdminBasicServiceImpl implements AdminBasicService {
      * @return
      */
     @Override
-    public Integer editAdmin(Integer adminId, String username, String password, String nickName, String phone, Integer status, String remark, List<LayerDTO> layer) {
+    public Integer editAdmin(Integer adminId, String username, String password, String nickName, String phone, String email, Integer status, String remark, List<LayerDTO> layer) {
 
         //入参验证
         if (adminId == null) {
             log.error("修改管理员->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         //获取管理员
@@ -119,6 +122,10 @@ public class AdminBasicServiceImpl implements AdminBasicService {
             admin.setPhone(phone);
         }
 
+        if (StringUtils.isNotEmpty(email)) {
+            admin.setEmail(email);
+        }
+
         if (status != null) {
             admin.setStatus(status);
         }
@@ -147,12 +154,12 @@ public class AdminBasicServiceImpl implements AdminBasicService {
 
         if (adminId == null) {
             log.error("删除管理员->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         if (adminId.equals(AuthjConstants.ROOT_ID)) {
             log.error("删除管理员->禁止删除root用户");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
         // 被删除的管理员 退出所有加入的组
@@ -176,7 +183,7 @@ public class AdminBasicServiceImpl implements AdminBasicService {
         //入参验证
         if (adminId == null) {
             log.error("获取管理员通过Id->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         return adminMapper.selectByPrimaryKey(adminId);
@@ -193,7 +200,7 @@ public class AdminBasicServiceImpl implements AdminBasicService {
 
         if (StringUtils.isEmpty(username)) {
             log.error("获取管理员通过username->参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         AdminExample example = new AdminExample();
@@ -206,13 +213,51 @@ public class AdminBasicServiceImpl implements AdminBasicService {
         return null;
     }
 
+    /**
+     * 获取通过phone
+     *
+     * @param phone
+     * @return
+     */
+    @Override
+    public Admin getAdminByPhone(String phone) {
 
-    private AdminExample getExample(String username, String nickName, String phone) {
+        if (StringUtils.isEmpty(phone)) {
+            log.error("获取管理员获取通过phone->参数错误");
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
+        }
+
+        List<Admin> list = this.getAllAdmin(null, null, phone, null);
+
+        return CollectionUtils.isEmpty(list) ? null : list.get(0);
+    }
+
+    /**
+     * 获取通过email
+     *
+     * @param email
+     * @return
+     */
+    @Override
+    public Admin getAdminByEmail(String email) {
+
+        if (StringUtils.isEmpty(email)) {
+            log.error("获取管理员获取通过email->参数错误");
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
+        }
+
+        List<Admin> list = this.getAllAdmin(null, null, null, email);
+
+        return CollectionUtils.isEmpty(list) ? null : list.get(0);
+    }
+
+
+    private AdminExample getExample(String username, String nickName, String phone, String email) {
 
         AdminExample example = new AdminExample();
         AdminExample.Criteria criteria = example.createCriteria();
         if (StringUtils.isNotEmpty(username)) {
-            criteria.andUsernameLike("%" + username + "%");
+            criteria.andUsernameEqualTo(username);
         }
 
         if (StringUtils.isNotEmpty(nickName)) {
@@ -220,7 +265,11 @@ public class AdminBasicServiceImpl implements AdminBasicService {
         }
 
         if (StringUtils.isNotEmpty(phone)) {
-            criteria.andPhoneLike("%" + phone + "%");
+            criteria.andPhoneEqualTo(phone);
+        }
+
+        if (StringUtils.isNoneEmpty(email)) {
+            criteria.andEmailEqualTo(email);
         }
 
         example.setOrderByClause(SqlTemplate.ORDER_BY_ID_DESC);
@@ -239,15 +288,15 @@ public class AdminBasicServiceImpl implements AdminBasicService {
      * @return
      */
     @Override
-    public PageInfo<Admin> getAdminsWithPage(String username, String nickName, String phone, Integer page, Integer size) {
+    public PageInfo<Admin> getAdminsWithPage(String username, String nickName, String phone, String email, Integer page, Integer size) {
 
         //入参验证
         if (page == null || size == null) {
             log.error("分页查询管理员->分页参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
-        AdminExample example = this.getExample(username, nickName, phone);
+        AdminExample example = this.getExample(username, nickName, phone, email);
 
 
         PageHelper.startPage(page, size);
@@ -266,9 +315,9 @@ public class AdminBasicServiceImpl implements AdminBasicService {
      * @return
      */
     @Override
-    public List<Admin> getAllAdmin(String username, String nickName, String phone) {
+    public List<Admin> getAllAdmin(String username, String nickName, String phone, String email) {
 
-        AdminExample example = this.getExample(username, nickName, phone);
+        AdminExample example = this.getExample(username, nickName, phone, email);
 
         return adminMapper.selectByExample(example);
     }

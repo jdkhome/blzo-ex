@@ -26,7 +26,7 @@ public interface AdminBasicService {
      * @param remark
      * @return
      */
-    Integer addAdmin(String username, String password, String nickName, String phone, String remark);
+    Integer addAdmin(String username, String password, String nickName, String phone, String email, String remark);
 
     //============== 修改 ==============//
 
@@ -42,7 +42,7 @@ public interface AdminBasicService {
      * @param layer
      * @return
      */
-    Integer editAdmin(Integer adminId, String username, String password, String nickName, String phone, Integer status, String remark, List<LayerDTO> layer);
+    Integer editAdmin(Integer adminId, String username, String password, String nickName, String phone, String email, Integer status, String remark, List<LayerDTO> layer);
 
     //============== 删除 ==============//
 
@@ -73,20 +73,36 @@ public interface AdminBasicService {
     Admin getAdminByUsername(String username);
 
     /**
+     * 获取通过phone
+     *
+     * @param phone
+     * @return
+     */
+    Admin getAdminByPhone(String phone);
+
+    /**
+     * 获取通过email
+     *
+     * @param email
+     * @return
+     */
+    Admin getAdminByEmail(String email);
+
+    /**
      * 分页查询管理员
      *
      * @param page
      * @param size
      * @return
      */
-    PageInfo<Admin> getAdminsWithPage(String username, String nickName, String phone, Integer page, Integer size);
+    PageInfo<Admin> getAdminsWithPage(String username, String nickName, String phone, String email, Integer page, Integer size);
 
     /**
      * 获取所有管理员
      *
      * @return
      */
-    List<Admin> getAllAdmin(String username, String nickName, String phone);
+    List<Admin> getAllAdmin(String username, String nickName, String phone, String email);
 
 
 }

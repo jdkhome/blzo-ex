@@ -28,10 +28,10 @@ public class RedisTokenManager implements TokenManager {
      *
      * @param token 验证码
      */
-    private void setToken(String token, Integer userId) {
+    private void setToken(String token, Object userId) {
         String cachedKey = String.format(UsigninConstants.CACHE_KEY, token);
         stringRedisTemplate.opsForValue().set(cachedKey, String.valueOf(userId), 3600L * 24 * 7, TimeUnit.SECONDS);
-        stringRedisTemplate.opsForList().leftPush(String.format(UsigninConstants.TOKEN_MAPPER, userId.toString()), token);
+        stringRedisTemplate.opsForList().leftPush(String.format(UsigninConstants.TOKEN_MAPPER, String.valueOf(userId)), token);
     }
 
     /**
@@ -39,7 +39,7 @@ public class RedisTokenManager implements TokenManager {
      *
      * @param userId
      */
-    private String getToken(Integer userId) {
+    private String getToken(Object userId) {
 
         Object obj = stringRedisTemplate.opsForList().range(String.format(UsigninConstants.TOKEN_MAPPER, userId.toString()), 0, 0);
         return obj == null ? null : String.valueOf(obj);
@@ -68,21 +68,19 @@ public class RedisTokenManager implements TokenManager {
     }
 
 
-
-
     /**
      * 删除该用户的所有Token
      *
      * @param userId
      */
-    private void delAllTokenByUserId(Integer userId) {
+    private void delAllTokenByUserId(Object userId) {
         List<String> tokenList = stringRedisTemplate.opsForList().range(String.format(UsigninConstants.TOKEN_MAPPER, userId.toString()), 0, -1);
         tokenList.stream().forEach(token -> delToken(token));
         stringRedisTemplate.delete(String.format(UsigninConstants.TOKEN_MAPPER, userId.toString()));
     }
 
     @Override
-    public String createToken(Integer userId) {
+    public String createToken(Object userId) {
 
         //使用uuid作为源token
         String token = UUIDGenerator.get();
@@ -117,7 +115,7 @@ public class RedisTokenManager implements TokenManager {
      * @param userId
      */
     @Override
-    public void deleteTokenByUserId(Integer userId) {
+    public void deleteTokenByUserId(Object userId) {
         this.delAllTokenByUserId(userId);
     }
 
@@ -127,7 +125,7 @@ public class RedisTokenManager implements TokenManager {
     }
 
     @Override
-    public Integer getUserId(String token) {
+    public Object getUserId(String token) {
 
         if (StringUtils.isEmpty(token)) {
             return null;
@@ -136,7 +134,7 @@ public class RedisTokenManager implements TokenManager {
         String cachedKey = String.format(UsigninConstants.CACHE_KEY, token);
         String userId = stringRedisTemplate.opsForValue().get(cachedKey);
         if (userId != null) {
-            return Integer.valueOf(userId);
+            return userId;
         } else {
             return null;
         }
@@ -147,7 +145,7 @@ public class RedisTokenManager implements TokenManager {
      */
     @Override
     public void refreshTokenExpire(String token) {
-        Integer userId = this.getUserId(token);
+        Object userId = this.getUserId(token);
         this.setToken(token, userId);
     }
 }

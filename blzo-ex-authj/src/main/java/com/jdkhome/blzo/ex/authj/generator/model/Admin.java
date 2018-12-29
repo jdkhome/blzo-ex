@@ -15,6 +15,8 @@ public class Admin {
 
     private String phone;
 
+    private String email;
+
     private Integer status;
 
     private String lastIp;
@@ -75,6 +77,14 @@ public class Admin {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 
     public Integer getStatus() {

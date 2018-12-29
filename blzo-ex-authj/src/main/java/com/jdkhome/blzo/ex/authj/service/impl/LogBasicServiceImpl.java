@@ -9,7 +9,7 @@ import com.jdkhome.blzo.ex.authj.generator.model.LogExample;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import com.jdkhome.blzo.ex.authj.service.LogBasicService;
 import com.jdkhome.blzo.ex.basic.constants.SqlTemplate;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -47,7 +47,7 @@ public class LogBasicServiceImpl implements LogBasicService {
 
         if (adminId == null || StringUtils.isEmpty(adminName) || StringUtils.isEmpty(authjUri) || StringUtils.isEmpty(authjName)) {
             log.error("添加日志 -> 参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         Log log = new Log();
@@ -74,7 +74,7 @@ public class LogBasicServiceImpl implements LogBasicService {
 
         if (logId == null) {
             log.error("获取日志通过Id -> 参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         Log log = logMapper.selectByPrimaryKey(logId);
@@ -87,7 +87,7 @@ public class LogBasicServiceImpl implements LogBasicService {
         LogExample.Criteria criteria = example.createCriteria();
 
         if (StringUtils.isNotEmpty(nickName)) {
-            List<Admin> adminList = adminBasicService.getAllAdmin(null, nickName, null);
+            List<Admin> adminList = adminBasicService.getAllAdmin(null, nickName, null,null);
             List<Integer> adminIds = new ArrayList<>();
             adminIds.add(-1);
             if (adminList != null && !adminList.isEmpty()) {
@@ -126,7 +126,7 @@ public class LogBasicServiceImpl implements LogBasicService {
 
         if (page == null || size == null) {
             log.error("分页查询日志 -> 参数错误");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         LogExample example = this.getExample(nickName, authjUri, authjName);

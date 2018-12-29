@@ -73,7 +73,7 @@ public class LayerPageController {
             Group group = groupBasicService.getGroupById(groupAdmin.getGroupId());
 
             vo.setName(group.getName());
-            var uris = authjService.getValidAuth(group.getId());
+            Set<String>  uris = authjService.getValidAuth(group.getId());
             List<AuthjBean> list = new ArrayList<>();
             uris.stream().filter(uri -> authjCache.hasAuthj(uri) && authjCache.getAuthj(uri).getMenu()).forEach(uri -> list.add(authjCache.getAuthj(uri)));
 

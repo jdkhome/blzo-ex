@@ -8,6 +8,7 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="last_ip" jdbcType="VARCHAR" property="lastIp" />
     <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
@@ -75,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, nick_name, username, password, salt, phone, status, last_ip, last_time, remark, 
-    layer, create_time, update_time
+    id, nick_name, username, password, salt, phone, email, status, last_ip, last_time, 
+    remark, layer, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.jdkhome.blzo.ex.authj.generator.model.AdminExample" resultMap="BaseResultMap">
     select
@@ -111,14 +112,14 @@
   <insert id="insert" parameterType="com.jdkhome.blzo.ex.authj.generator.model.Admin">
     insert into admins (id, nick_name, username, 
       password, salt, phone, 
-      status, last_ip, last_time, 
-      remark, layer, create_time, 
-      update_time)
+      email, status, last_ip, 
+      last_time, remark, layer, 
+      create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{lastIp,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
-      #{remark,jdbcType=VARCHAR}, #{layer,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{lastIp,jdbcType=VARCHAR}, 
+      #{lastTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{layer,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jdkhome.blzo.ex.authj.generator.model.Admin">
     insert into admins
@@ -140,6 +141,9 @@
       </if>
       <if test="phone != null">
         phone,
+      </if>
+      <if test="email != null">
+        email,
       </if>
       <if test="status != null">
         status,
@@ -181,6 +185,9 @@
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -232,6 +239,9 @@
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
@@ -266,6 +276,7 @@
       password = #{record.password,jdbcType=VARCHAR},
       salt = #{record.salt,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       last_ip = #{record.lastIp,jdbcType=VARCHAR},
       last_time = #{record.lastTime,jdbcType=TIMESTAMP},
@@ -294,6 +305,9 @@
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -326,6 +340,7 @@
       password = #{password,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       last_ip = #{lastIp,jdbcType=VARCHAR},
       last_time = #{lastTime,jdbcType=TIMESTAMP},

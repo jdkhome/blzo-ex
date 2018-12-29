@@ -2,7 +2,7 @@ package com.jdkhome.blzo.ex.authj.core;
 
 import com.jdkhome.blzo.ex.authj.service.LogBasicService;
 import com.jdkhome.blzo.ex.basic.aop.api.ApiRecordAspect;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.utils.tools.IpTools;
 import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
@@ -50,7 +50,7 @@ public class AuthjInterceptor extends HandlerInterceptorAdapter {
 
                 if (uri.startsWith("/api")) {
                     // api 返回没有权限
-                    ApiResponse resp = ApiResponse.error(CommonResponseError.NO_PERMISSION);
+                    ApiResponse resp = ApiResponse.error(BasicResponseError.NO_PERMISSION);
                     response.setCharacterEncoding("utf-8");
                     response.setContentType("application/json");
                     PrintWriter pw = response.getWriter();

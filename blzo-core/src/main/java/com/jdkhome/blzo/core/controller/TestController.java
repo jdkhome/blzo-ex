@@ -1,11 +1,11 @@
 package com.jdkhome.blzo.core.controller;
 
 import com.jdkhome.blzo.ex.basic.aop.api.Api;
-import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
 import com.jdkhome.blzo.common.constants.ErrorMsg;
+import com.jdkhome.blzo.ex.usignin.annotation.CurrentUser;
+import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
 import com.jdkhome.blzo.ex.utils.constants.RegularExpression;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
-import com.jdkhome.blzo.ex.version.annotation.MinVersion;
 import com.jdkhome.blzo.ex.version.annotation.Version;
 import lombok.Data;
 import org.springframework.validation.BindingResult;
@@ -24,7 +24,6 @@ import javax.validation.constraints.Pattern;
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
-
 
     /**
      * @api {post} /api/test/aaa [测试]测试接口
@@ -57,11 +56,11 @@ public class TestController {
     }
 
     @UserSignin
-    @MinVersion("1.5.0")
+//    @MinVersion("1.5.0")
     @Api("测试用接口")
     @RequestMapping(value = "/aaa", method = RequestMethod.POST)
     public ApiResponse apiTestAaa(@Valid TestParams params, BindingResult validResult,
-                                  @Version String version) {
+                                  @Version String version, @CurrentUser Integer userId) {
 
         return ApiResponse.success(version);
     }

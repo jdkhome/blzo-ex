@@ -8,7 +8,7 @@ import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 import com.jdkhome.blzo.ex.authj.generator.model.AdminExample;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import com.jdkhome.blzo.ex.authj.service.AdminService;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
 import com.jdkhome.blzo.ex.utils.generator.SaltGenerator;
@@ -46,7 +46,7 @@ public class AdminServiceImpl implements AdminService {
 
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || StringUtils.isEmpty(ip)) {
             log.error("管理员登录->登录必要参数为空");
-            throw new ServiceException(CommonResponseError.PARAMETER_ERROR);
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         // 获取对应管理员

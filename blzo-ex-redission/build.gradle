@@ -1,0 +1,19 @@
+jar {
+    baseName = "blzo-ex-redission"
+}
+
+
+
+dependencies {
+    // redis
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
+
+    // redisson 分布式锁
+    // https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter
+    compile group: 'org.redisson', name: 'redisson-spring-boot-starter', version: '3.8.2'
+
+    compile project(":blzo-ex-basic")
+
+}
+
+////gradle publishMavenJavaPublicationToSonatypeRepository
