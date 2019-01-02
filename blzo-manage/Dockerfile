@@ -8,4 +8,4 @@ COPY build/libs /var/app
 # 端口
 EXPOSE 8080
 
-CMD ["java", "-jar", "-Dfile.encoding=UTF8", "-Duser.timezone=GMT+08", "-Dfastjson.parser.autoTypeSupport=true", "/var/app/blzo-manage.jar"]
+CMD ["java", "-jar", "-Dfile.encoding=UTF8", "-Duser.timezone=GMT+08", "-Dfastjson.parser.autoTypeSupport=true", "/var/app/blzo-manage-0.0.6.jar"]
