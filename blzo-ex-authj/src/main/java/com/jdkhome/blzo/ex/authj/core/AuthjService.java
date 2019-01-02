@@ -156,7 +156,8 @@ public class AuthjService {
 
         // 改用户拥有的所有组的有效权限 并集 即为该用户的权限集合
         Set<String> result = new HashSet<>();
-        groupAdmins.forEach(groupAdmin -> result.addAll(this.getValidAuth(groupAdmin.getGroupId())));
+        groupAdmins.stream().filter(groupAdmin -> !groupAdmin.getCreateAdminId().equals(adminId))
+                .forEach(groupAdmin -> result.addAll(this.getValidAuth(groupAdmin.getGroupId())));
 
         result.addAll(this.allCommonMenuUri());
 
