@@ -1,6 +1,7 @@
 package com.jdkhome.blzo.manage;
 
 import com.jdkhome.blzo.ex.authj.service.AdminService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@Slf4j
 @ComponentScan(basePackages = {"com.jdkhome.blzo.ex", "com.jdkhome.blzo"})
 @EnableScheduling
 @EnableTransactionManagement
@@ -31,5 +33,6 @@ public class ManageApplication implements CommandLineRunner {
          * 初始化Root用户
          */
         adminService.initRoot();
+        log.info("over.");
     }
 }
