@@ -57,7 +57,7 @@ public class AuthjService {
             LayerDTO layer = new LayerDTO();
             Group group = groupBasicService.getGroupById(groupAdmin.getGroupId());
             layer.setName(group.getName());
-            Set<String> groupUris = this.getValidAuth(groupAdmin.getGroupId());
+            Set<String> groupUris = this.getValidAuth(groupAdmin.getGroupId(), groupAdmin.getGroupId());
             List<String> uris = new ArrayList<>();
             groupUris.stream()
                     .filter(uri -> authjCache.hasAuthj(uri) && authjCache.getAuthj(uri).menu)
@@ -140,24 +140,28 @@ public class AuthjService {
     /**
      * 获取管理员的权限集合
      *
-     * @param adminId
+     * @param thisAdminId 当前查找AdminId
+     * @param stopAdminId 终止查找AdminId(防止循环授权)
      * @return
      */
-    public Set<String> getAdminAuth(Integer adminId) {
+    public Set<String> getAdminAuth(Integer thisAdminId, Integer stopAdminId) {
         /**
          * 如果是root用户拥有全部权限
          */
-        if (AuthjConstants.ROOT_ID.equals(adminId)) {
+        if (AuthjConstants.ROOT_ID.equals(thisAdminId)) {
             return authjCache.getUris();
         }
 
         // 拿到该用所在的组
-        List<GroupAdmin> groupAdmins = groupBasicService.getGroupAdminByAdminId(adminId);
+        List<GroupAdmin> groupAdmins = groupBasicService.getGroupAdminByAdminId(thisAdminId);
 
         // 改用户拥有的所有组的有效权限 并集 即为该用户的权限集合
         Set<String> result = new HashSet<>();
-        groupAdmins.stream().filter(groupAdmin -> !groupAdmin.getCreateAdminId().equals(adminId))
-                .forEach(groupAdmin -> result.addAll(this.getValidAuth(groupAdmin.getGroupId())));
+        // 过滤掉种植查找创建的权限组 下一级查找时也设置同样的stop
+        groupAdmins.stream()
+                .filter(groupAdmin -> !groupAdmin.getCreateAdminId().equals(thisAdminId))
+                .filter(groupAdmin -> !groupAdmin.getCreateAdminId().equals(stopAdminId))
+                .forEach(groupAdmin -> result.addAll(this.getValidAuth(groupAdmin.getGroupId(), stopAdminId)));
 
         result.addAll(this.allCommonMenuUri());
 
@@ -170,7 +174,7 @@ public class AuthjService {
      * @param groupId
      * @return
      */
-    public Set<String> getValidAuth(Integer groupId) {
+    public Set<String> getValidAuth(Integer groupId, Integer stopAdminId) {
 
         Group group = groupBasicService.getGroupById(groupId);
 
@@ -184,7 +188,7 @@ public class AuthjService {
         /**
          * 和组创建者的权限取交集
          */
-        groupAuthUriSet.retainAll(this.getAdminAuth(group.getCreateAdminId()));
+        groupAuthUriSet.retainAll(this.getAdminAuth(group.getCreateAdminId(), stopAdminId));
 
         return groupAuthUriSet;
     }
@@ -198,7 +202,7 @@ public class AuthjService {
         userAuthjConfBean.setId(admin.getId());
         userAuthjConfBean.setName(admin.getNickName());
 
-        userAuthjConfBean.setAuthUriSet(this.getAdminAuth(userId));
+        userAuthjConfBean.setAuthUriSet(this.getAdminAuth(userId, userId));
 
         UserAuthjConfBean tempBean = this.reloadMenus(PerfectGson.getGson().fromJson(admin.getLayer(),
                 new TypeToken<List<LayerDTO>>() {
