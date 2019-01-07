@@ -61,5 +61,12 @@ public class ServiceException extends RuntimeException {
         this.riskTigger = riskTigger;
     }
 
+    public ServiceException(Integer errorCode, String errorMsg, Object debug, BaseError baseError) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+        this.debug = debug;
+        this.baseError = baseError;
+    }
+
 
 }
