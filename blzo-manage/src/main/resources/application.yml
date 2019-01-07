@@ -1,6 +1,8 @@
 # 内置tomcat端口
 
 spring:
+#  main:
+#    allow-bean-definition-overriding: true
   datasource:
     # 数据源
     type: com.alibaba.druid.pool.DruidDataSource
@@ -78,7 +80,6 @@ blzo:
   project_name: BLZO
   authj:
     controller-package_name: com.jdkhome.blzo.manage.controller
-
 
 
 

@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -32,6 +33,8 @@ import java.util.Enumeration;
 @Component
 public class ApiRecordAspect {
 
+    @Autowired
+    ApiBeforeCustom apiBeforeCustom;
 
     //申明一个切点里面是execution表达式
     //@Pointcut("execution(* com.jdkhome.blzo.*.controller..*.*(..))")
@@ -93,6 +96,8 @@ public class ApiRecordAspect {
     //请求method前打印内容
     @Before(value = "apiAspect()")
     public void methodBefore(JoinPoint joinPoint) {
+
+        apiBeforeCustom.action(joinPoint);
 
         // 获取Api 注解
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
