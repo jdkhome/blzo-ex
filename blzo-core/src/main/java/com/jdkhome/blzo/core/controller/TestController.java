@@ -6,6 +6,7 @@ import com.jdkhome.blzo.ex.usignin.annotation.CurrentUser;
 import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
 import com.jdkhome.blzo.ex.utils.constants.RegularExpression;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
+import com.jdkhome.blzo.ex.version.annotation.MinVersion;
 import com.jdkhome.blzo.ex.version.annotation.Version;
 import lombok.Data;
 import org.springframework.validation.BindingResult;
@@ -55,8 +56,8 @@ public class TestController {
         String email;
     }
 
-    @UserSignin
-//    @MinVersion("1.5.0")
+    //@UserSignin
+    @MinVersion(value = "1.5.0",max = "2.0.0")
     @Api("测试用接口")
     @RequestMapping(value = "/aaa", method = RequestMethod.POST)
     public ApiResponse apiTestAaa(@Valid TestParams params, BindingResult validResult,

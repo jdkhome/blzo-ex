@@ -1,5 +1,7 @@
 package com.jdkhome.blzo.ex.version.annotation;
 
+import com.jdkhome.blzo.ex.version.constants.VersionConstants;
+
 import java.lang.annotation.*;
 
 /**
@@ -20,4 +22,14 @@ public @interface MinVersion {
      * @return
      */
     String value();
+
+    /**
+     * 最大支持版本
+     * 当新版产品,移除了某些功能,导致一些接口准备删除时,
+     * 可以指定该接口的最大支持版本,高版本的客户端不能调用超过最大支持版本的接口,
+     * 便于未来删除
+     *
+     * @return
+     */
+    String max() default VersionConstants.ANY_VERSION_CODE;
 }

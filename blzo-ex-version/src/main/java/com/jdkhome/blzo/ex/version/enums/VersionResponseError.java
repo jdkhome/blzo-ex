@@ -11,7 +11,8 @@ import lombok.Getter;
 public enum VersionResponseError implements BaseError {
 
     //===========通用返回==============
-    VERSION_UPGRADE(101, "版本过低");
+    VERSION_UPGRADE(101, "版本过低"),
+    API_DEPRECATED(102, "接口已过期");
 
     private Integer code;
     private String msg;
