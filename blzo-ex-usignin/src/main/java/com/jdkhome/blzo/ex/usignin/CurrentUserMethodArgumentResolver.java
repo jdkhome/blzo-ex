@@ -43,13 +43,19 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
                                   NativeWebRequest nativeWebRequest,
                                   WebDataBinderFactory webDataBinderFactory) throws Exception {
 
-        Object currentUserId = nativeWebRequest.getAttribute(UsigninConstants.USER_ID, RequestAttributes.SCOPE_REQUEST);
+        String currentUserId = (String) nativeWebRequest.getAttribute(UsigninConstants.USER_ID, RequestAttributes.SCOPE_REQUEST);
 
 
         log.debug("currentUserId:{}", currentUserId);
 
 
+        if (methodParameter.getParameterType().isAssignableFrom(Integer.class)) {
+            return Integer.parseInt(currentUserId);
+        }
+
+
         return currentUserId;
+
 
         // 这里currentUserId是有可能为空的(redis里面错误数据之类的)
 
