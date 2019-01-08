@@ -2,6 +2,10 @@ package com.jdkhome.blzo.ex.utils.tools.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializer;
+
+import java.math.BigDecimal;
 
 /**
  * @author YC 获取一个完美gson：
@@ -35,6 +39,14 @@ public class PerfectGson {
      */
     public static Gson getGson() {
         return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").serializeNulls()
+                .registerTypeAdapter(BigDecimal.class, (JsonSerializer<BigDecimal>) (value, typeOfSrc, context) -> {
+
+                            if (value == null) {
+                                return new JsonPrimitive("0"); // Convert NaN to zero
+                            } else
+                                return new JsonPrimitive(value.stripTrailingZeros().toPlainString());
+                        }
+                )
                 .registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory<Object>())
                 .setExclusionStrategies(new AnnotationExclusion()).create();
     }
