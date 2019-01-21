@@ -50,7 +50,7 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
 
 
         if (methodParameter.getParameterType().isAssignableFrom(Integer.class)) {
-            return Integer.parseInt(currentUserId);
+            return currentUserId == null ? null : Integer.parseInt(currentUserId);
         }
 
 
