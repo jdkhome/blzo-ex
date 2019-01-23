@@ -7,10 +7,10 @@ spring:
     username: 应用数据库账户
     password: 应用数据库密码
   redis:
-    host: host
-    port: 6379
-    password: pwd
-    database: 0
+    host: 192.168.1.233
+    port: 6543
+    password: yMxsueZD9yx0AkfR
+    database: 15
     timeout: 10s
 
 logging:

@@ -36,3 +36,8 @@ include 'blzo-ex-authj'
 
 // 基于redisson的分布式锁简单封装
 include 'blzo-ex-redission'
+
+// 基于
+include 'blzo-ex-risk'
+include 'blzo-ex-risk'
+

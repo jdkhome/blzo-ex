@@ -7,5 +7,6 @@ dependencies {
 
     compile project(":blzo-ex-usignin")
     compile project(":blzo-ex-version")
+    compile project(":blzo-ex-risk")
     //compile project(":blzo-ex-redission")
 }

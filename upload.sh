@@ -19,3 +19,6 @@ gradle publishMavenJavaPublicationToSonatypeRepository
 
 cd ../blzo-ex-version
 gradle publishMavenJavaPublicationToSonatypeRepository
+
+cd ../blzo-ex-risk
+gradle publishMavenJavaPublicationToSonatypeRepository

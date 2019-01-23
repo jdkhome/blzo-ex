@@ -2,8 +2,9 @@ package com.jdkhome.blzo.core.controller;
 
 import com.jdkhome.blzo.ex.basic.aop.api.Api;
 import com.jdkhome.blzo.common.constants.ErrorMsg;
+import com.jdkhome.blzo.ex.risk.annotation.Risk;
 import com.jdkhome.blzo.ex.usignin.annotation.CurrentUser;
-import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
+import com.jdkhome.blzo.ex.usignin.annotation.UserMaybeSignin;
 import com.jdkhome.blzo.ex.utils.constants.RegularExpression;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.version.annotation.MinVersion;
@@ -56,9 +57,10 @@ public class TestController {
         String email;
     }
 
-    //@UserSignin
-    @MinVersion(value = "1.5.0",max = "2.0.0")
-    @Api("测试用接口")
+    @Risk(period = 5L, count = 10, time = 3L) // 5秒内，该接口请求达到10次 限制3秒 该设置对所有节点有效 依赖于@Api注解
+    @UserMaybeSignin // 用户可能登录 如果用户登录，则能够获取到用户Id
+    @MinVersion(value = "1.5.0", max = "2.0.0") // 版本控制
+    @Api("测试用接口") // 日志
     @RequestMapping(value = "/aaa", method = RequestMethod.POST)
     public ApiResponse apiTestAaa(@Valid TestParams params, BindingResult validResult,
                                   @Version String version, @CurrentUser Integer userId) {
