@@ -14,7 +14,7 @@ public class ApiBeforeConfig {
 
     @Bean
     ApiBeforeCustom apiBeforeCustom() {
-        return joinPoint -> log.info("[apiBeforeCustom] -> nothing todo.");
+        return joinPoint -> log.debug("[apiBeforeCustom] -> nothing todo.");
     }
 
 }
