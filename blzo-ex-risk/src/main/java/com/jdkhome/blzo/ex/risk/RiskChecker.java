@@ -51,7 +51,7 @@ public class RiskChecker {
         Risk risk = method.getAnnotation(Risk.class);
 
         // 检查
-        if (risk.risk()) {
+        if (risk != null && risk.risk()) {
             String uri = request.getRequestURI();
 
             // 首先检查IP是否被控制
