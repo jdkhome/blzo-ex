@@ -64,6 +64,10 @@
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true"></table>
 
+        <table tableName="organizes" domainObjectName="Organize" enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true"></table>
+
 
 
     </context>

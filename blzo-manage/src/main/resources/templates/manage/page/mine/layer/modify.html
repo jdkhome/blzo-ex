@@ -3,55 +3,64 @@
 <head th:replace="manage/common/head"></head>
 
 <body>
-<!-- topbar starts -->
-<div th:replace="manage/common/topbar"></div>
-<!-- topbar ends -->
 
-<div class="page-content">
-    <div class="row">
-        <div class="col-md-2">
-            <div th:replace="manage/common/menu"></div>
-        </div>
-        <div class="col-md-10">
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
             <div class="row">
-                <div class="col-md-12">
-                    <div th:replace="manage/common/box_header"></div>
-
-                    <div class="content-box-large box-with-header">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="navbar-inner">
-                                    <ul class="nav nav-pills">
-                                        <li class="active"><a href="#tab1" data-toggle="tab">继承的菜单</a></li>
-                                        <li class=""><a href="#tab2" data-toggle="tab">所有菜单</a></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-content">
-                                    <div class="tab-pane active well" id="tab1">
-                                        <!--<div class="panel-body">-->
-                                        <div th:each="menuGroup:${menuGroups}">
-                                            <h6 th:text="${'继承自: '+menuGroup.name}">组名</h6>
-                                            <p>
-                                                <button th:each="menu:${menuGroup.menus}"
+
+                                <section class="panel">
+                                    <header class="panel-heading tab-bg-dark-navy-blue ">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#extends">继承的菜单</a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#all">所有菜单</a>
+                                            </li>
+                                        </ul>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div id="extends" class="tab-pane active">
+                                                <div th:each="menuGroup:${menuGroups}">
+                                                    <h6 th:text="${'继承自: '+menuGroup.name}">组名</h6>
+                                                    <div>
+                                                        <button th:each="menu:${menuGroup.menus}"
+                                                                onclick="addMenu(this)"
+                                                                class="btn btn-primary add-menu"
+                                                                th:attr="value=${menu.uri}" th:text="${menu.name}">
+                                                            管理员列表页
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div id="all" class="tab-pane">
+                                                <button th:each="menu:${allMenu}"
                                                         onclick="addMenu(this)"
                                                         class="btn btn-primary add-menu"
                                                         th:attr="value=${menu.uri}" th:text="${menu.name}">
                                                     管理员列表页
                                                 </button>
-                                            </p>
+                                            </div>
                                         </div>
-                                        <!--</div>-->
+                                    </div>
+                                </section>
 
-                                    </div>
-                                    <div class="tab-pane well" id="tab2">
-                                        <button th:each="menu:${allMenu}"
-                                                onclick="addMenu(this)"
-                                                class="btn btn-primary add-menu"
-                                                th:attr="value=${menu.uri}" th:text="${menu.name}">
-                                            管理员列表页
-                                        </button>
-                                    </div>
-                                </div>
 
                             </div>
                             <div class="row">
@@ -108,19 +117,22 @@
                             </div>
 
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            <!-- page end-->
+        </section>
+    </section>
 
-<footer th:replace="manage/common/footer"></footer>
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
 
 <!-- external javascript -->
 <div th:replace="manage/common/script"></div>
 
-<script type="text/javascript" src="/manage/js/page/mine/layer/modify.js"></script>
+<script type="text/javascript" src="/manage/custom/page/mine/layer/modify.js"></script>
 <script>
 
     function addMenu(_this) {
