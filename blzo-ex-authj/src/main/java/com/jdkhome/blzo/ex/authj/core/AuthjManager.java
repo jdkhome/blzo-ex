@@ -42,16 +42,26 @@ public class AuthjManager {
 
 
     /**
-     * 获取登录的用户id，没登录则返回0
+     * 获取登录的用户id，没登录则返回null
+     * 注意在 BLZO v0.0.13以及之前的版本中，该接口会返回0
      *
      * @return
      */
     public Integer getUserId() {
         UserAuthjConfBean userAuthjConfBean = this.getUserAuthjConfBean();
         if (userAuthjConfBean == null) {
-            return 0;
+            return null;
         } else {
             return userAuthjConfBean.getId();
+        }
+    }
+
+    public Integer getOrganizeId() {
+        UserAuthjConfBean userAuthjConfBean = this.getUserAuthjConfBean();
+        if (userAuthjConfBean == null) {
+            return null;
+        } else {
+            return userAuthjConfBean.getOrganizeId();
         }
     }
 

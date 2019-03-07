@@ -35,15 +35,16 @@ public class LogBasicServiceImpl implements LogBasicService {
     /**
      * 添加日志
      *
-     * @param adminId   管理员Id
-     * @param authjUri  authj地址
-     * @param authjName authjName
-     * @param paramers  参数(json)
-     * @param ip        ip
+     * @param organizeId 组织Id
+     * @param adminId    管理员Id
+     * @param authjUri   authj地址
+     * @param authjName  authjName
+     * @param paramers   参数(json)
+     * @param ip         ip
      * @return
      */
     @Override
-    public Integer addLog(Integer adminId, String adminName, String authjUri, String authjName, String paramers, String ip) {
+    public Integer addLog(Integer organizeId, Integer adminId, String adminName, String authjUri, String authjName, String paramers, String ip) {
 
         if (adminId == null || StringUtils.isEmpty(adminName) || StringUtils.isEmpty(authjUri) || StringUtils.isEmpty(authjName)) {
             log.error("添加日志 -> 参数错误");
@@ -51,6 +52,7 @@ public class LogBasicServiceImpl implements LogBasicService {
         }
 
         Log log = new Log();
+        log.setOrganizeid(organizeId);
         log.setAdminId(adminId);
         log.setAdminName(adminName);
         log.setAuthjUri(authjUri);
@@ -81,13 +83,19 @@ public class LogBasicServiceImpl implements LogBasicService {
         return log;
     }
 
-    private LogExample getExample(String nickName, String authjUri, String authjName) {
+    private LogExample getExample(Integer organizeId, String nickName, String authjUri, String authjName) {
 
         LogExample example = new LogExample();
         LogExample.Criteria criteria = example.createCriteria();
 
+        if (organizeId != null) {
+            criteria.andOrganizeidEqualTo(organizeId);
+        }
+
         if (StringUtils.isNotEmpty(nickName)) {
-            List<Admin> adminList = adminBasicService.getAllAdmin(null, nickName, null,null);
+            List<Admin> adminList = (organizeId == null
+                    ? adminBasicService.getAllAdmin(null, null, nickName, null, null)
+                    : adminBasicService.getAllAdmin(organizeId, null, nickName, null, null));
             List<Integer> adminIds = new ArrayList<>();
             adminIds.add(-1);
             if (adminList != null && !adminList.isEmpty()) {
@@ -122,14 +130,14 @@ public class LogBasicServiceImpl implements LogBasicService {
      * @return
      */
     @Override
-    public PageInfo<Log> getLogWithPage(String nickName, String authjUri, String authjName, Integer page, Integer size) {
+    public PageInfo<Log> getLogWithPage(Integer organizeId, String nickName, String authjUri, String authjName, Integer page, Integer size) {
 
         if (page == null || size == null) {
             log.error("分页查询日志 -> 参数错误");
             throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
-        LogExample example = this.getExample(nickName, authjUri, authjName);
+        LogExample example = this.getExample(organizeId, nickName, authjUri, authjName);
 
         PageHelper.startPage(page, size);
         return new PageInfo<>(logMapper.selectByExampleWithBLOBs(example));

@@ -145,7 +145,6 @@ public interface GroupBasicService {
      */
     List<Group> getAllGroup(String name, Integer createId);
 
-
     /**
      * 获取GroupAdmin 通过管理员Id
      *

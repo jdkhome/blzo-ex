@@ -3,6 +3,7 @@ package com.jdkhome.blzo.ex.authj.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jdkhome.blzo.ex.authj.core.AuthjConstants;
+import com.jdkhome.blzo.ex.authj.enums.AdminStatusEnum;
 import com.jdkhome.blzo.ex.authj.enums.AuthjResponseError;
 import com.jdkhome.blzo.ex.authj.generator.dao.AdminMapper;
 import com.jdkhome.blzo.ex.authj.generator.model.Admin;
@@ -52,15 +53,17 @@ public class AdminBasicServiceImpl implements AdminBasicService {
      * @return
      */
     @Override
-    public Integer addAdmin(String username, String password, String nickName, String phone, String email, String remark) {
+    public Integer addAdmin(Integer organizeId, String username, String password, String nickName, String phone, String email, String remark) {
 
         //入参验证
-        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || StringUtils.isEmpty(nickName) || StringUtils.isEmpty(phone)) {
-            log.error("添加管理员->参数错误");
+        if (organizeId == null || StringUtils.isEmpty(username) || StringUtils.isEmpty(password)
+                || StringUtils.isEmpty(nickName) || StringUtils.isEmpty(phone)) {
+            log.error("添加管理员 -> 参数错误");
             throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
         Admin admin = new Admin();
+        admin.setOrganizeId(organizeId);
         admin.setUsername(username);
         admin.setSalt(SaltGenerator.get());
         admin.setPassword(PasswordEncoder.toMD5(password, admin.getSalt()));
@@ -68,6 +71,7 @@ public class AdminBasicServiceImpl implements AdminBasicService {
         admin.setPhone(phone);
         admin.setEmail(email);
         admin.setRemark(remark);
+        admin.setStatus(AdminStatusEnum.INIT.getCode());
 
         return adminMapper.insertSelective(admin);
     }
@@ -84,7 +88,9 @@ public class AdminBasicServiceImpl implements AdminBasicService {
      * @return
      */
     @Override
-    public Integer editAdmin(Integer adminId, String username, String password, String nickName, String phone, String email, Integer status, String remark, List<LayerDTO> layer) {
+    public Integer editAdmin(Integer adminId, String username, String password,
+                             String nickName, String phone, String email,
+                             AdminStatusEnum status, String remark, List<LayerDTO> layer) {
 
         //入参验证
         if (adminId == null) {
@@ -97,49 +103,49 @@ public class AdminBasicServiceImpl implements AdminBasicService {
 
         if (admin == null) {
             log.error("修改管理员->管理员 adminId={} 不存在", adminId);
-            throw new ServiceException(AuthjResponseError.RESP_ERROR_ADMIN_NOT_EXIST);
+            throw new ServiceException(AuthjResponseError.ADMIN_NOT_EXIST);
         }
 
-        String salt = admin.getSalt();
 
-        admin = new Admin();
+        Admin updateAdmin = new Admin();
 
-        admin.setId(adminId);
+        updateAdmin.setId(adminId);
 
         if (StringUtils.isNotEmpty(username)) {
-            admin.setUsername(username);
+            updateAdmin.setUsername(username);
         }
 
         if (StringUtils.isNotEmpty(password)) {
-            admin.setPassword(PasswordEncoder.toMD5(password, salt));
+            String salt = admin.getSalt();
+            updateAdmin.setPassword(PasswordEncoder.toMD5(password, salt));
         }
 
         if (StringUtils.isNotEmpty(nickName)) {
-            admin.setNickName(nickName);
+            updateAdmin.setNickName(nickName);
         }
 
         if (StringUtils.isNotEmpty(phone)) {
-            admin.setPhone(phone);
+            updateAdmin.setPhone(phone);
         }
 
         if (StringUtils.isNotEmpty(email)) {
-            admin.setEmail(email);
+            updateAdmin.setEmail(email);
         }
 
         if (status != null) {
-            admin.setStatus(status);
+            updateAdmin.setStatus(status.getCode());
         }
 
         if (StringUtils.isNotEmpty(remark)) {
-            admin.setRemark(remark);
+            updateAdmin.setRemark(remark);
         }
 
         if (layer != null) {
             // size=0 = > []
-            admin.setLayer(PerfectGson.getGson().toJson(layer));
+            updateAdmin.setLayer(PerfectGson.getGson().toJson(layer));
         }
 
-        return adminMapper.updateByPrimaryKeySelective(admin);
+        return adminMapper.updateByPrimaryKeySelective(updateAdmin);
     }
 
     /**
@@ -227,7 +233,7 @@ public class AdminBasicServiceImpl implements AdminBasicService {
             throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
-        List<Admin> list = this.getAllAdmin(null, null, phone, null);
+        List<Admin> list = this.getAllAdmin(null, null, null, phone, null);
 
         return CollectionUtils.isEmpty(list) ? null : list.get(0);
     }
@@ -246,16 +252,52 @@ public class AdminBasicServiceImpl implements AdminBasicService {
             throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
-        List<Admin> list = this.getAllAdmin(null, null, null, email);
+        List<Admin> list = this.getAllAdmin(null, null, null, null, email);
 
         return CollectionUtils.isEmpty(list) ? null : list.get(0);
     }
 
+    /**
+     * 分页查询管理员
+     *
+     * @param username
+     * @param nickName
+     * @param phone
+     * @param page
+     * @param size
+     * @return
+     */
+    @Override
+    public PageInfo<Admin> getAdminsWithPage(Integer organizeId, String username, String nickName, String phone, String email, Integer page, Integer size) {
 
-    private AdminExample getExample(String username, String nickName, String phone, String email) {
+        //入参验证
+        if (page == null || size == null) {
+            log.error("分页查询管理员 -> 分页参数错误");
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
+        }
+
+        PageHelper.startPage(page, size);
+        return new PageInfo<>(this.getAllAdmin(organizeId, username, nickName, phone, email));
+    }
+
+    /**
+     * 获取所有管理员
+     *
+     * @param username
+     * @param nickName
+     * @param phone
+     * @return
+     */
+    @Override
+    public List<Admin> getAllAdmin(Integer organizeId, String username, String nickName, String phone, String email) {
 
         AdminExample example = new AdminExample();
         AdminExample.Criteria criteria = example.createCriteria();
+
+        if (organizeId != null) {
+            criteria.andOrganizeIdEqualTo(organizeId);
+        }
+
         if (StringUtils.isNotEmpty(username)) {
             criteria.andUsernameEqualTo(username);
         }
@@ -273,51 +315,6 @@ public class AdminBasicServiceImpl implements AdminBasicService {
         }
 
         example.setOrderByClause(SqlTemplate.ORDER_BY_ID_DESC);
-
-        return example;
-    }
-
-    /**
-     * 分页查询管理员
-     *
-     * @param username
-     * @param nickName
-     * @param phone
-     * @param page
-     * @param size
-     * @return
-     */
-    @Override
-    public PageInfo<Admin> getAdminsWithPage(String username, String nickName, String phone, String email, Integer page, Integer size) {
-
-        //入参验证
-        if (page == null || size == null) {
-            log.error("分页查询管理员->分页参数错误");
-            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
-        }
-
-        AdminExample example = this.getExample(username, nickName, phone, email);
-
-
-        PageHelper.startPage(page, size);
-        PageInfo pageInfo = new PageInfo<>(adminMapper.selectByExample(example));
-
-
-        return pageInfo;
-    }
-
-    /**
-     * 获取所有管理员
-     *
-     * @param username
-     * @param nickName
-     * @param phone
-     * @return
-     */
-    @Override
-    public List<Admin> getAllAdmin(String username, String nickName, String phone, String email) {
-
-        AdminExample example = this.getExample(username, nickName, phone, email);
 
         return adminMapper.selectByExample(example);
     }

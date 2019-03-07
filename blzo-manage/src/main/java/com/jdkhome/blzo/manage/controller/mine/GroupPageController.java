@@ -103,6 +103,7 @@ public class GroupPageController {
     @RequestMapping("/admin")
     public String groupAdmin(Model model, HttpServletRequest request,
                              PageRequest pageRequest,
+                             @RequestParam(value = "organizeId", required = false) Integer organizeId,
                              @RequestParam(value = "groupId", required = true) Integer groupId) {
 
         Group group = groupBasicService.getGroupById(groupId);
@@ -116,11 +117,17 @@ public class GroupPageController {
             pageRequest = new PageRequest();
         }
 
+
+        // 非0号组织则只能看自己的数据
+        if (0 != authjManager.getOrganizeId()) {
+            organizeId = authjManager.getOrganizeId();
+        }
+
         //组信息
         model.addAttribute("group", group);
 
         //获取所有管理员
-        PageInfo pageInfo = adminBasicService.getAdminsWithPage(null, null, null, null, pageRequest.getPage(), pageRequest.getSize());
+        PageInfo pageInfo = adminBasicService.getAdminsWithPage(organizeId, null, null, null, null, pageRequest.getPage(), pageRequest.getSize());
 
         //获取组内所有管理员Id
 

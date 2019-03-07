@@ -1,14 +1,9 @@
 package com.jdkhome.blzo.ex.authj.enums;
 
-/**
- * Created with IntelliJ IDEA.
- * User: wxb
- * CreatedTime: 2018/6/22 下午4:46
- * Description:订单状态枚举
- */
+
 public enum AdminStatusEnum {
 
-    INIT(0, "初始"),
+    INIT(0, "初始"), // 初始状态是希望用户登录后立即修改密码
     NORMAL(1, "正常"),
     FREEZE(-1, "冻结");
 

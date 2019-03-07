@@ -66,7 +66,13 @@ public class AuthjInterceptor extends HandlerInterceptorAdapter {
         }
 
         if (authj != null && authj.auth()) {
-            logBasicService.addLog(authjManager.getUserId(), authjManager.getUserName(), uri, authj.value(), ApiRecordAspect.getParamerStr(request), IpTools.getIp(request));
+            logBasicService.addLog(authjManager.getOrganizeId(),
+                    authjManager.getUserId(),
+                    authjManager.getUserName(),
+                    uri, authj.value(),
+                    String.format("query:%s \n body:%s",
+                            ApiRecordAspect.getParamerStr(request), ApiRecordAspect.getBodyStr(request)),
+                    IpTools.getIp(request));
         }
         return true;
     }

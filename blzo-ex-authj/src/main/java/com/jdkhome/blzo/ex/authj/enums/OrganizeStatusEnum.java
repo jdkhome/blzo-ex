@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.ex.authj.enums;
 
 
-public enum AdminStatusEnum {
+public enum OrganizeStatusEnum {
 
     INIT(0, "初始"), // 初始状态是希望用户登录后立即修改密码
     NORMAL(1, "正常"),
@@ -18,18 +18,18 @@ public enum AdminStatusEnum {
         return name;
     }
 
-    AdminStatusEnum(Integer code, String name) {
+    OrganizeStatusEnum(Integer code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public static AdminStatusEnum getByCode(Integer code) {
+    public static OrganizeStatusEnum getByCode(Integer code) {
 
         //1 get all the enum constants
-        AdminStatusEnum[] enumTypes = values();
+        OrganizeStatusEnum[] enumTypes = values();
 
         //2 judge if constants contains name
-        for (AdminStatusEnum enumType : enumTypes) {
+        for (OrganizeStatusEnum enumType : enumTypes) {
             if (enumType.getCode().equals(code)) {
                 return enumType;
             }

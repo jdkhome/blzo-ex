@@ -1,6 +1,7 @@
 package com.jdkhome.blzo.ex.authj.core;
 
 import com.google.gson.reflect.TypeToken;
+import com.jdkhome.blzo.ex.authj.enums.AuthjResponseError;
 import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 import com.jdkhome.blzo.ex.authj.generator.model.Group;
 import com.jdkhome.blzo.ex.authj.generator.model.GroupAdmin;
@@ -8,6 +9,7 @@ import com.jdkhome.blzo.ex.authj.generator.model.GroupAuth;
 import com.jdkhome.blzo.ex.authj.pojo.dto.LayerDTO;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
+import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,6 +212,13 @@ public class AuthjService {
 
         userAuthjConfBean.setLayerList(tempBean.layerList);
         userAuthjConfBean.setMoreMenu(tempBean.moreMenu);
+
+        // 2019年03月07日  增加组织Id
+        if (admin.getOrganizeId() == null) {
+            log.error("[Authj] -> 无法给无组织用户授权! adminId={}", admin.getId());
+            throw new ServiceException(AuthjResponseError.ADMIN_HAVENOT_ORG);
+        }
+        userAuthjConfBean.setOrganizeId(admin.getOrganizeId());
 
 
         return userAuthjConfBean;

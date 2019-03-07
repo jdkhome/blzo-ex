@@ -6,8 +6,11 @@ import com.jdkhome.blzo.ex.authj.enums.AuthjResponseError;
 import com.jdkhome.blzo.ex.authj.generator.dao.AdminMapper;
 import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 import com.jdkhome.blzo.ex.authj.generator.model.AdminExample;
+import com.jdkhome.blzo.ex.authj.generator.model.Organize;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import com.jdkhome.blzo.ex.authj.service.AdminService;
+import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
+import com.jdkhome.blzo.ex.authj.service.OrganizeBasicService;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
@@ -33,6 +36,12 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     AdminMapper adminMapper;
 
+    @Autowired
+    GroupBasicService groupBasicService;
+
+    @Autowired
+    OrganizeBasicService organizeBasicService;
+
     /**
      * 管理员登录
      *
@@ -53,13 +62,13 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = adminBasicService.getAdminByUsername(username);
         if (admin == null) {
             log.error("管理员登录->管理员不存在");
-            throw new ServiceException(AuthjResponseError.RESP_ERROR_ADMIN_NOT_EXIST);
+            throw new ServiceException(AuthjResponseError.ADMIN_NOT_EXIST);
         }
 
         //密码验证
         if (!admin.getPassword().equals(PasswordEncoder.toMD5(password, admin.getSalt()))) {
             log.error("管理员登录->密码错误");
-            throw new ServiceException(AuthjResponseError.RESP_ERROR_PASSWORD_ERROR);
+            throw new ServiceException(AuthjResponseError.PASSWORD_ERROR);
         }
 
         //更新ip
@@ -69,6 +78,89 @@ public class AdminServiceImpl implements AdminService {
         adminMapper.updateByPrimaryKeySelective(admin);
 
         return admin;
+    }
+
+    /**
+     * 激活管理员账户(第一次登录需重置密码)
+     *
+     * @param adminId     管理员Id
+     * @param newPassword 新密码
+     * @return
+     */
+    @Override
+    public Integer activeAdmin(Integer adminId, String newPassword) {
+
+        // 入参验证
+        if (adminId == null || StringUtils.isEmpty(newPassword)) {
+            log.error("激活管理员账户 -> 参数错误");
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
+        }
+
+        //获取管理员
+        Admin admin = adminBasicService.getAdminById(adminId);
+
+        if (admin == null) {
+            log.error("激活管理员账户 -> 管理员 adminId={} 不存在", adminId);
+            throw new ServiceException(AuthjResponseError.ADMIN_NOT_EXIST);
+        }
+
+
+        Admin updateAdmin = new Admin();
+        updateAdmin.setId(adminId);
+        String salt = admin.getSalt();
+        updateAdmin.setPassword(PasswordEncoder.toMD5(newPassword, salt));
+        updateAdmin.setStatus(AdminStatusEnum.NORMAL.getCode());
+
+        // 校验
+        if (!AdminStatusEnum.INIT.getCode().equals(admin.getStatus())) {
+            log.error("激活管理员账户 -> 管理员 adminId={} 状态错误", adminId, admin.getStatus());
+            throw new ServiceException(AuthjResponseError.ADMIN_STATUS_ERROR);
+        }
+
+        if (admin.getPassword().equals(updateAdmin.getPassword())) {
+            log.error("激活管理员账户 -> 新密码不能和老密码一样", adminId);
+            throw new ServiceException(AuthjResponseError.ACTIVE_LIKE_ORIGIN);
+        }
+
+        adminMapper.updateByPrimaryKeySelective(updateAdmin);
+
+        return null;
+    }
+
+    /**
+     * 修改管理员组织
+     *
+     * @param adminId
+     * @param orgId
+     * @return
+     */
+    @Override
+    public Integer changeAdminOrg(Integer adminId, Integer orgId) {
+
+        Admin admin = adminBasicService.getAdminById(adminId);
+
+        if (admin == null) {
+            log.error("修改管理员组织 -> 管理员不存在 adminId={}", adminId);
+            throw new ServiceException(AuthjResponseError.ADMIN_NOT_EXIST);
+        }
+
+        Organize organize = organizeBasicService.getOrganizeById(orgId);
+        if (organize == null) {
+            log.error("修改管理员组织 -> 管理员不存在 adminId={}", adminId);
+            throw new ServiceException(AuthjResponseError.ADMIN_NOT_EXIST);
+        }
+
+        // 移除管理员创建的所有组
+        groupBasicService.delGroupByCreateAdminId(adminId);
+
+        // 管理员退出所有非0号组织创建的组
+        groupBasicService.delGroupAdminByAdminId(adminId);
+
+        Admin updateAdmin = new Admin();
+        updateAdmin.setId(adminId);
+        updateAdmin.setOrganizeId(orgId);
+
+        return adminMapper.updateByPrimaryKeySelective(updateAdmin);
     }
 
     /**

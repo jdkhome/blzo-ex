@@ -20,6 +20,25 @@ public interface AdminService {
     Admin login(String username, String password, String ip);
 
     /**
+     * 激活管理员账户(第一次登录需重置密码)
+     *
+     * @param adminId     管理员Id
+     * @param newPassword 新密码
+     * @return
+     */
+    Integer activeAdmin(Integer adminId, String newPassword);
+
+    /**
+     * 修改管理员组织
+     *
+     * @param adminId
+     * @param orgId
+     * @return
+     */
+    Integer changeAdminOrg(Integer adminId, Integer orgId);
+
+
+    /**
      * 如果没有root用户，则自动初始化一个
      */
     void initRoot();

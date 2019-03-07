@@ -21,8 +21,21 @@
                         <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
                             <div class="col-md-12">
-                                <legend>筛选条件<a class="empty"><i class="glyphicon glyphicon-repeat"></i></a></legend>
+                                <legend>筛选条件</legend>
                             </div>
+
+                            <div th:if="${userAuthjConfBean.organizeId!=null && userAuthjConfBean.organizeId==0}"
+                                 class="form-group col-md-3">
+                                <label>组织</label>
+                                <select id="organizeId" name="search" data-rel="chosen" class="form-control"
+                                        style="width: 231px;">
+                                    <option value="">所有</option>
+                                    <option th:each="organize:${organizes}"
+                                            th:text="${organize.name}" th:value="${organize.id}">
+                                    </option>
+                                </select>
+                            </div>
+
                             <div class="form-group col-md-3">
                                 <label>登录名</label>
                                 <input class="form-control" placeholder="请输入" type="text" id="userName" name="search">

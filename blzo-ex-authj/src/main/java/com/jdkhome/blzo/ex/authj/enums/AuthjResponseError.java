@@ -9,8 +9,12 @@ import com.jdkhome.blzo.ex.basic.pojo.BaseError;
  */
 public enum AuthjResponseError implements BaseError {
 
-    RESP_ERROR_ADMIN_NOT_EXIST(10000, "管理员不存在"),
-    RESP_ERROR_PASSWORD_ERROR(10001, "管理员密码错误");
+    ADMIN_NOT_EXIST(10000, "管理员不存在"),
+    PASSWORD_ERROR(10001, "管理员密码错误"),
+    ADMIN_STATUS_ERROR(10002, "管理员状态错误"),
+    ACTIVE_LIKE_ORIGIN(10003, "新密码不能与原密码相同"),
+    ADMIN_HAVENOT_ORG(10004, "管理员无组织"),
+    ;
 
     private Integer code;
     private String msg;
