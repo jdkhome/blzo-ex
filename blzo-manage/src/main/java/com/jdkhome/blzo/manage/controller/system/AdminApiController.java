@@ -56,6 +56,7 @@ public class AdminApiController {
                                                 @RequestParam(value = "password", required = true) String password,
                                                 @RequestParam(value = "nickName", required = true) String nickName,
                                                 @RequestParam(value = "phone", required = true) String phone,
+                                                @RequestParam(value = "email", required = true) String email,
                                                 @RequestParam(value = "remark", required = false) String remark
     ) {
         // 非0号组织则只能看自己的数据
@@ -63,7 +64,7 @@ public class AdminApiController {
             organizeId = authjManager.getOrganizeId();
         }
 
-        adminBasicService.addAdmin(organizeId, username, password, nickName, phone, null, remark);
+        adminBasicService.addAdmin(organizeId, username, password, nickName, phone, email, remark);
         return ApiResponse.success();
 
     }

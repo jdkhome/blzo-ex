@@ -10,6 +10,36 @@
         init: function () {
             var _this = this;
 
+            // === 响应事件 === //
+            // 同步响应=> 成功后自动刷新页面
+            $(document).on('api-with-sync', function (msg, data) {
+                if (data.code != 200) {
+                    new NotificationFx({
+                        message: data.msg
+                    }).show();
+                } else {
+                    new NotificationFx({
+                        message: data.msg,
+                        onClose: function () {
+                            location.reload();
+                        }
+                    }).show();
+                }
+            });
+
+            // 非同步响应=> 如果失败则刷新页面
+            $(document).on('api-without-sync', function (msg, data) {
+                if (data.code != 200) {
+                    new NotificationFx({
+                        message: "失去同步:" + data.msg,
+                        onClose: function () {
+                            location.reload();
+                        }
+                    }).show();
+                }
+            });
+
+
             $('.admin-edit').click(function (event) {
 
                 $(this).parents('tr').find('.admin-nickName-input:first').removeClass('hidden');
@@ -39,6 +69,20 @@
                 };
 
                 request.apiSystemAdminEdit($(document), obj, 'adminEdit');
+            });
+
+
+            $('#admin-add').click(function (event) {
+                var obj = {
+                    "username": $('#add-username').val(),
+                    "password": $('#add-password').val(),
+                    "nickName": $('#add-nickName').val(),
+                    "phone": $('#add-phone').val(),
+                    "email": $('#add-email').val(),
+                    "remark": $('#add-remark').val(),
+                    "organizeId": $('#add-organizeId').val()
+                };
+                request.apiSystemAdminAdd($(document), obj, 'api-with-sync');
             });
 
             $(document).on('adminEdit', function (msg, data) {
