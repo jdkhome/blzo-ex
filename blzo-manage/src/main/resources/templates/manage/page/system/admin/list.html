@@ -71,86 +71,7 @@
                                         <!--class="fa fa-plus"></i></a>-->
                                     </div>
                                 </div>
-                                <!-- 添加面板 -->
-                                <div aria-hidden="true" aria-labelledby="new-admin-label"
-                                     role="dialog" tabindex="-1" id="new-admin" class="modal fade">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button aria-hidden="true" data-dismiss="modal"
-                                                        class="close" type="button">×
-                                                </button>
-                                                <h4 class="modal-title">新的管理员</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal bucket-form">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">登录名</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="add-username"
-                                                                   placeholder="请输入">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">密码</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="add-password"
-                                                                   placeholder="请输入">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">昵称</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="add-nickName"
-                                                                   placeholder="请输入">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">手机号</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="add-phone"
-                                                                   placeholder="请输入">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">邮箱</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="add-email"
-                                                                   placeholder="请输入">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">备注</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="add-remark"
-                                                                   placeholder="请输入">
-                                                        </div>
-                                                    </div>
-                                                    <div th:if="${userAuthjConfBean.organizeId!=null && userAuthjConfBean.organizeId==0}"
-                                                         class="form-group">
-                                                        <label class="col-sm-3 control-label">组织</label>
-                                                        <div class="col-sm-6">
-                                                            <select id="add-organizeId" class="form-control">
-                                                                <option th:each="organize:${organizes}"
-                                                                        th:text="${organize.name}"
-                                                                        th:value="${organize.id}">
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label class="col-sm-6 control-label">将创建新的管理员</label>
-                                                        <div class="col-sm-3">
-                                                            <a id="admin-add"
-                                                               class="btn btn-success pull-right">添加</a>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
 
@@ -172,64 +93,110 @@
                                     <tbody>
                                     <tr th:each="obj,objStatus : ${pageInfo.list}">
                                         <td th:text="${obj.id}"></td>
-                                        <td>
-                                            <span class="admin-nickName-span" th:text="${obj.nickName}"></span>
-                                            <input type="text" class="admin-nickName-input form-control small hidden"
-                                                   th:value="${obj.nickName}">
-                                        </td>
-                                        <td>
-                                            <span class="admin-username-span" th:text="${obj.username}"></span>
-                                            <input type="text" class="admin-username-input form-control small hidden"
-                                                   th:value="${obj.username}">
-                                        </td>
-                                        <td>
-                                            <span class="admin-phone-span" th:text="${obj.phone}"></span>
-                                            <input type="text" class="admin-phone-input form-control small hidden"
-                                                   th:value="${obj.phone}">
-                                        </td>
-                                        <td>
-                                            <span class="admin-email-span" th:text="${obj.email}"></span>
-                                            <input type="text" class="admin-email-input form-control small hidden"
-                                                   th:value="${obj.email}">
-                                        </td>
-                                        <td>
+                                        <td th:text="${obj.nickName}"></td>
+                                        <td th:text="${obj.username}"></td>
+                                        <td th:text="${obj.phone}"></td>
+                                        <td th:text="${obj.email}"></td>
+                                        <td th:attr="status=${obj.status}">
                                             <span class="admin-status-span" th:text="${obj.statusStr}"></span>
-                                            <select class="admin-status-select form-control small hidden">
-                                                <option th:each="adminStatus:${adminStatusEnums}"
-                                                        th:value="${adminStatus.code}"
-                                                        th:selected="${obj.status == adminStatus.code}"
-                                                        th:text="${adminStatus.name}">
-                                                    初始状态
-                                                </option>
-                                            </select>
                                         </td>
-                                        <td>
-                                            <span class="admin-remark-span" th:text="${obj.remark}"></span>
-                                            <input type="text" class="admin-remark-input form-control small hidden"
-                                                   th:value="${obj.remark}">
-                                        </td>
+                                        <td th:text="${obj.remark}"></td>
                                         <td th:text="${'['+#dates.format(obj.lastTime, 'yyyy-MM-dd HH:mm:ss')+']'+obj.ipCity+'('+obj.lastIp+')'}"></td>
                                         <td>
-                                            <button class="btn btn-info btn-xs admin-edit">
-                                                编辑
-                                            </button>
-
-                                            <button class="btn btn-info btn-xs admin-save hidden"
-                                                    th:attr="data-id=${obj.id}">
-                                                保存
-                                            </button>
-                                            <a class="btn btn-primary btn-xs"
-                                               th:href="@{${'/manage/system/admin/edit'}(adminId=${obj.id})}">
-                                                修改密码
+                                            <a href="#edit-admin" data-toggle="modal"
+                                               class="btn btn-round btn-primary edit-admin-btn">
+                                                <i class="fa fa-edit"></i>
                                             </a>
-                                            <a class="btn btn-danger btn-xs delete" th:attr="data-id=${obj.id}">
-                                                删除
+                                            <a data-toggle="modal"
+                                               class="btn btn-round btn-danger del-admin-btn">
+                                                <i class="fa fa-times"></i>
                                             </a>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                                 <div th:replace="manage/common/paginate"></div>
+                            </div>
+
+                            <!-- 添加面板 -->
+                            <div aria-hidden="true" aria-labelledby="new-admin-label"
+                                 role="dialog" tabindex="-1" id="new-admin" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-hidden="true" data-dismiss="modal"
+                                                    class="close" type="button">×
+                                            </button>
+                                            <h4 class="modal-title">新的管理员</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal bucket-form">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">登录名</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-username"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">密码</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-password"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">昵称</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-nickName"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">手机号</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-phone"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">邮箱</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-email"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">备注</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-remark"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div th:if="${userAuthjConfBean.organizeId!=null && userAuthjConfBean.organizeId==0}"
+                                                     class="form-group">
+                                                    <label class="col-sm-3 control-label">组织</label>
+                                                    <div class="col-sm-6">
+                                                        <select id="add-organizeId" class="form-control">
+                                                            <option th:each="organize:${organizes}"
+                                                                    th:text="${organize.name}"
+                                                                    th:value="${organize.id}">
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">将创建新的管理员</label>
+                                                    <div class="col-sm-3">
+                                                        <a id="admin-add"
+                                                           class="btn btn-success pull-right">添加</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- 编辑面板 -->
@@ -241,16 +208,55 @@
                                             <button aria-hidden="true" data-dismiss="modal"
                                                     class="close" type="button">×
                                             </button>
-                                            <h4 class="modal-title">编辑组织</h4>
+                                            <h4 class="modal-title">管理员信息修改</h4>
                                         </div>
                                         <div class="modal-body">
                                             <form class="form-horizontal bucket-form">
                                                 <input type="hidden" class="form-control" id="edit-id">
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label">组织名称</label>
+                                                    <label class="col-sm-3 control-label">登录名</label>
                                                     <div class="col-sm-6">
-                                                        <input type="text" class="form-control" id="edit-name"
+                                                        <input type="text" class="form-control" id="edit-username"
                                                                placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">密码</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-password"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">昵称</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-nickName"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">手机号</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-phone"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">邮箱</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-email"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">状态</label>
+                                                    <div class="col-sm-6">
+                                                        <select id="edit-status" class="form-control">
+                                                            <option th:each="adminStatus:${adminStatusEnums}"
+                                                                    th:text="${adminStatus.name}"
+                                                                    th:value="${adminStatus.code}">
+                                                            </option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -261,17 +267,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label">状态</label>
-                                                    <div class="col-sm-6">
-                                                        <select id="edit-status" class="form-control">
-                                                            <option th:each="status:${statusEnums}"
-                                                                    th:text="${status.name}" th:value="${status.code}">
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">保存组织修改内容</label>
+                                                    <label class="col-sm-6 control-label">保存管理员信息</label>
                                                     <div class="col-sm-3">
                                                         <a id="organize-save"
                                                            class="btn btn-success pull-right">保存</a>

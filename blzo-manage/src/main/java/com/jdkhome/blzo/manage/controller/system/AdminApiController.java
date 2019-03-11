@@ -110,6 +110,7 @@ public class AdminApiController {
                                                  @RequestParam(value = "password", required = false) String password,
                                                  @RequestParam(value = "nickName", required = false) String nickName,
                                                  @RequestParam(value = "phone", required = false) String phone,
+                                                 @RequestParam(value = "email", required = false) String email,
                                                  @RequestParam(value = "status", required = false) Integer status,
                                                  @RequestParam(value = "remark", required = false) String remark
     ) {
