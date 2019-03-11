@@ -24,17 +24,33 @@
     //======管理员=======
     // 添加管理员
     Request.apiSystemAdminAdd = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/mine/admin/add', context, data, event, callbacks);
+        Base.doPost('/api/manage/system/admin/add', context, data, event, callbacks);
     };
 
     // 编辑管理员
     Request.apiSystemAdminEdit = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/mine/admin/edit', context, data, event, callbacks);
+        Base.doPost('/api/manage/system/admin/edit', context, data, event, callbacks);
     };
 
     // 删除管理员
     Request.apiSystemAdminDel = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/mine/admin/del', context, data, event, callbacks);
+        Base.doPost('/api/manage/system/admin/del', context, data, event, callbacks);
+    };
+
+    //==== 组织管理 ====
+    // 添加组织
+    Request.apiManageSystemOrganizeAdd = function (context, data, event, callbacks) {
+        Base.doPost('/api/manage/system/organize/add', context, data, event, callbacks);
+    };
+
+    // 删除组织
+    Request.apiManageSystemOrganizeDel = function (context, data, event, callbacks) {
+        Base.doPost('/api/manage/system/organize/del', context, data, event, callbacks);
+    };
+
+    // 编辑组织
+    Request.apiManageSystemOrganizeEdit = function (context, data, event, callbacks) {
+        Base.doPost('/api/manage/system/organize/edit', context, data, event, callbacks);
     };
 
     //======组=======
@@ -100,21 +116,7 @@
         Base.doPost('/api/manage/mine/setting/password', context, data, event, callbacks);
     };
 
-    //==== 组织管理 ====
-    // 添加组织
-    Request.apiManageSystemOrganizeAdd = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/system/organize/add', context, data, event, callbacks);
-    };
 
-    // 删除组织
-    Request.apiManageSystemOrganizeDel = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/system/organize/del', context, data, event, callbacks);
-    };
-
-    // 编辑组织
-    Request.apiManageSystemOrganizeEdit = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/system/organize/edit', context, data, event, callbacks);
-    };
 
     window.controller.Request = Request;
 

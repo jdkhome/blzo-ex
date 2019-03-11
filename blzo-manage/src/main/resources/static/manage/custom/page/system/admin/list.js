@@ -71,7 +71,7 @@
             });
 
 
-            $('.admin-save').click(function (event) {
+            $('#admin-save').click(function (event) {
                 var obj = {
                     "adminId": $('#edit-id').val(),
                     "username": $('#edit-username').val(),
