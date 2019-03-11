@@ -51,7 +51,7 @@
             /**
              * 编辑组织按钮被点击，保存被点击组织的信息
              */
-            $('.edit-organize-btn').click(function (event) {
+            $('.edit-admin-btn').click(function (event) {
 
                 edit_admin_id = $($(this).parents('tr').first().children('td')[0]).text();
                 edit_admin_nickName = $($(this).parents('tr').first().children('td')[1]).text();
