@@ -36,7 +36,7 @@ public class OrganizeBasicServiceImpl implements OrganizeBasicService {
     @Override
     public Integer addOrganize(String name, String remark) {
 
-        if (StringUtil.isNotEmpty(name) || StringUtil.isNotEmpty(remark)) {
+        if (StringUtil.isEmpty(name) || StringUtil.isEmpty(remark)) {
             log.error("添加组织 -> 参数错误");
             throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }

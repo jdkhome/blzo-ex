@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/manage/mine/admin")
+@RequestMapping("/api/manage/system/admin")
 public class AdminApiController {
 
     @Autowired

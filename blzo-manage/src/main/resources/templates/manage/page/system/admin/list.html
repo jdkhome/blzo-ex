@@ -231,6 +231,59 @@
                                 </table>
                                 <div th:replace="manage/common/paginate"></div>
                             </div>
+
+                            <!-- 编辑面板 -->
+                            <div aria-hidden="true" aria-labelledby="edit-admin-label"
+                                 role="dialog" tabindex="-1" id="edit-admin" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-hidden="true" data-dismiss="modal"
+                                                    class="close" type="button">×
+                                            </button>
+                                            <h4 class="modal-title">编辑组织</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal bucket-form">
+                                                <input type="hidden" class="form-control" id="edit-id">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">组织名称</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-name"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">备注</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-remark"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">状态</label>
+                                                    <div class="col-sm-6">
+                                                        <select id="edit-status" class="form-control">
+                                                            <option th:each="status:${statusEnums}"
+                                                                    th:text="${status.name}" th:value="${status.code}">
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">保存组织修改内容</label>
+                                                    <div class="col-sm-3">
+                                                        <a id="organize-save"
+                                                           class="btn btn-success pull-right">保存</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </section>
                 </div>

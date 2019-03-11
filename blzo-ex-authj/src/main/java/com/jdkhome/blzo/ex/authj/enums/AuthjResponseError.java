@@ -14,6 +14,7 @@ public enum AuthjResponseError implements BaseError {
     ADMIN_STATUS_ERROR(10002, "管理员状态错误"),
     ACTIVE_LIKE_ORIGIN(10003, "新密码不能与原密码相同"),
     ADMIN_HAVENOT_ORG(10004, "管理员无组织"),
+    DEL_ORG_WILL_DEL_ADMIN(10005, "删除组织前需先删除组织所有成员"),
     ;
 
     private Integer code;

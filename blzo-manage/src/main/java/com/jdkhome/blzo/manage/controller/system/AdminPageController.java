@@ -93,7 +93,7 @@ public class AdminPageController {
         AdminStatusEnum[] adminStatusEnums = AdminStatusEnum.values();
 
 
-        List<Organize> organizes = organizeBasicService.getAllOrganize(null, null);
+        List<Organize> organizes = organizeBasicService.getAllOrganize(null, null, null, null);
 
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("adminStatusEnums", adminStatusEnums);
