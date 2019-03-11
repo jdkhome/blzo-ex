@@ -93,13 +93,21 @@ public class OrganizeBasicServiceImpl implements OrganizeBasicService {
     }
 
     @Override
-    public List<Organize> getAllOrganize(String name, String remark) {
+    public List<Organize> getAllOrganize(Integer organizeId, String name, OrganizeStatusEnum statusEnum, String remark) {
 
         OrganizeExample example = new OrganizeExample();
         OrganizeExample.Criteria criteria = example.createCriteria();
 
+        if (organizeId != null) {
+            criteria.andIdEqualTo(organizeId);
+        }
+
         if (StringUtil.isNotEmpty(name)) {
             criteria.andNameLike("%" + name + "%");
+        }
+
+        if (statusEnum != null) {
+            criteria.andStatusEqualTo(statusEnum.getCode());
         }
 
         if (StringUtil.isNotEmpty(remark)) {
@@ -110,7 +118,7 @@ public class OrganizeBasicServiceImpl implements OrganizeBasicService {
     }
 
     @Override
-    public PageInfo<Organize> getOrganizeWithPage(String name, String remark, Integer page, Integer size) {
+    public PageInfo<Organize> getOrganizeWithPage(Integer organizeId, String name, OrganizeStatusEnum statusEnum, String remark, Integer page, Integer size) {
 
         if (page == null || size == null) {
             log.error("分页获取组织 -> 参数错误");
@@ -118,6 +126,6 @@ public class OrganizeBasicServiceImpl implements OrganizeBasicService {
         }
 
         PageHelper.startPage(page, size);
-        return new PageInfo<>(this.getAllOrganize(name, remark));
+        return new PageInfo<>(this.getAllOrganize(organizeId, name, statusEnum, remark));
     }
 }

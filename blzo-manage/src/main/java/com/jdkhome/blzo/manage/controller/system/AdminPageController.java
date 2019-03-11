@@ -122,14 +122,4 @@ public class AdminPageController {
         return "manage/page/system/admin/edit";
     }
 
-    /**
-     * 创建管理员页面
-     */
-    @Authj(value = "创建管理员页面", menu = true)
-    @RequestMapping("/add")
-    public String adminAdd(Model model, HttpServletRequest request) {
-
-        return "manage/page/system/admin/add";
-    }
-
 }

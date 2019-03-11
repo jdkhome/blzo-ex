@@ -40,7 +40,8 @@ public interface OrganizeBasicService {
      */
     Organize getOrganizeById(Integer organizeId);
 
-    List<Organize> getAllOrganize(String name, String remark);
+    List<Organize> getAllOrganize(Integer organizeId, String name, OrganizeStatusEnum statusEnum, String remark);
 
-    PageInfo<Organize> getOrganizeWithPage(String name, String remark, Integer page, Integer size);
+    PageInfo<Organize> getOrganizeWithPage(Integer organizeId, String name,
+                                           OrganizeStatusEnum statusEnum, String remark, Integer page, Integer size);
 }
