@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -83,7 +84,7 @@ public class LogBasicServiceImpl implements LogBasicService {
         return log;
     }
 
-    private LogExample getExample(Integer organizeId, String nickName, String authjUri, String authjName) {
+    private LogExample getExample(Integer organizeId, String nickName, String authjUri, String authjName, Date timeBegan, Date timeEnd) {
 
         LogExample example = new LogExample();
         LogExample.Criteria criteria = example.createCriteria();
@@ -113,6 +114,14 @@ public class LogBasicServiceImpl implements LogBasicService {
             criteria.andAuthjNameLike("%" + authjName + "%");
         }
 
+        if (timeBegan != null) {
+            criteria.andCreateTimeGreaterThanOrEqualTo(timeBegan);
+        }
+
+        if (timeEnd != null) {
+            criteria.andCreateTimeLessThanOrEqualTo(timeEnd);
+        }
+
         example.setOrderByClause(SqlTemplate.ORDER_BY_ID_DESC);
 
         return example;
@@ -130,14 +139,15 @@ public class LogBasicServiceImpl implements LogBasicService {
      * @return
      */
     @Override
-    public PageInfo<Log> getLogWithPage(Integer organizeId, String nickName, String authjUri, String authjName, Integer page, Integer size) {
+    public PageInfo<Log> getLogWithPage(Integer organizeId, String nickName, String authjUri, String authjName,
+                                        Date timeBegan, Date timeEnd, Integer page, Integer size) {
 
         if (page == null || size == null) {
             log.error("分页查询日志 -> 参数错误");
             throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
         }
 
-        LogExample example = this.getExample(organizeId, nickName, authjUri, authjName);
+        LogExample example = this.getExample(organizeId, nickName, authjUri, authjName, timeBegan, timeEnd);
 
         PageHelper.startPage(page, size);
         return new PageInfo<>(logMapper.selectByExampleWithBLOBs(example));

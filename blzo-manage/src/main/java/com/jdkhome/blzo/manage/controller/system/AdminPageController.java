@@ -51,6 +51,7 @@ public class AdminPageController {
 
     /**
      * 管理员列表
+     * todo 修改组织
      */
     @RequestMapping("/list")
     @Authj(value = "管理员列表", menu = true)
@@ -100,26 +101,6 @@ public class AdminPageController {
         model.addAttribute("organizes", organizes);
 
         return "manage/page/system/admin/list";
-    }
-
-    /**
-     * 管理员编辑页
-     */
-    @RequestMapping("/edit")
-    @Authj("管理员编辑页")
-    public String adminEdit(Model model, HttpServletRequest request,
-                            @RequestParam(value = "adminId", required = true) Integer adminId) {
-
-        if (!organizeValidator.validAdmin(adminId)) {
-            log.error("删除管理员 -> 组织鉴权不通过");
-            throw new ServiceException(BasicResponseError.NO_PERMISSION);
-        }
-
-        Admin obj = adminBasicService.getAdminById(adminId);
-
-        model.addAttribute("obj", obj);
-
-        return "manage/page/system/admin/edit";
     }
 
 }

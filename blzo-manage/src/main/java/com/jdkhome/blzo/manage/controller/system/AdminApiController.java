@@ -121,7 +121,7 @@ public class AdminApiController {
         }
 
         adminBasicService.editAdmin(adminId, username, password, nickName,
-                phone, null, AdminStatusEnum.getByCode(status), remark, null);
+                phone, email, AdminStatusEnum.getByCode(status), remark, null);
 
         return ApiResponse.success();
 

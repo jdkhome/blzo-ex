@@ -11,6 +11,7 @@ import com.jdkhome.blzo.ex.authj.generator.model.AdminExample;
 import com.jdkhome.blzo.ex.authj.pojo.dto.LayerDTO;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
+import com.jdkhome.blzo.ex.authj.service.GroupService;
 import com.jdkhome.blzo.ex.basic.constants.SqlTemplate;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
@@ -41,6 +42,9 @@ public class AdminBasicServiceImpl implements AdminBasicService {
 
     @Autowired
     GroupBasicService groupBasicService;
+
+    @Autowired
+    GroupService groupService;
 
     /**
      * 添加管理员
@@ -169,10 +173,10 @@ public class AdminBasicServiceImpl implements AdminBasicService {
         }
 
         // 被删除的管理员 退出所有加入的组
-        groupBasicService.delGroupAdminByAdminId(adminId);
+        groupService.delGroupAdminByAdminId(adminId);
 
         // 删除所有该管理员创建的组
-        groupBasicService.delGroupByCreateAdminId(adminId);
+        groupService.delGroupByCreateAdminId(adminId);
 
         return adminMapper.deleteByPrimaryKey(adminId);
     }

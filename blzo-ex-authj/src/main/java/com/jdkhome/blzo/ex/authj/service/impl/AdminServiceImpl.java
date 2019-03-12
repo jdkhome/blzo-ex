@@ -7,10 +7,7 @@ import com.jdkhome.blzo.ex.authj.generator.dao.AdminMapper;
 import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 import com.jdkhome.blzo.ex.authj.generator.model.AdminExample;
 import com.jdkhome.blzo.ex.authj.generator.model.Organize;
-import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
-import com.jdkhome.blzo.ex.authj.service.AdminService;
-import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
-import com.jdkhome.blzo.ex.authj.service.OrganizeBasicService;
+import com.jdkhome.blzo.ex.authj.service.*;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
@@ -41,6 +38,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     OrganizeBasicService organizeBasicService;
+
+    @Autowired
+    GroupService groupService;
 
     /**
      * 管理员登录
@@ -151,10 +151,10 @@ public class AdminServiceImpl implements AdminService {
         }
 
         // 移除管理员创建的所有组
-        groupBasicService.delGroupByCreateAdminId(adminId);
+        groupService.delGroupByCreateAdminId(adminId);
 
         // 管理员退出所有非0号组织创建的组
-        groupBasicService.delGroupAdminByAdminId(adminId);
+        groupService.delGroupAdminByAdminId(adminId);
 
         Admin updateAdmin = new Admin();
         updateAdmin.setId(adminId);

@@ -7,10 +7,13 @@ import com.jdkhome.blzo.ex.authj.service.LogBasicService;
 import com.jdkhome.blzo.ex.basic.pojo.PageRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Date;
 
 /**
  * author linkji.
@@ -36,7 +39,9 @@ public class LogPageController {
                           @RequestParam(value = "organizeId", required = false) Integer organizeId,
                           @RequestParam(value = "nickName", required = false) String nickName,
                           @RequestParam(value = "authjUri", required = false) String authjUri,
-                          @RequestParam(value = "authjName", required = false) String authjName
+                          @RequestParam(value = "authjName", required = false) String authjName,
+                          @RequestParam(value = "timeBegan", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date timeBegan,
+                          @RequestParam(value = "timeEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date timeEnd
     ) {
 
         if (pageRequest == null) {
@@ -48,7 +53,8 @@ public class LogPageController {
             organizeId = authjManager.getOrganizeId();
         }
 
-        PageInfo pageInfo = logBasicService.getLogWithPage(organizeId, nickName, authjUri, authjName, pageRequest.getPage(), pageRequest.getSize());
+        PageInfo pageInfo = logBasicService.getLogWithPage(organizeId, nickName, authjUri, authjName,
+                timeBegan, timeEnd, pageRequest.getPage(), pageRequest.getSize());
 
         model.addAttribute("pageInfo", pageInfo);
 

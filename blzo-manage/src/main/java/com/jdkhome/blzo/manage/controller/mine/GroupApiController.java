@@ -3,7 +3,10 @@ package com.jdkhome.blzo.manage.controller.mine;
 import com.jdkhome.blzo.ex.authj.core.Authj;
 import com.jdkhome.blzo.ex.authj.core.AuthjManager;
 import com.jdkhome.blzo.ex.authj.generator.model.Group;
+import com.jdkhome.blzo.ex.authj.pojo.dto.AuthDTO;
+import com.jdkhome.blzo.ex.authj.pojo.dto.LayerDTO;
 import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
+import com.jdkhome.blzo.ex.authj.service.GroupService;
 import com.jdkhome.blzo.ex.authj.validator.OrganizeValidator;
 import com.jdkhome.blzo.ex.basic.aop.api.Api;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
@@ -11,10 +14,11 @@ import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 
 /**
@@ -34,6 +38,9 @@ public class GroupApiController {
 
     @Autowired
     OrganizeValidator organizeValidator;
+
+    @Autowired
+    GroupService groupService;
 
     /**
      * 添加组
@@ -70,7 +77,7 @@ public class GroupApiController {
             throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
-        groupBasicService.delGroup(groupId);
+        groupService.delGroup(groupId);
         return ApiResponse.success();
 
     }
@@ -164,56 +171,25 @@ public class GroupApiController {
     }
 
     /**
-     * 添加组权限
+     * 设置组权限
      *
-     * @param groupId
+     * @param auths
      * @return
      */
     @Authj
-    @Api("添加组权限")
-    @RequestMapping(value = "/auth/add", method = RequestMethod.POST)
-    public ApiResponse apiManagerMineGroupAuthAdd(@RequestParam(value = "groupId", required = true) Integer groupId,
-                                                  @RequestParam(value = "uri", required = true) String uri
-    ) {
+    @Api("设置组权限")
+    @RequestMapping(value = "/auth/set", method = RequestMethod.POST)
+    public ApiResponse apiManagerMineGroupAuthSet(@Valid @RequestBody AuthDTO auths, Errors errors) {
 
-        Group group = groupBasicService.getGroupById(groupId);
+        Group group = groupBasicService.getGroupById(auths.getGroupId());
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
-            log.error("添加组权限 -> 当前用户不是改组的创建者");
+            log.error("设置组权限 -> 当前用户不是该组的创建者");
             throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
-        groupBasicService.addGroupAuth(groupId, uri);
-
-
-        return ApiResponse.success();
-
-    }
-
-
-    /**
-     * 移除组权限
-     *
-     * @param groupId
-     * @return
-     */
-    @Authj
-    @Api("移除组权限")
-    @RequestMapping(value = "/auth/remove", method = RequestMethod.POST)
-    public ApiResponse apiManagerMineGroupAuthRemove(@RequestParam(value = "groupId", required = true) Integer groupId,
-                                                     @RequestParam(value = "uri", required = true) String uri
-    ) {
-
-        Group group = groupBasicService.getGroupById(groupId);
-        if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
-            log.error("移除组权限 -> 当前用户不是改组的创建者");
-            throw new ServiceException(BasicResponseError.NO_PERMISSION);
-        }
-
-        groupBasicService.delGroupAuth(groupId, uri);
-
+        groupService.setAuth(auths.getGroupId(), auths.getUris());
 
         return ApiResponse.success();
-
     }
 
 

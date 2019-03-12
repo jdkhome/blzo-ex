@@ -4,6 +4,8 @@ package com.jdkhome.blzo.ex.authj.service;
 import com.github.pagehelper.PageInfo;
 import com.jdkhome.blzo.ex.authj.generator.model.Log;
 
+import java.util.Date;
+
 /**
  * author linkji.
  * 日志服务
@@ -49,10 +51,13 @@ public interface LogBasicService {
      * @param nickName   用户昵称
      * @param authjUri   权限Uri
      * @param authjName  权限Name
+     * @param timeBegan
+     * @param timeEnd
      * @param page
      * @param size
      * @return
      */
-    PageInfo<Log> getLogWithPage(Integer organizeId, String nickName, String authjUri, String authjName, Integer page, Integer size);
+    PageInfo<Log> getLogWithPage(Integer organizeId, String nickName, String authjUri, String authjName,
+                                 Date timeBegan, Date timeEnd, Integer page, Integer size);
 
 }

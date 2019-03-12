@@ -79,19 +79,9 @@
         Base.doPost('/api/manage/mine/group/admin/remove', context, data, event, callbacks);
     };
 
-    // 添加权限组关联
-    Request.apiMineGroupAuthAdd = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/mine/group/auth/add', context, data, event, callbacks);
-    };
-
-    // 移除权限组关联
-    Request.apiMineGroupAuthRemove = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/mine/group/auth/remove', context, data, event, callbacks);
-    };
-
     // 保存权限组关联
-    Request.apiMineGroupAuthSave = function (context, data, event, callbacks) {
-        Base.doPostBody('/api/manage/mine/group/auth/save', context, data, event, callbacks);
+    Request.apiManagerMineGroupAuthSet = function (context, data, event, callbacks) {
+        Base.doPostBody('/api/manage/mine/group/auth/set', context, data, event, callbacks);
     };
 
     //====管理员个人设置相关====

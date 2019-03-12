@@ -14,118 +14,7 @@ import java.util.List;
  */
 public interface GroupBasicService {
 
-    //============== 添加 ==============//
-
-    /**
-     * 添加组
-     *
-     * @param name
-     * @param comment
-     * @return
-     */
-    Integer addGroup(String name, String comment);
-
-
-    /**
-     * 增加组管理员关联
-     *
-     * @param groupId
-     * @param adminId
-     * @return
-     */
-    Integer addGroupAdmin(Integer groupId, Integer adminId);
-
-
-    /**
-     * 增加组权限关联
-     *
-     * @param groupId
-     * @param uri
-     * @return
-     */
-    Integer addGroupAuth(Integer groupId, String uri);
-
-    //============== 修改 ==============//
-
-    /**
-     * 修改组
-     *
-     * @param groupId
-     * @param name
-     * @param comment
-     * @return
-     */
-    Integer editGroups(Integer groupId, String name, String comment);
-
-    //============== 删除 ==============//
-
-    /**
-     * 删除组
-     *
-     * @param groupId
-     * @return
-     */
-    Integer delGroup(Integer groupId);
-
-    /**
-     * 删除某管理员创建的所有组
-     *
-     * @param adminId
-     * @return
-     */
-    Integer delGroupByCreateAdminId(Integer adminId);
-
-    /**
-     * 删除组管理员关联
-     *
-     * @param groupId
-     * @param adminId
-     * @return
-     */
-    Integer delGroupAdmin(Integer groupId, Integer adminId);
-
-    /**
-     * 删除某组的所有管理员关联
-     *
-     * @param groupId
-     * @return
-     */
-    Integer delGroupAdminByGroupId(Integer groupId);
-
-    /**
-     * 删除某管理员的所有组关联
-     *
-     * @param adminId
-     * @return
-     */
-    Integer delGroupAdminByAdminId(Integer adminId);
-
-    /**
-     * 删除组权限关联
-     *
-     * @param groupId
-     * @param uri
-     * @return
-     */
-    Integer delGroupAuth(Integer groupId, String uri);
-
-    /**
-     * 删除组所有权限关联
-     *
-     * @param groupId
-     * @return
-     */
-    Integer delGroupAuthByGroupId(Integer groupId);
-
-    //============== 查询接口 ==============//
-
-    /**
-     * 获取组通过Id
-     *
-     * @param groupId
-     * @return
-     */
-    Group getGroupById(Integer groupId);
+    // ==== 组相关 ==== //
 
     /**
      * 分页查询组
@@ -144,6 +33,59 @@ public interface GroupBasicService {
      * @return
      */
     List<Group> getAllGroup(String name, Integer createId);
+
+    /**
+     * 获取组通过Id
+     *
+     * @param groupId
+     * @return
+     */
+    Group getGroupById(Integer groupId);
+
+    /**
+     * 添加组
+     *
+     * @param name
+     * @param comment
+     * @return
+     */
+    Integer addGroup(String name, String comment);
+
+    /**
+     * 修改组
+     *
+     * @param groupId
+     * @param name
+     * @param comment
+     * @return
+     */
+    Integer editGroups(Integer groupId, String name, String comment);
+
+
+
+
+    // ==== 组管理员相关 ==== //
+
+    /**
+     * 增加组管理员关联
+     *
+     * @param groupId
+     * @param adminId
+     * @return
+     */
+    Integer addGroupAdmin(Integer groupId, Integer adminId);
+
+    /**
+     * 删除组管理员关联
+     *
+     * @param groupId
+     * @param adminId
+     * @return
+     */
+    Integer delGroupAdmin(Integer groupId, Integer adminId);
+
+
+    //============== 查询接口 ==============//
 
     /**
      * 获取GroupAdmin 通过管理员Id

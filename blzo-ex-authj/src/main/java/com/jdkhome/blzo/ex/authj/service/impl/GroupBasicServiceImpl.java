@@ -88,29 +88,6 @@ public class GroupBasicServiceImpl implements GroupBasicService {
     }
 
     /**
-     * 增加组权限关联
-     *
-     * @param groupId
-     * @param uri
-     * @return
-     */
-    @Override
-    public Integer addGroupAuth(Integer groupId, String uri) {
-        //入参验证
-        if (groupId == null || StringUtils.isEmpty(uri)) {
-            log.error("增加组权限关联->参数错误");
-            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
-        }
-
-        GroupAuth groupAuth = new GroupAuth();
-        groupAuth.setGroupId(groupId);
-        groupAuth.setUri(uri);
-        groupAuth.setCreateAdminId(authjManager.getUserId());
-
-        return groupAuthMapper.insertSelective(groupAuth);
-    }
-
-    /**
      * 修改组
      *
      * @param groupId
@@ -140,47 +117,7 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         return groupMapper.updateByPrimaryKeySelective(group);
     }
 
-    /**
-     * 删除组
-     *
-     * @param groupId
-     * @return
-     */
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public Integer delGroup(Integer groupId) {
-        if (groupId == null) {
-            log.error("删除组->参数错误");
-            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
-        }
 
-        // 删除这个组的所有关联！
-        this.delGroupAuthByGroupId(groupId);
-        this.delGroupAdminByGroupId(groupId);
-
-        return groupMapper.deleteByPrimaryKey(groupId);
-    }
-
-    /**
-     * 删除某管理员创建的所有组
-     *
-     * @param adminId
-     * @return
-     */
-    @Override
-    public Integer delGroupByCreateAdminId(Integer adminId) {
-
-        if (adminId == null) {
-            log.error("删除某管理员创建的所有组->参数错误");
-            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
-        }
-
-        List<Group>  list = this.getAllGroup(null, adminId);
-
-        list.forEach(group -> this.delGroup(group.getId()));
-
-        return 0;
-    }
 
     /**
      * 删除组管理员关联
@@ -202,88 +139,6 @@ public class GroupBasicServiceImpl implements GroupBasicService {
         example.createCriteria().andGroupIdEqualTo(groupId).andAdminIdEqualTo(adminId);
 
         return groupAdminMapper.deleteByExample(example);
-    }
-
-    /**
-     * 删除某组的所有管理员关联
-     *
-     * @param groupId
-     * @return
-     */
-    @Override
-    public Integer delGroupAdminByGroupId(Integer groupId) {
-
-        if (groupId == null) {
-            log.error("删除某组的所有管理员关联->参数错误");
-            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
-        }
-
-        GroupAdminExample example = new GroupAdminExample();
-        example.createCriteria().andGroupIdEqualTo(groupId);
-
-        return groupAdminMapper.deleteByExample(example);
-    }
-
-    /**
-     * 删除某管理员的所有组关联
-     *
-     * @param adminId
-     * @return
-     */
-    @Override
-    public Integer delGroupAdminByAdminId(Integer adminId) {
-        if (adminId == null) {
-            log.error("删除某管理员的所有组关联->参数错误");
-            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
-        }
-
-        GroupAdminExample example = new GroupAdminExample();
-        example.createCriteria().andAdminIdEqualTo(adminId);
-
-        return groupAdminMapper.deleteByExample(example);
-    }
-
-    /**
-     * 删除组权限关联
-     *
-     * @param groupId
-     * @param uri
-     * @return
-     */
-    @Override
-    public Integer delGroupAuth(Integer groupId, String uri) {
-
-        //入参验证
-        if (groupId == null || StringUtils.isEmpty(uri)) {
-            log.error("删除组权限关联->参数错误");
-            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
-        }
-
-        GroupAuthExample example = new GroupAuthExample();
-        example.createCriteria().andGroupIdEqualTo(groupId).andUriEqualTo(uri);
-
-        return groupAuthMapper.deleteByExample(example);
-    }
-
-    /**
-     * 删除组所有权限关联
-     *
-     * @param groupId
-     * @return
-     */
-    @Override
-    public Integer delGroupAuthByGroupId(Integer groupId) {
-
-        //入参验证
-        if (groupId == null) {
-            log.error("删除组所有权限关联->参数错误");
-            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
-        }
-
-        GroupAuthExample example = new GroupAuthExample();
-        example.createCriteria().andGroupIdEqualTo(groupId);
-
-        return groupAuthMapper.deleteByExample(example);
     }
 
     /**
