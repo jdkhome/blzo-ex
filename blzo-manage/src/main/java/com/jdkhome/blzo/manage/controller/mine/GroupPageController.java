@@ -149,6 +149,8 @@ public class GroupPageController {
         //组信息
         model.addAttribute("pageInfo", pageInfo);
 
+        // TODO 改成权限一样吧
+
         return "manage/page/mine/group/admin";
     }
 
