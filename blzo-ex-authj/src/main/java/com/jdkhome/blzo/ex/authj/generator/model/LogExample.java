@@ -165,63 +165,63 @@ public class LogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidIsNull() {
-            addCriterion("organizeId is null");
+        public Criteria andOrganizeIdIsNull() {
+            addCriterion("organize_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidIsNotNull() {
-            addCriterion("organizeId is not null");
+        public Criteria andOrganizeIdIsNotNull() {
+            addCriterion("organize_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidEqualTo(Integer value) {
-            addCriterion("organizeId =", value, "organizeid");
+        public Criteria andOrganizeIdEqualTo(Integer value) {
+            addCriterion("organize_id =", value, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidNotEqualTo(Integer value) {
-            addCriterion("organizeId <>", value, "organizeid");
+        public Criteria andOrganizeIdNotEqualTo(Integer value) {
+            addCriterion("organize_id <>", value, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidGreaterThan(Integer value) {
-            addCriterion("organizeId >", value, "organizeid");
+        public Criteria andOrganizeIdGreaterThan(Integer value) {
+            addCriterion("organize_id >", value, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("organizeId >=", value, "organizeid");
+        public Criteria andOrganizeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("organize_id >=", value, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidLessThan(Integer value) {
-            addCriterion("organizeId <", value, "organizeid");
+        public Criteria andOrganizeIdLessThan(Integer value) {
+            addCriterion("organize_id <", value, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidLessThanOrEqualTo(Integer value) {
-            addCriterion("organizeId <=", value, "organizeid");
+        public Criteria andOrganizeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("organize_id <=", value, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidIn(List<Integer> values) {
-            addCriterion("organizeId in", values, "organizeid");
+        public Criteria andOrganizeIdIn(List<Integer> values) {
+            addCriterion("organize_id in", values, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidNotIn(List<Integer> values) {
-            addCriterion("organizeId not in", values, "organizeid");
+        public Criteria andOrganizeIdNotIn(List<Integer> values) {
+            addCriterion("organize_id not in", values, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidBetween(Integer value1, Integer value2) {
-            addCriterion("organizeId between", value1, value2, "organizeid");
+        public Criteria andOrganizeIdBetween(Integer value1, Integer value2) {
+            addCriterion("organize_id between", value1, value2, "organizeId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizeidNotBetween(Integer value1, Integer value2) {
-            addCriterion("organizeId not between", value1, value2, "organizeid");
+        public Criteria andOrganizeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("organize_id not between", value1, value2, "organizeId");
             return (Criteria) this;
         }
 

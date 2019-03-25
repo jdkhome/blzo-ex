@@ -3,7 +3,7 @@
 <mapper namespace="com.jdkhome.blzo.ex.authj.generator.dao.LogMapper">
   <resultMap id="BaseResultMap" type="com.jdkhome.blzo.ex.authj.generator.model.Log">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="organizeId" jdbcType="INTEGER" property="organizeid" />
+    <result column="organize_id" jdbcType="INTEGER" property="organizeId" />
     <result column="admin_id" jdbcType="INTEGER" property="adminId" />
     <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
     <result column="authj_uri" jdbcType="VARCHAR" property="authjUri" />
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, organizeId, admin_id, admin_name, authj_uri, authj_name, ip, create_time
+    id, organize_id, admin_id, admin_name, authj_uri, authj_name, ip, create_time
   </sql>
   <sql id="Blob_Column_List">
     paramers
@@ -127,11 +127,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jdkhome.blzo.ex.authj.generator.model.Log">
-    insert into logs (id, organizeId, admin_id, 
+    insert into logs (id, organize_id, admin_id, 
       admin_name, authj_uri, authj_name, 
       ip, create_time, paramers
       )
-    values (#{id,jdbcType=INTEGER}, #{organizeid,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{organizeId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, 
       #{adminName,jdbcType=VARCHAR}, #{authjUri,jdbcType=VARCHAR}, #{authjName,jdbcType=VARCHAR}, 
       #{ip,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{paramers,jdbcType=LONGVARCHAR}
       )
@@ -142,8 +142,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="organizeid != null">
-        organizeId,
+      <if test="organizeId != null">
+        organize_id,
       </if>
       <if test="adminId != null">
         admin_id,
@@ -171,8 +171,8 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="organizeid != null">
-        #{organizeid,jdbcType=INTEGER},
+      <if test="organizeId != null">
+        #{organizeId,jdbcType=INTEGER},
       </if>
       <if test="adminId != null">
         #{adminId,jdbcType=INTEGER},
@@ -209,8 +209,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.organizeid != null">
-        organizeId = #{record.organizeid,jdbcType=INTEGER},
+      <if test="record.organizeId != null">
+        organize_id = #{record.organizeId,jdbcType=INTEGER},
       </if>
       <if test="record.adminId != null">
         admin_id = #{record.adminId,jdbcType=INTEGER},
@@ -241,7 +241,7 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update logs
     set id = #{record.id,jdbcType=INTEGER},
-      organizeId = #{record.organizeid,jdbcType=INTEGER},
+      organize_id = #{record.organizeId,jdbcType=INTEGER},
       admin_id = #{record.adminId,jdbcType=INTEGER},
       admin_name = #{record.adminName,jdbcType=VARCHAR},
       authj_uri = #{record.authjUri,jdbcType=VARCHAR},
@@ -256,7 +256,7 @@
   <update id="updateByExample" parameterType="map">
     update logs
     set id = #{record.id,jdbcType=INTEGER},
-      organizeId = #{record.organizeid,jdbcType=INTEGER},
+      organize_id = #{record.organizeId,jdbcType=INTEGER},
       admin_id = #{record.adminId,jdbcType=INTEGER},
       admin_name = #{record.adminName,jdbcType=VARCHAR},
       authj_uri = #{record.authjUri,jdbcType=VARCHAR},
@@ -270,8 +270,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jdkhome.blzo.ex.authj.generator.model.Log">
     update logs
     <set>
-      <if test="organizeid != null">
-        organizeId = #{organizeid,jdbcType=INTEGER},
+      <if test="organizeId != null">
+        organize_id = #{organizeId,jdbcType=INTEGER},
       </if>
       <if test="adminId != null">
         admin_id = #{adminId,jdbcType=INTEGER},
@@ -299,7 +299,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jdkhome.blzo.ex.authj.generator.model.Log">
     update logs
-    set organizeId = #{organizeid,jdbcType=INTEGER},
+    set organize_id = #{organizeId,jdbcType=INTEGER},
       admin_id = #{adminId,jdbcType=INTEGER},
       admin_name = #{adminName,jdbcType=VARCHAR},
       authj_uri = #{authjUri,jdbcType=VARCHAR},
@@ -311,7 +311,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jdkhome.blzo.ex.authj.generator.model.Log">
     update logs
-    set organizeId = #{organizeid,jdbcType=INTEGER},
+    set organize_id = #{organizeId,jdbcType=INTEGER},
       admin_id = #{adminId,jdbcType=INTEGER},
       admin_name = #{adminName,jdbcType=VARCHAR},
       authj_uri = #{authjUri,jdbcType=VARCHAR},

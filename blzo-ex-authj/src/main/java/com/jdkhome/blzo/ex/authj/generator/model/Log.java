@@ -5,7 +5,7 @@ import java.util.Date;
 public class Log {
     private Integer id;
 
-    private Integer organizeid;
+    private Integer organizeId;
 
     private Integer adminId;
 
@@ -29,12 +29,12 @@ public class Log {
         this.id = id;
     }
 
-    public Integer getOrganizeid() {
-        return organizeid;
+    public Integer getOrganizeId() {
+        return organizeId;
     }
 
-    public void setOrganizeid(Integer organizeid) {
-        this.organizeid = organizeid;
+    public void setOrganizeId(Integer organizeId) {
+        this.organizeId = organizeId;
     }
 
     public Integer getAdminId() {

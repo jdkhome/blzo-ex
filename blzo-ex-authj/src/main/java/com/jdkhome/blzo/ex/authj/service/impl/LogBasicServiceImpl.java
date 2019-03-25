@@ -53,7 +53,7 @@ public class LogBasicServiceImpl implements LogBasicService {
         }
 
         Log log = new Log();
-        log.setOrganizeid(organizeId);
+        log.setOrganizeId(organizeId);
         log.setAdminId(adminId);
         log.setAdminName(adminName);
         log.setAuthjUri(authjUri);
@@ -90,7 +90,7 @@ public class LogBasicServiceImpl implements LogBasicService {
         LogExample.Criteria criteria = example.createCriteria();
 
         if (organizeId != null) {
-            criteria.andOrganizeidEqualTo(organizeId);
+            criteria.andOrganizeIdEqualTo(organizeId);
         }
 
         if (StringUtils.isNotEmpty(nickName)) {
