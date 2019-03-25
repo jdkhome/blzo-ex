@@ -19,7 +19,7 @@
                 <div class="col-sm-6">
                     <section class="panel">
                         <header class="panel-heading">
-                            <span>组内成员</span>
+                            <span th:text="${group.name}">组名</span>-<span>组内成员</span>
                             <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                             <a href="javascript:location.reload();" class="fa fa-refresh"></a>
@@ -40,7 +40,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="obj,objStatus : ${pageInfo.list}">
+                                    <tr th:each="obj,objStatus : ${listInside}">
                                         <td th:text="${obj.id}"></td>
                                         <td th:text="${obj.nickName}"></td>
                                         <td th:text="${obj.username}"></td>
@@ -59,7 +59,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div th:replace="manage/common/paginate"></div>
                             </div>
                         </div>
                     </section>
@@ -67,7 +66,7 @@
                 <div class="col-sm-6">
                     <section class="panel">
                         <header class="panel-heading">
-                            <span>组外成员</span>
+                            <span th:text="${group.name}">组名</span>-<span>组外成员</span>
                             <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                             <a href="javascript:location.reload();" class="fa fa-refresh"></a>
@@ -88,7 +87,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="obj,objStatus : ${pageInfo.list}">
+                                    <tr th:each="obj,objStatus : ${listOther}">
                                         <td th:text="${obj.id}"></td>
                                         <td th:text="${obj.nickName}"></td>
                                         <td th:text="${obj.username}"></td>
@@ -107,7 +106,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div th:replace="manage/common/paginate"></div>
                             </div>
                         </div>
                     </section>
