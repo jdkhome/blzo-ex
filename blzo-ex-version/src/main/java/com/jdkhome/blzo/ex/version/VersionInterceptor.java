@@ -1,8 +1,6 @@
 package com.jdkhome.blzo.ex.version;
 
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
-import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
-import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
 import com.jdkhome.blzo.ex.version.annotation.MinVersion;
 import com.jdkhome.blzo.ex.version.constants.VersionConstants;
 import com.jdkhome.blzo.ex.version.enums.VersionResponseError;
@@ -14,7 +12,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.lang.reflect.Method;
 
 /**

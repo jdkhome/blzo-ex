@@ -1,40 +1,16 @@
 package com.jdkhome.blzo.ex.version.annotation;
 
-
-import org.springframework.context.annotation.ComponentScan;
-
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * author link.ji
- * createTime 下午5:09 2019/4/1
- * 新版版本号注解
+ * Created by jdk on 17/9/6.
+ * 需要获取version时，增加该注解
+ *
  */
-@Documented
-@Inherited
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Version {
-
-    /**
-     * 版本号表达式
-     *
-     * @return
-     */
-    VersionEx[] value();
-
-    /**
-     * Declares the type filter to be used as an {@linkplain ComponentScan#includeFilters
-     * include filter} or {@linkplain ComponentScan#excludeFilters exclude filter}.
-     */
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target({})
-    @interface VersionEx {
-
-        String value();
-
-        Class<?> hander();
-
-    }
-
 }

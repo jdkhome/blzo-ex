@@ -1,0 +1,13 @@
+jar {
+    baseName = "blzo-ex-mqtt"
+}
+
+
+
+dependencies {
+
+    compile project(":blzo-ex-basic")
+
+    // https://mvnrepository.com/artifact/org.eclipse.paho/org.eclipse.paho.client.mqttv3
+    compile group: 'org.eclipse.paho', name: 'org.eclipse.paho.client.mqttv3', version: '1.2.1'
+}
