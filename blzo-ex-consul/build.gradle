@@ -1,0 +1,22 @@
+jar {
+    baseName = "blzo-ex-consul"
+}
+
+dependencies {
+    compile project(":blzo-ex-basic")
+
+    // -- spring cloud
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    // 熔断
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-hystrix
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix', version: '1.4.5.RELEASE'
+    // consul读配置
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-consul-config
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-consul-config', version: '2.0.1.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-consul-discovery
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-consul-discovery', version: '2.0.1.RELEASE'
+    // 简化请求
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.0.1.RELEASE'
+}

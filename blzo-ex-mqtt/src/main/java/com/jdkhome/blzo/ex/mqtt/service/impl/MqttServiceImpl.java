@@ -2,6 +2,7 @@ package com.jdkhome.blzo.ex.mqtt.service.impl;
 
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
+import com.jdkhome.blzo.ex.mqtt.configuration.MqttClientConfiguration;
 import com.jdkhome.blzo.ex.mqtt.enums.MqttQosEnum;
 import com.jdkhome.blzo.ex.mqtt.service.MqttService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class MqttServiceImpl implements MqttService {
 
     @Autowired
-    MqttClient mqttClient;
+    MqttClientConfiguration mqttClientConfiguration;
 
     /**
      * 默认发送 default qos = 0
@@ -59,9 +60,10 @@ public class MqttServiceImpl implements MqttService {
         message.setQos(qos.getCode());
         message.setRetained(false);
         try {
-            mqttClient.publish(topic, message);
+            mqttClientConfiguration.get().publish(topic, message);
         } catch (MqttException e) {
             log.error("[MQTT] 发送失败-> e:{}", e.getMessage());
+            throw new ServiceException(BasicResponseError.UPSTREAM_ERROR,e.getMessage());
         }
     }
 }

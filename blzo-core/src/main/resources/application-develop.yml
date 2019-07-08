@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
@@ -16,3 +16,15 @@ spring:
 logging:
   level:
     root: info
+
+
+
+mqtt:
+  # emq 服务地址
+  host: tcp://192.168.1.244:1883
+  # emq 用户名
+  username: admin
+  # emq 密码
+  password: 1234abc
+  # 客户端标识
+  clientId: test
