@@ -27,7 +27,7 @@ cd ../blzo-ex-mqtt
 gradle publishMavenJavaPublicationToSonatypeRepository
 
 cd ../blzo-ex-consul
-gradle publishMavenJavaPublication ToSonatypeRepository
+gradle publishMavenJavaPublicationToSonatypeRepository
 
 cd ../blzo-ex-task
 gradle publishMavenJavaPublicationToSonatypeRepository
