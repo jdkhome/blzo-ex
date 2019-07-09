@@ -11,4 +11,6 @@ dependencies {
     //compile project(":blzo-ex-redission")
 
     compile project(":blzo-ex-mqtt")
+
+    compile project(":blzo-ex-task")
 }

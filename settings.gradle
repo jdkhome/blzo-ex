@@ -41,4 +41,5 @@ include 'blzo-ex-redission'
 include 'blzo-ex-risk'
 include 'blzo-ex-mqtt'
 include 'blzo-ex-consul'
+include 'blzo-ex-task'
 

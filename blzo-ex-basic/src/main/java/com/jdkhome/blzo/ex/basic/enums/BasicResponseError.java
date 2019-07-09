@@ -17,6 +17,7 @@ public enum BasicResponseError implements BaseError {
     NO_PERMISSION(403, "权限不足"),
     SERVER_ERROR(500, "服务器未知错误"),
     SERVER_BUSY(503, "服务器忙"),
+    TIME_OUT(504, "执行超时"),
     UPSTREAM_ERROR(600, "上游错误"),
     TODO(666, "未实现"),
 

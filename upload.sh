@@ -22,3 +22,12 @@ gradle publishMavenJavaPublicationToSonatypeRepository
 
 cd ../blzo-ex-risk
 gradle publishMavenJavaPublicationToSonatypeRepository
+
+cd ../blzo-ex-mqtt
+gradle publishMavenJavaPublicationToSonatypeRepository
+
+cd ../blzo-ex-consul
+gradle publishMavenJavaPublication ToSonatypeRepository
+
+cd ../blzo-ex-task
+gradle publishMavenJavaPublicationToSonatypeRepository
