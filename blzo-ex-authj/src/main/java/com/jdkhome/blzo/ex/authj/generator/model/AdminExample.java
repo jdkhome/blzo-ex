@@ -445,6 +445,76 @@ public class AdminExample {
             return (Criteria) this;
         }
 
+        public Criteria andGoogleSecretIsNull() {
+            addCriterion("google_secret is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretIsNotNull() {
+            addCriterion("google_secret is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretEqualTo(String value) {
+            addCriterion("google_secret =", value, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretNotEqualTo(String value) {
+            addCriterion("google_secret <>", value, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretGreaterThan(String value) {
+            addCriterion("google_secret >", value, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretGreaterThanOrEqualTo(String value) {
+            addCriterion("google_secret >=", value, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretLessThan(String value) {
+            addCriterion("google_secret <", value, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretLessThanOrEqualTo(String value) {
+            addCriterion("google_secret <=", value, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretLike(String value) {
+            addCriterion("google_secret like", value, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretNotLike(String value) {
+            addCriterion("google_secret not like", value, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretIn(List<String> values) {
+            addCriterion("google_secret in", values, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretNotIn(List<String> values) {
+            addCriterion("google_secret not in", values, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretBetween(String value1, String value2) {
+            addCriterion("google_secret between", value1, value2, "googleSecret");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoogleSecretNotBetween(String value1, String value2) {
+            addCriterion("google_secret not between", value1, value2, "googleSecret");
+            return (Criteria) this;
+        }
+
         public Criteria andPhoneIsNull() {
             addCriterion("phone is null");
             return (Criteria) this;

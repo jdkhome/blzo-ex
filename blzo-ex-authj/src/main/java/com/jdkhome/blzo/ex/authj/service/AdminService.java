@@ -20,6 +20,22 @@ public interface AdminService {
     Admin login(String username, String password, String ip);
 
     /**
+     * 设置google验证码 已设置则覆盖
+     *
+     * @param adminId
+     * @param secret 秘钥
+     * @param code code
+     * @return
+     */
+    void setGoogleAuth(Integer adminId,String secret,String code);
+
+    /**
+     * 移除google验证码
+     * @param adminId
+     */
+    void removeGoogleAuth(Integer adminId);
+
+    /**
      * 激活管理员账户(第一次登录需重置密码)
      *
      * @param adminId     管理员Id

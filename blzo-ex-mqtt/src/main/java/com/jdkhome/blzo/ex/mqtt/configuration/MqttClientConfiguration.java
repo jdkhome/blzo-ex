@@ -1,19 +1,24 @@
 package com.jdkhome.blzo.ex.mqtt.configuration;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Base64;
 
 /**
  * author linkji.
  * create at 2019-07-04 10:08
  */
 @Slf4j
+@Data
 @Component
 public class MqttClientConfiguration {
 
@@ -36,6 +41,17 @@ public class MqttClientConfiguration {
     @Value("${mqtt.clientId}")
     String clientId;
 
+    @Value("${mqtt.publish_url}")
+    String publishUrl;
+
+    @Value("${mqtt.app_id}")
+    String appId;
+
+    @Value("${mqtt.app_key}")
+    String appKey;
+
+    String authorization;
+
     @Autowired
     PushCallback pushCallback;
 
@@ -56,6 +72,9 @@ public class MqttClientConfiguration {
     // bean初始化 (对象创建之后) 自动执行
     @PostConstruct
     public void reConnect() throws MqttException {
+
+        authorization = "Basic " + Base64.getEncoder().encodeToString((appId + ":" + appKey).getBytes());
+
         //防止重复创建MQTTClient实例
         if (client == null) {
             client = new MqttClient(host, clientId, new MemoryPersistence());

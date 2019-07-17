@@ -15,6 +15,7 @@ public enum AuthjResponseError implements BaseError {
     ACTIVE_LIKE_ORIGIN(10003, "新密码不能与原密码相同"),
     ADMIN_HAVENOT_ORG(10004, "管理员无组织"),
     DEL_ORG_WILL_DEL_ADMIN(10005, "删除组织前需先删除组织所有成员"),
+    GOOGLE_AUTH_CODE_ERROR(10006,"google验证码验证错误"),
     ;
 
     private Integer code;

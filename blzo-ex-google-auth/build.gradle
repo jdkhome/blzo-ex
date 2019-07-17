@@ -1,0 +1,9 @@
+jar {
+    baseName = "blzo-ex-google-auth"
+}
+
+dependencies {
+
+}
+
+//gradle publishMavenJavaPublicationToSonatypeRepository

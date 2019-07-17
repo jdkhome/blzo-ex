@@ -3,7 +3,8 @@ jar {
 }
 
 dependencies {
-
+    // 二维码
+    compile 'com.google.zxing:core:3.3.0'
 }
 
 //gradle publishMavenJavaPublicationToSonatypeRepository

@@ -11,6 +11,7 @@ jar {
 
 dependencies {
     compile project(":blzo-ex-basic")
+    compile project(":blzo-ex-google-auth")
 }
 
 

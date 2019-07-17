@@ -31,3 +31,6 @@ gradle publishMavenJavaPublicationToSonatypeRepository
 
 cd ../blzo-ex-task
 gradle publishMavenJavaPublicationToSonatypeRepository
+
+cd ../blzo-ex-google-auth
+gradle publishMavenJavaPublicationToSonatypeRepository

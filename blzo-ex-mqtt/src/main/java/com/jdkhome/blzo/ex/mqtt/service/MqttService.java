@@ -19,6 +19,8 @@ public interface MqttService {
      */
     void send(String topic, String msg);
 
+    void httpSent(String topic, String msg);
+
     /**
      * QoS 0: 最多分发一次 默认
      * QoS 1: 至少分发一次

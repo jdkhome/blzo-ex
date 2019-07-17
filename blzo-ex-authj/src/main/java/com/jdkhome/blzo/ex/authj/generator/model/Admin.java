@@ -13,6 +13,8 @@ public class Admin {
 
     private String salt;
 
+    private String googleSecret;
+
     private String phone;
 
     private String email;
@@ -71,6 +73,14 @@ public class Admin {
 
     public void setSalt(String salt) {
         this.salt = salt == null ? null : salt.trim();
+    }
+
+    public String getGoogleSecret() {
+        return googleSecret;
+    }
+
+    public void setGoogleSecret(String googleSecret) {
+        this.googleSecret = googleSecret == null ? null : googleSecret.trim();
     }
 
     public String getPhone() {

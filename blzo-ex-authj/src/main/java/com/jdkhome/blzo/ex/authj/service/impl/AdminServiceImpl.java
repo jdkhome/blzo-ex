@@ -10,6 +10,7 @@ import com.jdkhome.blzo.ex.authj.generator.model.Organize;
 import com.jdkhome.blzo.ex.authj.service.*;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
+import com.jdkhome.blzo.ex.google_auth.GoogleAuth;
 import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
 import com.jdkhome.blzo.ex.utils.generator.SaltGenerator;
 import com.jdkhome.blzo.ex.utils.generator.UUIDGenerator;
@@ -65,8 +66,14 @@ public class AdminServiceImpl implements AdminService {
             throw new ServiceException(AuthjResponseError.ADMIN_NOT_EXIST);
         }
 
-        //密码验证
-        if (!admin.getPassword().equals(PasswordEncoder.toMD5(password, admin.getSalt()))) {
+        if (StringUtils.isNotEmpty(admin.getGoogleSecret())) {
+            // 如果设置了Google验证码 则使用google验证码登陆
+            if (!GoogleAuth.validCode(admin.getGoogleSecret(), password)) {
+                log.error("管理员登录->谷歌验证码校验失败");
+                throw new ServiceException(AuthjResponseError.PASSWORD_ERROR);
+            }
+        } else if (!admin.getPassword().equals(PasswordEncoder.toMD5(password, admin.getSalt()))) {
+            // 没设置Google验证码则使用密码验证
             log.error("管理员登录->密码错误");
             throw new ServiceException(AuthjResponseError.PASSWORD_ERROR);
         }
@@ -78,6 +85,54 @@ public class AdminServiceImpl implements AdminService {
         adminMapper.updateByPrimaryKeySelective(admin);
 
         return admin;
+    }
+
+    /**
+     * 设置google验证码 已设置则覆盖
+     *
+     * @param adminId
+     * @param secret  秘钥
+     * @param code    code
+     * @return
+     */
+    @Override
+    public void setGoogleAuth(Integer adminId, String secret, String code) {
+
+        if (adminId == null || StringUtils.isEmpty(secret) || StringUtils.isEmpty(code)) {
+            log.error("设置google验证码 -> 参数错误");
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
+        }
+
+        if (!GoogleAuth.validCode(secret, code)) {
+            log.error("设置google验证码 -> 验证失败");
+            throw new ServiceException(AuthjResponseError.GOOGLE_AUTH_CODE_ERROR);
+        }
+
+        Admin admin = new Admin();
+
+        admin.setId(adminId);
+        admin.setGoogleSecret(secret);
+
+        adminMapper.updateByPrimaryKeySelective(admin);
+    }
+
+    /**
+     * 移除google验证码
+     *
+     * @param adminId
+     */
+    @Override
+    public void removeGoogleAuth(Integer adminId) {
+        if (adminId == null) {
+            log.error("移除google验证码 -> 参数错误");
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
+        }
+
+        Admin admin = new Admin();
+        admin.setId(adminId);
+        admin.setGoogleSecret("");
+
+        adminMapper.updateByPrimaryKeySelective(admin);
     }
 
     /**
