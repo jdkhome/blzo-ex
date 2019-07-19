@@ -1,4 +1,4 @@
-package com.jdkhome.blzo.ex.utils.tools.gson;
+package com.jdkhome.blzo.ex.basic.tools.gson;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;

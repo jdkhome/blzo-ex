@@ -11,8 +11,6 @@ import java.security.SecureRandom;
  
 public class GoogleGenerator {
 
-
-
     // 生成的key长度( Generate secret key length)
     public static final int SECRET_SIZE = 10;
 

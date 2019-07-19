@@ -1,6 +1,6 @@
 package com.jdkhome.blzo.ex.authj.core;
 
-import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

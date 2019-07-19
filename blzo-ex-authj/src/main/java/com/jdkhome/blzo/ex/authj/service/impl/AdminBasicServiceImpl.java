@@ -17,7 +17,7 @@ import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
 import com.jdkhome.blzo.ex.utils.generator.SaltGenerator;
-import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

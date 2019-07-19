@@ -3,8 +3,11 @@ jar {
 }
 
 dependencies {
+
+    compile project(":blzo-ex-basic")
     // 二维码
-    compile 'com.google.zxing:core:3.3.0'
+    compile 'com.google.zxing:core:3.4.0'
+
 }
 
 //gradle publishMavenJavaPublicationToSonatypeRepository

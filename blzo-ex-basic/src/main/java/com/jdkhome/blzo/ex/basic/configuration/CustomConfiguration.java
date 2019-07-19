@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.ex.basic.configuration;
 
 import com.google.gson.Gson;
-import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -2,10 +2,10 @@ jar {
     baseName = "blzo-common"
 }
 dependencies {
+
+
+
     compile project(":blzo-ex-ip2region")
     compile project(":blzo-ex-utils")
     compile project(":blzo-ex-basic")
-    //compile 'com.jdkhome.blzo:blzo-ex-basic:0.0.1'
-
-
 }

@@ -1,4 +1,4 @@
-package com.jdkhome.blzo.ex.utils.tools.gson;
+package com.jdkhome.blzo.ex.basic.tools.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

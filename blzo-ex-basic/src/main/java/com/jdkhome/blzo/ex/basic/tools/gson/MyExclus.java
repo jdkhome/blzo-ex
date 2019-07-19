@@ -1,4 +1,4 @@
-package com.jdkhome.blzo.ex.utils.tools.gson;
+package com.jdkhome.blzo.ex.basic.tools.gson;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

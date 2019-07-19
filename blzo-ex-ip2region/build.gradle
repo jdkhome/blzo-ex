@@ -5,8 +5,9 @@ jar {
 
 
 dependencies {
-
-
+    compile project(":blzo-ex-basic")
+    // ip获取城市
+    compile group: 'org.lionsoul', name: 'ip2region', version: '1.7.2'
 
 }
 

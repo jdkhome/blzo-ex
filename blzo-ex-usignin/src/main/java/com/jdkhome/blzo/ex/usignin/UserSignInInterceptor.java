@@ -6,7 +6,7 @@ import com.jdkhome.blzo.ex.usignin.annotation.UserMaybeSignin;
 import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
 import com.jdkhome.blzo.ex.usignin.constants.UsigninConstants;
 import com.jdkhome.blzo.ex.usignin.token.TokenManager;
-import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

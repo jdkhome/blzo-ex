@@ -7,9 +7,9 @@ spring:
     username: 应用数据库账户
     password: 应用数据库密码
   redis:
-    host: 192.168.1.233
-    port: 6543
-    password: yMxsueZD9yx0AkfR
+    host: 192.168.12.121
+    port: 6379
+   # password: yMxsueZD9yx0AkfR
     database: 15
     timeout: 10s
 
@@ -20,11 +20,15 @@ logging:
 
 
 mqtt:
-  # emq 服务地址
+  #  emq 服务地址
   host: tcp://192.168.1.244:1883
-  # emq 用户名
+  #  emq 用户名
   username: admin
-  # emq 密码
+  #   emq 密码
   password: 1234abc
-  # 客户端标识
-  clientId: test
+  #   客户端标识
+  clientId: core
+  # post url
+  publish_url: http://192.168.1.244:8080/api/v3/mqtt/publish
+  app_id: 536c0891820c
+  app_key: Mjg4Mjc0NTc5MDM5ODMzMDM5NDk0NjY1NzI3MjY2NjUyMTG

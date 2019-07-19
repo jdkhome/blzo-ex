@@ -10,7 +10,7 @@ dependencies {
 
     // redisson 分布式锁
     // https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter
-    compile group: 'org.redisson', name: 'redisson-spring-boot-starter', version: '3.8.2'
+    compile group: 'org.redisson', name: 'redisson-spring-boot-starter', version: '3.11.1'
 
     compile project(":blzo-ex-basic")
 

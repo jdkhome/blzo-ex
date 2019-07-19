@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.ex.authj.core;
 
 import com.jdkhome.blzo.ex.basic.aop.api.Api;
-import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;

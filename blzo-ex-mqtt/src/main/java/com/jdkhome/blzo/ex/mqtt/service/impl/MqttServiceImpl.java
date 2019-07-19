@@ -7,7 +7,7 @@ import com.jdkhome.blzo.ex.mqtt.HttpSendRequest;
 import com.jdkhome.blzo.ex.mqtt.configuration.MqttClientConfiguration;
 import com.jdkhome.blzo.ex.mqtt.enums.MqttQosEnum;
 import com.jdkhome.blzo.ex.mqtt.service.MqttService;
-import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.paho.client.mqttv3.MqttException;

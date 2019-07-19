@@ -4,7 +4,7 @@ import com.jdkhome.blzo.ex.basic.constants.BasicSystemConstants;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
-import com.jdkhome.blzo.ex.utils.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 @Slf4j
 @ControllerAdvice
