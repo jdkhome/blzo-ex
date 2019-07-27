@@ -1,8 +1,6 @@
 # 内置tomcat端口
 
 spring:
-#  main:
-#    allow-bean-definition-overriding: true
   datasource:
     # 数据源
     type: com.alibaba.druid.pool.DruidDataSource
@@ -35,7 +33,7 @@ spring:
 
 
   profiles:
-    active: develop # 默认使用develop的配置
+    active: dev # 默认使用develop的配置
 
 
   # mvc
