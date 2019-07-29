@@ -52,7 +52,7 @@ public class UserSignInInterceptor extends HandlerInterceptorAdapter {
 
         //从header中得到token
         String token = request.getHeader(UsigninConstants.TOKEN);
-        log.info("用户登录校验->请求token:{}", token);
+        log.debug("用户登录校验->请求token:{}", token);
 
 
         //验证token, token存在则将userId注入到request属性
