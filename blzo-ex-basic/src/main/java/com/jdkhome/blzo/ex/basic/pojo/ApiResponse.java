@@ -1,6 +1,7 @@
 package com.jdkhome.blzo.ex.basic.pojo;
 
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
+import com.jdkhome.blzo.ex.basic.enums.I18nEnums;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import lombok.Data;
 
@@ -33,6 +34,11 @@ public class ApiResponse<T> {
         this.msg = baseError.getMsg();
     }
 
+    public ApiResponse(BaseError baseError, I18nEnums i18n) {
+        this.code = baseError.getCode();
+        this.msg = baseError.getMsg(i18n);
+    }
+
     /**
      * 由BaseError 创建带有额外信息的ApiResponse
      *
@@ -44,16 +50,30 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
+    public ApiResponse(BaseError baseError, T data, I18nEnums i18n) {
+        this.code = baseError.getCode();
+        this.msg = baseError.getMsg(i18n);
+        this.data = data;
+    }
+
+
     /**
      * ServiceException 创建ApiResponse
      *
      * @param se
      */
     public ApiResponse(ServiceException se) {
-        this.code = se.getErrorCode();
-        this.msg = se.getErrorMsg();
+        this.code = se.getBaseError().getCode();
+        this.msg = se.getBaseError().getMsg();
         this.debug = se.getDebug();
     }
+
+    public ApiResponse(ServiceException se, I18nEnums i18n) {
+        this.code = se.getErrorCode();
+        this.msg = se.getBaseError().getMsg(i18n);
+        this.debug = se.getDebug();
+    }
+
 
     /**
      * 返回成功
@@ -61,8 +81,8 @@ public class ApiResponse<T> {
      * @param data
      * @return
      */
-    static public ApiResponse success(Object data) {
-        ApiResponse result = new ApiResponse(BasicResponseError.SUCCESS);
+    static public ApiResponse<Object> success(Object data) {
+        ApiResponse<Object> result = new ApiResponse<>(BasicResponseError.SUCCESS);
         result.setData(data);
         return result;
     }
@@ -88,6 +108,10 @@ public class ApiResponse<T> {
         return new ApiResponse(se);
     }
 
+    static public ApiResponse error(ServiceException se, I18nEnums i18n) {
+        return new ApiResponse(se, i18n);
+    }
+
     /**
      * 返回失败
      *
@@ -98,6 +122,10 @@ public class ApiResponse<T> {
         return new ApiResponse(baseError);
     }
 
+    static public ApiResponse error(BaseError baseError, I18nEnums i18n) {
+        return new ApiResponse(baseError, i18n);
+    }
+
     /**
      * 返回失败
      *
@@ -106,6 +134,10 @@ public class ApiResponse<T> {
      */
     static public ApiResponse error(BaseError baseError, Object debug) {
         return new ApiResponse(baseError, debug);
+    }
+
+    static public ApiResponse error(BaseError baseError, Object debug, I18nEnums i18n) {
+        return new ApiResponse(baseError, debug, i18n);
     }
 
     /**
@@ -120,4 +152,9 @@ public class ApiResponse<T> {
         return result;
     }
 
+    static public ApiResponse error(Exception e, I18nEnums i18n) {
+        ApiResponse result = new ApiResponse(BasicResponseError.SERVER_ERROR, i18n);
+        result.setDebug(e.getMessage());
+        return result;
+    }
 }

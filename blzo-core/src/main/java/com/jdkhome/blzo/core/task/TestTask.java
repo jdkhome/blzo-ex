@@ -12,7 +12,7 @@ import java.util.Random;
  * create at 2019-07-08 17:17
  */
 @Slf4j
-@Component
+//@Component
 public class TestTask {
 
     // 1秒1次

@@ -1,5 +1,6 @@
 package com.jdkhome.blzo.ex.version.enums;
 
+import com.jdkhome.blzo.ex.basic.enums.I18nEnums;
 import com.jdkhome.blzo.ex.basic.pojo.BaseError;
 import lombok.Getter;
 
@@ -16,6 +17,10 @@ public enum VersionResponseError implements BaseError {
 
     private Integer code;
     private String msg;
+
+    public String getMsg(I18nEnums i18n) {
+        return msg;
+    }
 
     VersionResponseError(int code, String msg) {
         this.code = code;

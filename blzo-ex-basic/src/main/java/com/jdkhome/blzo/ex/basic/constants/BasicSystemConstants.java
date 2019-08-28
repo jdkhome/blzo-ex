@@ -6,4 +6,6 @@ package com.jdkhome.blzo.ex.basic.constants;
  */
 public interface BasicSystemConstants {
     String controllerName = "controller_name";
+
+    String i18n = "i18n";
 }

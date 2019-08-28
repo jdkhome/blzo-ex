@@ -22,8 +22,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jdk on 17/4/18.
@@ -149,8 +152,9 @@ public class ApiRecordAspect {
             }
         }
 
-    }
+        // 注入语言参数？
 
+    }
 
     //在方法执行完结后打印返回内容
     @AfterReturning(returning = "o", pointcut = "apiAspect()")

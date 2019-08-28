@@ -2,6 +2,9 @@ package com.jdkhome.blzo.core.controller;
 
 import com.jdkhome.blzo.ex.basic.aop.api.Api;
 import com.jdkhome.blzo.common.constants.ErrorMsg;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
+import com.jdkhome.blzo.ex.basic.enums.I18nEnums;
+import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.mqtt.service.MqttService;
 import com.jdkhome.blzo.ex.risk.annotation.Risk;
 import com.jdkhome.blzo.ex.usignin.annotation.CurrentUser;
@@ -11,6 +14,7 @@ import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.version.annotation.MinVersion;
 import com.jdkhome.blzo.ex.version.annotation.Version;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,37 @@ public class TestController {
 
     @Autowired
     MqttService mqttService;
+
+    /**
+     * @api {post} /api/test/123 [测试]测试接口
+     * @apiGroup TestController
+     * @apiDescription 测试接口
+     * @apiSuccessExample {json} Success-response:
+     * HTTP/1.1 0 OK
+     * <p>
+     * {
+     * "code": 200,
+     * "message": "success",
+     * "data": {...}
+     * }
+     * @apiErrorExample {json} Error-response:
+     * HTTP/1.1 error
+     * <p>
+     * {
+     * "code":xxx,
+     * "message":"xxx"
+     * "data":{...}
+     * }
+     */
+    @Api("测试mqtt") // 日志
+    @RequestMapping(value = "/123", method = RequestMethod.POST)
+    public ApiResponse apiTest123(String a, I18nEnums i18n) {
+
+        if (StringUtils.isEmpty(a)) {
+            throw new ServiceException(BasicResponseError.PARAMETER_ERROR);
+        }
+        return ApiResponse.success(i18n);
+    }
 
     /**
      * @api {post} /api/test/mqtt [测试]测试接口
@@ -57,11 +92,10 @@ public class TestController {
      */
     @Api("测试mqtt") // 日志
     @RequestMapping(value = "/mqtt", method = RequestMethod.POST)
-    public ApiResponse apiTestMqtt() {
-        mqttService.send("test123","123123123");
+    public ApiResponse apiTestMqtt(I18nEnums i18n) {
+        mqttService.send("test123", "123123123");
         return ApiResponse.success();
     }
-
 
 
     /**

@@ -2,6 +2,7 @@ package com.jdkhome.blzo.ex.basic.configuration;
 
 import com.jdkhome.blzo.ex.basic.constants.BasicSystemConstants;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
+import com.jdkhome.blzo.ex.basic.enums.I18nEnums;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
@@ -41,7 +42,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     ApiResponse handleException(Exception e, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ApiResponse result = ApiResponse.error(e);
+
+        I18nEnums i18n = I18nEnums.getByCode(request.getHeader(BasicSystemConstants.i18n));
+        ApiResponse result = ApiResponse.error(e, i18n);
+
         log.error("Controller(Err) =>{} 未知异常 msg:{}", request.getAttribute(BasicSystemConstants.controllerName), e.getMessage(), e);
         log.info("Controller(Out) => {}", PerfectGson.getGson().toJson(result));
 
@@ -58,7 +62,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseBody
     ApiResponse handleException(MissingServletRequestParameterException e, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ApiResponse result = ApiResponse.error(BasicResponseError.PARAMETER_ERROR, e.getMessage());
+
+        I18nEnums i18n = I18nEnums.getByCode(request.getHeader(BasicSystemConstants.i18n));
+        ApiResponse result = ApiResponse.error(BasicResponseError.PARAMETER_ERROR, e.getMessage(), i18n);
 
         this.errorPage(request, response, e);
         return result;
@@ -73,7 +79,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     @ResponseBody
     ApiResponse handleException(ServiceException e, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ApiResponse result = ApiResponse.error(e);
+        I18nEnums i18n = I18nEnums.getByCode(request.getHeader(BasicSystemConstants.i18n));
+        ApiResponse result = ApiResponse.error(e, i18n);
         log.error("Controller(Err) => {} 业务异常 msg:{}", request.getAttribute(BasicSystemConstants.controllerName), e.getErrorMsg());
         log.info("Controller(Out) => {}", PerfectGson.getGson().toJson(result));
 

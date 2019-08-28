@@ -11,23 +11,41 @@ import lombok.Getter;
 public enum BasicResponseError implements BaseError {
 
     //===========通用返回==============
-    NO_LOGIN(100, "请先登录"),
-    SUCCESS(200, "success"),
-    PARAMETER_ERROR(400, "参数错误"),
-    NO_PERMISSION(403, "权限不足"),
-    SERVER_ERROR(500, "服务器未知错误"),
-    SERVER_BUSY(503, "服务器忙"),
-    TIME_OUT(504, "执行超时"),
-    UPSTREAM_ERROR(600, "上游错误"),
-    TODO(666, "未实现"),
+    NO_LOGIN(100, "请先登录", "no login"),
+    SUCCESS(200, "success", "success"),
+    PARAMETER_ERROR(400, "参数错误", "params error"),
+    NO_PERMISSION(403, "权限不足", "no rermission"),
+    SERVER_ERROR(500, "服务器未知错误", "server error"),
+    SERVER_BUSY(503, "服务器忙", "server busy"),
+    TIME_OUT(504, "执行超时", "time out"),
+    UPSTREAM_ERROR(600, "上游错误", "upstream error"),
+    TODO(666, "未实现", "todo"),
 
     ;
 
     private Integer code;
     private String msg;
 
-    BasicResponseError(int code, String msg) {
+    private String enMsg;
+
+    public String getMsg(I18nEnums i18n) {
+
+        if (i18n == null) {
+            return msg;
+        }
+
+        switch (i18n) {
+            case EN_US:
+                return enMsg;
+            default:
+                return msg;
+        }
+
+    }
+
+    BasicResponseError(int code, String msg, String enMsg) {
         this.code = code;
         this.msg = msg;
+        this.enMsg = enMsg;
     }
 }

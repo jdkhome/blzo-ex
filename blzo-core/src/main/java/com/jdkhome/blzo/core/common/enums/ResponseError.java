@@ -1,6 +1,7 @@
 package com.jdkhome.blzo.core.common.enums;
 
 
+import com.jdkhome.blzo.ex.basic.enums.I18nEnums;
 import com.jdkhome.blzo.ex.basic.pojo.BaseError;
 
 /**
@@ -25,6 +26,10 @@ public enum ResponseError implements BaseError {
         return msg;
     }
 
+
+    public String getMsg(I18nEnums i18n) {
+        return msg;
+    }
 
     ResponseError(int code, String msg) {
         this.code = code;
