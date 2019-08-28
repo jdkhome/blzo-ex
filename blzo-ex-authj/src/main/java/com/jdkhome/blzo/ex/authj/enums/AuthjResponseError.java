@@ -1,6 +1,7 @@
 package com.jdkhome.blzo.ex.authj.enums;
 
 
+import com.jdkhome.blzo.ex.basic.enums.I18nEnums;
 import com.jdkhome.blzo.ex.basic.pojo.BaseError;
 
 /**
@@ -29,6 +30,19 @@ public enum AuthjResponseError implements BaseError {
     @Override
     public String getMsg() {
         return msg;
+    }
+
+    public String getMsg(I18nEnums i18n) {
+
+        if (i18n == null) {
+            return msg;
+        }
+
+        switch (i18n) {
+            default:
+                return msg;
+        }
+
     }
 
 

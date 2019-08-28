@@ -16,6 +16,8 @@ import com.jdkhome.blzo.ex.basic.constants.SqlTemplate;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
+import com.jdkhome.blzo.ex.utils.coder.PasswordEncoder;
+import com.jdkhome.blzo.ex.utils.generator.SaltGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
