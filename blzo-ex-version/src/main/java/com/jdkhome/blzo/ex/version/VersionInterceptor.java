@@ -1,5 +1,7 @@
 package com.jdkhome.blzo.ex.version;
 
+import com.jdkhome.blzo.ex.basic.constants.BasicSystemConstants;
+import com.jdkhome.blzo.ex.basic.enums.I18nEnums;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.version.annotation.MinVersion;
 import com.jdkhome.blzo.ex.version.constants.VersionConstants;
@@ -51,19 +53,19 @@ public class VersionInterceptor extends HandlerInterceptorAdapter {
         //从header中得到token
         String version = request.getHeader(VersionConstants.VERSION);
         log.debug("版本校验 -> 请求version:{}", version);
-
+        I18nEnums i18n = I18nEnums.getByCode(request.getHeader(BasicSystemConstants.i18n));
         //验证token, token存在则将userId注入到request属性
         if (VersionTools.checkVersion(version, versionAnn.value())) {
 
             if ((!versionAnn.max().equals(VersionConstants.ANY_VERSION_CODE))
                     && VersionTools.checkVersion(version, versionAnn.max())) {
-                throw new ServiceException(VersionResponseError.API_DEPRECATED);
+                throw new ServiceException(VersionResponseError.API_DEPRECATED, i18n);
             }
 
             request.setAttribute(VersionConstants.VERSION, version);
             return true;
         } else {
-            throw new ServiceException(VersionResponseError.VERSION_UPGRADE);
+            throw new ServiceException(VersionResponseError.VERSION_UPGRADE, i18n);
         }
 
     }
