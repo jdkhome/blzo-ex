@@ -1,6 +1,8 @@
 package com.jdkhome.blzo.ex.usignin;
 
+import com.jdkhome.blzo.ex.basic.constants.BasicSystemConstants;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
+import com.jdkhome.blzo.ex.basic.enums.I18nEnums;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.usignin.annotation.UserMaybeSignin;
 import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
@@ -76,12 +78,12 @@ public class UserSignInInterceptor extends HandlerInterceptorAdapter {
                 response.sendRedirect("/app/reLogin");
                 return false;
             }
-
+            I18nEnums i18n = I18nEnums.getByCode(request.getHeader(BasicSystemConstants.i18n));
             log.info("用户登录校验->token验证失败，需要重新登录:{}", token);
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json");
             PrintWriter pw = response.getWriter();
-            pw.write(PerfectGson.getGson().toJson(ApiResponse.error(BasicResponseError.NO_LOGIN)));
+            pw.write(PerfectGson.getGson().toJson(ApiResponse.error(BasicResponseError.NO_LOGIN, i18n)));
             pw.flush();
             return false;
         }
