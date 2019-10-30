@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
 @Slf4j
 @ComponentScan(basePackages = {"com.jdkhome.blzo.ex", "com.jdkhome.blzo"})
 @EnableScheduling
@@ -24,7 +25,10 @@ public class ManageApplication implements CommandLineRunner {
      * Springboot应用程序入口
      */
     public static void main(String[] args) {
-        SpringApplication.run(ManageApplication.class, args);
+          SpringApplication.run(ManageApplication.class, args);
+
+
+
     }
 
     @Override

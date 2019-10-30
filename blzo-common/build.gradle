@@ -3,8 +3,6 @@ jar {
 }
 dependencies {
 
-
-
     compile project(":blzo-ex-ip2region")
     compile project(":blzo-ex-utils")
     compile project(":blzo-ex-basic")

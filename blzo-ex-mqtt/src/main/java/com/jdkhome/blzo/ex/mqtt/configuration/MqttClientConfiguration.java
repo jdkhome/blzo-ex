@@ -6,7 +6,6 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -52,9 +51,6 @@ public class MqttClientConfiguration {
 
     String authorization;
 
-    @Autowired
-    PushCallback pushCallback;
-
     // 保存连接
     MqttClient client;
 
@@ -65,6 +61,7 @@ public class MqttClientConfiguration {
         options.setPassword(password.toCharArray());
         options.setConnectionTimeout(10);
         options.setKeepAliveInterval(20);
+        options.setAutomaticReconnect(true);
 
         return options;
     }
@@ -78,22 +75,12 @@ public class MqttClientConfiguration {
         //防止重复创建MQTTClient实例
         if (client == null) {
             client = new MqttClient(host, clientId, new MemoryPersistence());
-            client.setCallback(pushCallback);
+
         }
 
-        //判断拦截状态，这里注意一下，如果没有这个判断，是非常坑的
-        if (!client.isConnected()) {
-            client.connect(this.getOptions());
-            log.info("[MQTT] -> 连接成功");
-        } else {//这里的逻辑是如果连接成功就重新连接
-            client.disconnect();
-            // 手动释放
-            client = null;
-            client = new MqttClient(host, clientId, new MemoryPersistence());
-            client.setCallback(pushCallback);
-            client.connect(this.getOptions());
-            log.info("[MQTT] -> 重连成功");
-        }
+        client.connect(this.getOptions());
+        log.info("[MQTT] -> 连接成功");
+
     }
 
     /**
