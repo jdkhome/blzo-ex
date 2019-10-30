@@ -11,6 +11,10 @@ import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Created by jdk on 2019/1/7.
+ * 自定义json格式化工具
+ */
 @Configuration
 public class CustomConfiguration {
 

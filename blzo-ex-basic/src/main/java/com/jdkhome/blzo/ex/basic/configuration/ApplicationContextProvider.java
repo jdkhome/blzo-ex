@@ -5,6 +5,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+/**
+ * Created by jdk on 2019/1/7.
+ * 用于获取Spring上下文
+ */
 @Component
 public class ApplicationContextProvider
     implements ApplicationContextAware

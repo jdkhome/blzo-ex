@@ -8,6 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import java.util.List;
 
+/**
+ * 注册国际化参数解析器
+ */
 @Component
 public class I18nInterceptorConfig extends WebMvcConfigurerAdapter {
 

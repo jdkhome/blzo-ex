@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Created by jdk on 2019/1/7.
+ * 异常处理器
+ * 处理从Controller抛出的异常
+ */
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -23,7 +28,6 @@ public class GlobalExceptionHandler {
     /**
      * see https://blog.csdn.net/kinginblue/article/details/70186586
      */
-
     private void errorPage(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
         String uri = request.getServletPath();
         if (!uri.startsWith("/api")) {

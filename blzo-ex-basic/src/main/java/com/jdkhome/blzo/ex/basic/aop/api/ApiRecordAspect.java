@@ -30,6 +30,7 @@ import java.util.Map;
 
 /**
  * Created by jdk on 17/4/18.
+ * Api注解实际业务
  */
 @Slf4j
 @Aspect
@@ -40,7 +41,6 @@ public class ApiRecordAspect {
     ApiBeforeCustom apiBeforeCustom;
 
     //申明一个切点里面是execution表达式
-    //@Pointcut("execution(* com.jdkhome.blzo.*.controller..*.*(..))")
     @Pointcut("@annotation(com.jdkhome.blzo.ex.basic.aop.api.Api)")
     private void apiAspect() {
     }
@@ -151,8 +151,6 @@ public class ApiRecordAspect {
                 }
             }
         }
-
-        // 注入语言参数？
 
     }
 
