@@ -5,14 +5,12 @@ jar {
 
 
 dependencies {
-    // redis
-    compile('org.springframework.boot:spring-boot-starter-data-redis')
-
+    compile project(":blzo-ex-basic")
     // redisson 分布式锁
     // https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter
     compile group: 'org.redisson', name: 'redisson-spring-boot-starter', version: '3.11.1'
 
-    compile project(":blzo-ex-basic")
+
 
 }
 

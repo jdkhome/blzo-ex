@@ -9,5 +9,9 @@ dependencies {
     compile project(":blzo-ex-basic")
 
     // https://mvnrepository.com/artifact/org.eclipse.paho/org.eclipse.paho.client.mqttv3
-    compile group: 'org.eclipse.paho', name: 'org.eclipse.paho.client.mqttv3', version: '1.2.1'
+    compile group: 'org.eclipse.paho', name: 'org.eclipse.paho.client.mqttv3', version: '1.2.2'
+
+    // https://mvnrepository.com/artifact/com.github.kevinsawicki/http-request
+    compile group: 'com.github.kevinsawicki', name: 'http-request', version: '6.0'
+
 }

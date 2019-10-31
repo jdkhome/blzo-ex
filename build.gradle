@@ -26,7 +26,7 @@ allprojects {
     apply plugin: 'signing'  // 签名插件
 
 
-    version '0.3.1.1.RELEASE'
+    version '0.3.2.RELEASE'
     group 'com.jdkhome.blzo'
 
     sourceCompatibility = 1.8
@@ -45,10 +45,7 @@ allprojects {
     dependencies {
         // =========== 公共库 =========== //
 
-        // 自动get set
-        // https://mvnrepository.com/artifact/org.projectlombok/lombok
-        annotationProcessor("org.projectlombok:lombok:1.18.2")
-        compileOnly("org.projectlombok:lombok:1.18.2")
+
     }
 
     repositories {

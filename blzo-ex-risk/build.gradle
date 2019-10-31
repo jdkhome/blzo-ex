@@ -3,9 +3,5 @@ jar {
 }
 
 dependencies {
-    // redis
-    compile('org.springframework.boot:spring-boot-starter-data-redis')
-
     compile project(":blzo-ex-basic")
-
 }
