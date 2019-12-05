@@ -65,12 +65,18 @@ public class ApiResponse<T> {
     public ApiResponse(ServiceException se) {
         this.code = se.getBaseError().getCode();
         this.msg = se.getBaseError().getMsg();
+        if (!se.getErrorCode().equals(se.getBaseError().getCode())) {
+            this.msg = this.msg + "->" + se.getBaseError();
+        }
         this.debug = se.getDebug();
     }
 
     public ApiResponse(ServiceException se, I18nEnums i18n) {
         this.code = se.getErrorCode();
         this.msg = se.getBaseError().getMsg(i18n);
+        if (!se.getErrorCode().equals(se.getBaseError().getCode())) {
+            this.msg = this.msg + "->" + se.getBaseError();
+        }
         this.debug = se.getDebug();
     }
 

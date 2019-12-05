@@ -44,7 +44,10 @@ allprojects {
 
     dependencies {
         // =========== 公共库 =========== //
-
+        // 自动get set
+        // https://mvnrepository.com/artifact/org.projectlombok/lombok
+        annotationProcessor("org.projectlombok:lombok:1.18.2")
+        compileOnly("org.projectlombok:lombok:1.18.2")
 
     }
 
