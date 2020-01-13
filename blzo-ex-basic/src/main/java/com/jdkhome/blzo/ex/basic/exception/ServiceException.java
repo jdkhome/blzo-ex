@@ -30,6 +30,7 @@ public class ServiceException extends RuntimeException {
     private BaseError baseError;
 
     public ServiceException() {
+        super();
         this.errorCode = null;
         this.errorMsg = null;
         this.debug = null;
@@ -38,6 +39,7 @@ public class ServiceException extends RuntimeException {
     }
 
     public ServiceException(BaseError baseError) {
+        super(baseError.getMsg());
         this.errorCode = baseError.getCode();
         this.errorMsg = baseError.getMsg();
         this.debug = null;
@@ -46,6 +48,7 @@ public class ServiceException extends RuntimeException {
     }
 
     public ServiceException(BaseError baseError, Object debug) {
+        super(baseError.getMsg() + debug);
         this.errorCode = baseError.getCode();
         this.errorMsg = baseError.getMsg();
         this.debug = debug;
@@ -54,6 +57,7 @@ public class ServiceException extends RuntimeException {
     }
 
     public ServiceException(BaseError baseError, Object debug, RiskTigger riskTigger) {
+        super(baseError.getMsg() + debug);
         this.errorCode = baseError.getCode();
         this.errorMsg = baseError.getMsg();
         this.debug = debug;
@@ -62,6 +66,7 @@ public class ServiceException extends RuntimeException {
     }
 
     public ServiceException(Integer errorCode, String errorMsg, Object debug, BaseError baseError) {
+        super(errorMsg + debug);
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
         this.debug = debug;

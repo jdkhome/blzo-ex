@@ -159,7 +159,7 @@ public class AuthjService {
 
         // 改用户拥有的所有组的有效权限 并集 即为该用户的权限集合
         Set<String> result = new HashSet<>();
-        // 过滤掉种植查找创建的权限组 下一级查找时也设置同样的stop
+        // 过滤掉自己创建 以及终止查找创建的权限组 下一级查找时也设置同样的stop
         groupAdmins.stream()
                 .filter(groupAdmin -> !groupAdmin.getCreateAdminId().equals(thisAdminId))
                 .filter(groupAdmin -> !groupAdmin.getCreateAdminId().equals(stopAdminId))
