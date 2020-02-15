@@ -33,7 +33,7 @@ public class AuthjCache {
     }
 
     public Set<String> getUris() {
-        return authjCache.keySet();
+        return new HashSet<>(authjCache.keySet());
     }
 
     /**

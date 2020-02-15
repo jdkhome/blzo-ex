@@ -12,4 +12,8 @@ dependencies {
     // thymeleaf
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
+
+    // https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis
+    compile group: 'org.springframework.session', name: 'spring-session-data-redis', version: '2.1.6.RELEASE'
+
 }

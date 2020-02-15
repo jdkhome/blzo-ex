@@ -2,12 +2,14 @@ package com.jdkhome.blzo.ex.authj.core;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by jdk on 17/12/22.
  * 权限对象
  */
 @Data
-public class AuthjBean {
+public class AuthjBean implements Serializable {
 
     /**
      * 代表URI
