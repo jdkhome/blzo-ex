@@ -2,6 +2,7 @@ package com.jdkhome.blzo.ex.authj.core;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * 菜单VO
  */
 @Data
-public class MenuVO {
+public class MenuVO implements Serializable {
     String name;
     List<AuthjBean> menus;
 

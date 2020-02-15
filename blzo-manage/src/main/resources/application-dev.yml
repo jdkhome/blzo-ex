@@ -10,15 +10,16 @@ spring:
       password: 应用服务数据库密码
     # 管理后台数据源配置(仅供测试，定时重置，请勿搞事)
     manage:
-      url: jdbc:mysql://data-public.jdkhome.com:3306/blzo?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-      username: blzo
-      password: 123456
+      url: jdbc:mysql://192.168.12.144:3306/blzo_manage?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: blzo_manage
+      password: blzo_manage
 
   redis:
-    host: host
+    host: 192.168.12.144
     port: 6379
-    password: pwd
+    password: ikun520520520
     database: 0
+    timeout: 10s
 
   #测试时不需要缓存，方便调试
   thymeleaf:

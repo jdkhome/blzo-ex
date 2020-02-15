@@ -2,6 +2,7 @@ package com.jdkhome.blzo.ex.authj.core;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import java.util.Set;
  * 管理员权限配置实体
  */
 @Data
-public class UserAuthjConfBean {
+public class UserAuthjConfBean implements Serializable {
 
     /**
      * 管理员id
