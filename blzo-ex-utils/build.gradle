@@ -7,6 +7,7 @@ dependencies {
     compile project(":blzo-ex-basic")
     // 二维码
     compile 'com.google.zxing:core:3.4.0'
+    compile 'org.modelmapper:modelmapper:2.3.0'
 
 }
 

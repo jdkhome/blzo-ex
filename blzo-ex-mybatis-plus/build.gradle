@@ -1,0 +1,11 @@
+jar {
+    baseName = "blzo-ex-mybatis-plus"
+}
+
+
+
+dependencies {
+    compile project(":blzo-ex-utils")
+    compile 'com.baomidou:mybatis-plus-boot-starter:3.0.5'
+
+}
