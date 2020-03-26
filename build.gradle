@@ -5,6 +5,9 @@ buildscript {
     repositories {
         mavenLocal()
         maven {
+            url "http://nexus.matafy.com/repository/maven-public/"
+        }
+        maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
         }
         mavenCentral()
@@ -54,6 +57,9 @@ allprojects {
     repositories {
         repositories {
             mavenLocal()
+            maven {
+                url "http://nexus.matafy.com/repository/maven-public/"
+            }
             maven {
                 url "http://maven.aliyun.com/nexus/content/groups/public/"
             }
@@ -108,7 +114,7 @@ allprojects {
                 pom {
                     name = project.name
                     description = project.name
-                    url = "https://github.com/jdkhome/blzo-ex/tree/master/" + project.name
+                    url = "https://git.code.tencent.com/saas-home/blzo-ex/tree/master/" + project.name
                     licenses {
                         license {
                             name = "The Apache License, Version 2.0"
@@ -123,9 +129,9 @@ allprojects {
                         }
                     }
                     scm {
-                        connection = "scm:git:https://github.com/jdkhome/blzo-ex.git"
-                        developerConnection = "scm:git:https://github.com/jdkhome/blzo-ex.git"
-                        url = "https://github.com/jdkhome/blzo-ex"
+                        connection = "scm:git:https://git.code.tencent.com/saas-home/blzo-ex.git"
+                        developerConnection = "scm:git:https://git.code.tencent.com/saas-home/blzo-ex.git"
+                        url = "https://git.code.tencent.com/saas-home/blzo-ex"
                     }
                 }
             }
@@ -133,7 +139,7 @@ allprojects {
         repositories {
             maven {
                 name 'sonatypeRepository'
-                url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+                url 'http://nexus.matafy.com/repository/maven-releases/'
                 credentials {
                     username = "${NEXUS_USERNAME}"
                     password = "${NEXUS_PASSWORD}"
@@ -141,7 +147,7 @@ allprojects {
             }
             maven {
                 name = 'sonatypeSnapshotRepository'
-                url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+                url = 'http://nexus.matafy.com/repository/maven-snapshots/'
                 credentials {
                     username = "${NEXUS_USERNAME}"
                     password = "${NEXUS_PASSWORD}"
