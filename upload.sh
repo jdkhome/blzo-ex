@@ -34,3 +34,6 @@ gradle publishMavenJavaPublicationToSonatypeRepository
 
 cd ../blzo-ex-google-auth
 gradle publishMavenJavaPublicationToSonatypeRepository
+
+cd ../blzo-ex-mybatis-plus
+gradle publishMavenJavaPublicationToSonatypeRepository
