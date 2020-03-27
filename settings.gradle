@@ -9,10 +9,10 @@
 
 rootProject.name = 'blzo'
 
-// blzo 项目基础模块
-include 'blzo-core'
-include 'blzo-manage'
-include 'blzo-common'
+// DEMO
+include 'app-demo'
+include 'app-manage'
+
 
 // blzo-ex 扩展
 
@@ -40,8 +40,8 @@ include 'blzo-ex-redission'
 // 基于
 include 'blzo-ex-risk'
 include 'blzo-ex-mqtt'
-include 'blzo-ex-consul'
-include 'blzo-ex-task'
 include 'blzo-ex-google-auth'
 include 'blzo-ex-mybatis-plus'
+include 'blzo-ex-mybatis'
+
 

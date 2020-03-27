@@ -11,16 +11,16 @@ import lombok.Getter;
 public enum BasicResponseError implements BaseError {
 
     //===========通用返回==============
-    NO_LOGIN(100, "请先登录", "no login"),
     SUCCESS(200, "success", "success"),
     PARAMETER_ERROR(400, "参数错误", "params error"),
+    NO_LOGIN(401, "请先登录", "no login"),
     NO_PERMISSION(403, "权限不足", "no rermission"),
+    NOT_FOUND(404, "资源不存在", "not found"),
     SERVER_ERROR(500, "服务器未知错误", "server error"),
     SERVER_BUSY(503, "服务器忙", "server busy"),
     TIME_OUT(504, "执行超时", "time out"),
     UPSTREAM_ERROR(600, "上游错误", "upstream error"),
     TODO(666, "未实现", "todo"),
-
     ;
 
     private Integer code;

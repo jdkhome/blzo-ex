@@ -7,25 +7,13 @@ dependencies {
 
     // web 起步依赖
     compile('org.springframework.boot:spring-boot-starter-web')
-    // validation
+    // 参数校验
     compile('org.springframework.boot:spring-boot-starter-validation')
-    // aop
+    // 切面
     compile('org.springframework.boot:spring-boot-starter-aop')
     // 解决springboot注入配置属性报错
     compile('org.springframework.boot:spring-boot-configuration-processor')
 
-    // =========== 数据服务 ===========
-    // redis
-    compile('org.springframework.boot:spring-boot-starter-data-redis')
-
-    // 德鲁伊连接池
-    compile group: 'com.alibaba', name: 'druid', version: '1.1.20'
-    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
-    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
-    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.1'
-    // 分页
-    compile group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.2.12'
 
     // =========== 工具 ==============
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'

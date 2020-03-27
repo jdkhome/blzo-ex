@@ -8,6 +8,9 @@ dependencies {
     compile project(":blzo-ex-utils")
     compile project(":blzo-ex-basic")
 
+    // redis
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
+
 }
 
 ////gradle publishMavenJavaPublicationToSonatypeRepository

@@ -1,9 +1,0 @@
-jar {
-    baseName = "blzo-ex-task"
-}
-
-dependencies {
-
-    compile project(":blzo-ex-basic")
-    compile project(":blzo-ex-redission")
-}

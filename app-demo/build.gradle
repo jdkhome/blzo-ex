@@ -1,0 +1,10 @@
+jar {
+    baseName = "app-demo"
+}
+dependencies {
+    compile project(":blzo-ex-basic")
+
+    compile project(":blzo-ex-version")
+
+    compile project(":blzo-ex-usignin")
+}
