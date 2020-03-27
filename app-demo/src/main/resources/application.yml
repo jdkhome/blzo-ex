@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: local # 默认使用本地配置
+  application:
+    name: app-demo
+
+
+

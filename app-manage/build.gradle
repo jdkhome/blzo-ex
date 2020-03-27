@@ -1,0 +1,16 @@
+jar {
+    baseName = "app-manage"
+}
+dependencies {
+    compile project(":blzo-ex-basic")
+    compile project(":blzo-ex-authj")
+    compile project(":blzo-ex-utils")
+
+    // thymeleaf
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+
+    // https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis
+    compile group: 'org.springframework.session', name: 'spring-session-data-redis', version: '2.1.6.RELEASE'
+
+}
