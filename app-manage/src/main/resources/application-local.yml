@@ -10,12 +10,12 @@ spring:
       password: 应用服务数据库密码
     # 管理后台数据源配置(仅供测试，定时重置，请勿搞事)
     manage:
-      url: jdbc:mysql://192.168.12.144:3306/blzo_manage?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://192.168.1.60:3306/blzo_manage?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       username: blzo_manage
       password: blzo_manage
 
   redis:
-    host: 192.168.12.144
+    host: 192.168.1.60
     port: 6379
     password: ikun520520520
     database: 0
