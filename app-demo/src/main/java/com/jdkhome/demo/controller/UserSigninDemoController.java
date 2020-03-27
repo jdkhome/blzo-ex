@@ -8,6 +8,7 @@ import com.jdkhome.blzo.ex.usignin.annotation.UserSignin;
 import com.jdkhome.blzo.ex.usignin.token.TokenManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserSigninDemoController {
 
     @Autowired
-    TokenManager tokenManager;
+    @Qualifier("redisTokenManager")
+    TokenManager redisTokenManager;
+
+    @Autowired
+    @Qualifier("jwtTokenManager")
+    TokenManager jwtTokenManager;
 
     /**
      * /api/user_signin/demo/signin
@@ -41,7 +47,7 @@ public class UserSigninDemoController {
         // ...
 
         // 使用用户id申请token
-        String token = tokenManager.createToken(userId);
+        String token = redisTokenManager.createToken(userId);
 
         return ApiResponse.success(token);
     }
