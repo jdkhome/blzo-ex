@@ -1,4 +1,4 @@
-package com.jdkhome.blzo.common.common.utils;
+package com.jdkhome.blzo.mybatisplus.common.utils;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;

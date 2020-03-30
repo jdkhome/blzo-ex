@@ -1,4 +1,4 @@
-package com.jdkhome.blzo.common.common.entity;
+package com.jdkhome.blzo.mybatisplus.common.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

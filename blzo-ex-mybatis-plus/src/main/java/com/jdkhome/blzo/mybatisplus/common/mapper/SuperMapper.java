@@ -1,4 +1,4 @@
-package com.jdkhome.blzo.common.common.mapper;
+package com.jdkhome.blzo.mybatisplus.common.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
