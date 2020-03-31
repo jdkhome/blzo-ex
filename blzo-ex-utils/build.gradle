@@ -11,7 +11,7 @@ dependencies {
 
     compile 'com.alibaba:fastjson:1.2.34'
 
-    compileOnly 'io.github.openfeign:feign-core:10.1.0'
+    compile 'io.github.openfeign:feign-core:10.1.0'
 
 }
 

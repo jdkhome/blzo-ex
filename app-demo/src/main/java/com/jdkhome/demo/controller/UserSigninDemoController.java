@@ -26,9 +26,9 @@ public class UserSigninDemoController {
     @Qualifier("redisTokenManager")
     TokenManager redisTokenManager;
 
-    @Autowired
-    @Qualifier("jwtTokenManager")
-    TokenManager jwtTokenManager;
+//    @Autowired
+//    @Qualifier("jwtTokenManager")
+//    TokenManager jwtTokenManager;
 
     /**
      * /api/user_signin/demo/signin
