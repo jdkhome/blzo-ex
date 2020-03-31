@@ -84,10 +84,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     ApiResponse handleException(MethodArgumentNotValidException e, HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         I18nEnums i18n = I18nEnums.getByCode(request.getHeader(BasicSystemConstants.i18n));
-        ApiResponse result = ApiResponse.error(BasicResponseError.PARAMETER_ERROR, e.getMessage(), i18n);
-
+        ApiResponse result = ApiResponse.error(BasicResponseError.PARAMETER_ERROR, e.getBindingResult().getAllErrors().get(0).getDefaultMessage(), i18n);
         this.errorPage(request, response, e);
         return result;
     }
