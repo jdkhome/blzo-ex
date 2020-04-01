@@ -38,11 +38,3 @@ gradle/
 gradlew
 gradlew.bat
 
-
-### 各个项目的生成文件
-blzo-common/out/
-blzo-common/build/
-blzo-core/out/
-blzo-core/build/
-app-manage/out/
-app-manage/build/

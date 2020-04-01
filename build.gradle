@@ -129,17 +129,33 @@ allprojects {
                         }
                     }
                     scm {
-                        connection = "scm:git:https://git.code.tencent.com/saas-home/blzo-ex.git"
-                        developerConnection = "scm:git:https://git.code.tencent.com/saas-home/blzo-ex.git"
-                        url = "https://git.code.tencent.com/saas-home/blzo-ex"
+                        connection = "scm:git:https://github.com/jdkhome/blzo-ex.git"
+                        developerConnection = "scm:git:https://github.com/jdkhome/blzo-ex.git"
+                        url = "https://github.com/jdkhome/blzo-ex"
                     }
                 }
             }
         }
         repositories {
             maven {
-                name 'sonatypeRepository'
+                name 'matafyRepository'
                 url 'http://nexus.matafy.com/repository/maven-releases/'
+                credentials {
+                    username = "${MATAFY_USERNAME}"
+                    password = "${MATAFY_PASSWORD}"
+                }
+            }
+            maven {
+                name = 'matafySnapshotRepository'
+                url = 'http://nexus.matafy.com/repository/maven-snapshots/'
+                credentials {
+                    username = "${MATAFY_USERNAME}"
+                    password = "${MATAFY_PASSWORD}"
+                }
+            }
+            maven {
+                name 'sonatypeRepository'
+                url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
                 credentials {
                     username = "${NEXUS_USERNAME}"
                     password = "${NEXUS_PASSWORD}"
@@ -147,7 +163,7 @@ allprojects {
             }
             maven {
                 name = 'sonatypeSnapshotRepository'
-                url = 'http://nexus.matafy.com/repository/maven-snapshots/'
+                url = 'https://oss.sonatype.org/content/repositories/snapshots/'
                 credentials {
                     username = "${NEXUS_USERNAME}"
                     password = "${NEXUS_PASSWORD}"
