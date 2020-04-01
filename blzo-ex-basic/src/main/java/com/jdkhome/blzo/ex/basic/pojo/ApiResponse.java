@@ -160,4 +160,20 @@ public class ApiResponse<T> {
         result.setDebug(e.getMessage());
         return result;
     }
+
+    public void check() {
+        if (!BasicResponseError.SUCCESS.getCode().equals(this.getCode())) {
+            throw new ServiceException(this.getCode(), this.getMsg(), "[上游错误]" + this.getDebug(),
+                    BasicResponseError.UPSTREAM_ERROR);
+        }
+    }
+
+    public T get() {
+        if (!BasicResponseError.SUCCESS.getCode().equals(this.getCode())) {
+            throw new ServiceException(this.getCode(), this.getMsg(), "[上游错误]" + this.getDebug(),
+                    BasicResponseError.UPSTREAM_ERROR);
+        }
+        return this.getData();
+    }
+
 }
