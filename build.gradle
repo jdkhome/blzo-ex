@@ -114,7 +114,7 @@ allprojects {
                 pom {
                     name = project.name
                     description = project.name
-                    url = "https://git.code.tencent.com/saas-home/blzo-ex/tree/master/" + project.name
+                    url = "https://github.com/jdkhome/blzo-ex/tree/master/" + project.name
                     licenses {
                         license {
                             name = "The Apache License, Version 2.0"
