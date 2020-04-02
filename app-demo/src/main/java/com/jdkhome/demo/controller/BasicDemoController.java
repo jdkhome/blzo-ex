@@ -5,6 +5,7 @@ import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
