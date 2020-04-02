@@ -29,7 +29,7 @@ allprojects {
     apply plugin: 'signing'  // 签名插件
 
 
-    version '0.4.0.1.RELEASE'
+    version '0.4.0.2.RELEASE'
     group 'com.jdkhome.blzo'
 
     sourceCompatibility = 1.8
@@ -172,7 +172,6 @@ allprojects {
         }
     }
 
-// 签名配置，注意这里的顺序，今天第一次知道 gradle 中的 task 等配置也是有顺序的
 // 必须在 publishing 配置之后
     signing {
         sign publishing.publications.mavenJava
