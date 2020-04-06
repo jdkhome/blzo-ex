@@ -56,6 +56,13 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
+    public ApiResponse(BaseError baseError, T data, Object debug, I18nEnums i18n) {
+        this.code = baseError.getCode();
+        this.msg = baseError.getMsg(i18n);
+        this.data = data;
+        this.debug = debug;
+    }
+
 
     /**
      * ServiceException 创建ApiResponse
@@ -136,11 +143,11 @@ public class ApiResponse<T> {
      * @return
      */
     static public ApiResponse error(BaseError baseError, Object debug) {
-        return new ApiResponse(baseError, debug);
+        return new ApiResponse(baseError, null,debug,null);
     }
 
     static public ApiResponse error(BaseError baseError, Object debug, I18nEnums i18n) {
-        return new ApiResponse(baseError, debug, i18n);
+        return new ApiResponse(baseError, null, debug, i18n);
     }
 
     /**
