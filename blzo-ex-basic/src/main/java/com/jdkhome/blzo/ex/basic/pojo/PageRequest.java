@@ -1,5 +1,6 @@
 package com.jdkhome.blzo.ex.basic.pojo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
  * Created by jdk on 2017/9/4.
  */
 @Data
+@Builder
 public class PageRequest {
 
     @Min(value = 1, message = "页码错误")
