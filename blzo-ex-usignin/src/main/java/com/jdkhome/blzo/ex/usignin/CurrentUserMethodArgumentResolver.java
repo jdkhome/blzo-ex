@@ -52,6 +52,9 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
         if (methodParameter.getParameterType().isAssignableFrom(Integer.class)) {
             return currentUserId == null ? null : Integer.parseInt(currentUserId);
         }
+        if (methodParameter.getParameterType().isAssignableFrom(Long.class)) {
+            return currentUserId == null ? null : Long.parseLong(currentUserId);
+        }
 
 
         return currentUserId;

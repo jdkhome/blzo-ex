@@ -9,7 +9,7 @@ import java.util.List;
  * Created by jdk on 2019/1/16.
  */
 @Data
-@Builder
+//@Builder
 public class PageDTO<T> {
 
     Long totalSize;
