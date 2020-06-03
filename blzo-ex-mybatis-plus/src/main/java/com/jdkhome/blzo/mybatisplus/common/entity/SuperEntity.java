@@ -14,7 +14,7 @@ public abstract class SuperEntity  implements Serializable {
     /**
      * 主键序号
      */
-    @TableId(value = "f_id", type = IdType.AUTO)
+    @TableId(value = "f_id", type = IdType.ID_WORKER)
     private Long id;
 
     /**
