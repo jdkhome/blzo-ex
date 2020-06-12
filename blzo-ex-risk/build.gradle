@@ -1,5 +1,5 @@
 jar {
-    baseName = "blzo-ex-risk"
+    archiveBaseName = "blzo-ex-risk"
 }
 
 dependencies {

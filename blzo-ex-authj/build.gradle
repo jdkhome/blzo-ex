@@ -1,5 +1,5 @@
 jar {
-    baseName = "blzo-ex-authj"
+    archiveBaseName = "blzo-ex-authj"
 }
 
 

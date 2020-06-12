@@ -1,5 +1,5 @@
 jar {
-    baseName = "blzo-ex-mqtt"
+    archiveBaseName = "blzo-ex-mqtt"
 }
 
 
@@ -9,7 +9,7 @@ dependencies {
     compile project(":blzo-ex-basic")
 
     // https://mvnrepository.com/artifact/org.eclipse.paho/org.eclipse.paho.client.mqttv3
-    compile group: 'org.eclipse.paho', name: 'org.eclipse.paho.client.mqttv3', version: '1.2.2'
+    compile group: 'org.eclipse.paho', name: 'org.eclipse.paho.client.mqttv3', version: '1.2.4'
 
     // https://mvnrepository.com/artifact/com.github.kevinsawicki/http-request
     compile group: 'com.github.kevinsawicki', name: 'http-request', version: '6.0'

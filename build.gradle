@@ -1,12 +1,11 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.6.RELEASE'
+        springBootVersion = '2.3.0.RELEASE'
     }
     repositories {
-        mavenLocal()
-        maven {
-            url "http://nexus.matafy.com/repository/maven-public/"
-        }
+        //https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:case-for-maven-local
+        // 官方建议不用mavenLocal
+        // mavenLocal()
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
         }
@@ -19,18 +18,20 @@ buildscript {
 
 
 allprojects {
+
+    // 版本号
+    version '0.5.0.1.RELEASE'
+    group 'com.jdkhome.blzo'
+
     apply plugin: "java"
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'application'
 
-
-    apply plugin: 'maven-publish'  // maven 发布插件
-    apply plugin: 'signing'  // 签名插件
-
-
-    version '0.4.0.12.RELEASE'
-    group 'com.jdkhome.blzo'
+    // maven 发布插件
+    apply plugin: 'maven-publish'
+    // 签名插件
+    apply plugin: 'signing'
 
     sourceCompatibility = 1.8
     compileJava {
@@ -46,20 +47,19 @@ allprojects {
 
 
     dependencies {
-        // =========== 公共库 =========== //
+
         // 自动get set
-        // https://mvnrepository.com/artifact/org.projectlombok/lombok
-        annotationProcessor("org.projectlombok:lombok:1.18.2")
-        compileOnly("org.projectlombok:lombok:1.18.2")
+        annotationProcessor("org.projectlombok:lombok:1.18.12")
+        compileOnly("org.projectlombok:lombok:1.18.12")
+
+        // 测试依赖
+        testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+        testCompile('org.springframework.boot:spring-boot-starter-test')
 
     }
 
     repositories {
         repositories {
-            mavenLocal()
-            maven {
-                url "http://nexus.matafy.com/repository/maven-public/"
-            }
             maven {
                 url "http://maven.aliyun.com/nexus/content/groups/public/"
             }
@@ -72,17 +72,19 @@ allprojects {
         enabled = true
     }
 
-// 后面的都是打包的配置
+    // === 打包配置 === //
+
     task sourcesJar(type: Jar) {
-        classifier = 'sources'
+        // classifier = 'sources' // TODO 去掉了待测试
         from sourceSets.main.allJava
     }
-// 生成 javadoc jar
+    // 生成 javadoc jar
     task javadocJar(type: Jar) {
-        classifier = 'javadoc'
+        // classifier = 'javadoc' // TODO 去掉了待测试
         from javadoc.destinationDir
     }
-// javadoc 配置，这里是自定义了 java doc 的一些配置
+
+    // javadoc 配置，这里是自定义了 java doc 的一些配置
     javadoc {
         description = project.name
 

@@ -1,5 +1,5 @@
 jar {
-    baseName = "blzo-ex-basic"
+    archiveBaseName = "blzo-ex-basic"
 }
 
 
@@ -7,31 +7,20 @@ dependencies {
 
     // web 起步依赖
     compile('org.springframework.boot:spring-boot-starter-web')
-    // 参数校验
     compile('org.springframework.boot:spring-boot-starter-validation')
-    // 切面
     compile('org.springframework.boot:spring-boot-starter-aop')
-    // 解决springboot注入配置属性报错
     compile('org.springframework.boot:spring-boot-configuration-processor')
 
 
     // =========== 工具 ==============
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
 
-    compile 'commons-codec:commons-codec:1.13'
-
-    // 自动get set
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    annotationProcessor("org.projectlombok:lombok:1.18.2")
-    compileOnly("org.projectlombok:lombok:1.18.2")
+    compile 'commons-codec:commons-codec:1.14'
 
     // =========== 测试 ============== //
-    // 测试依赖
-    // https://mvnrepository.com/artifact/org.mockito/mockito-all
-    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+
 
 }
 
