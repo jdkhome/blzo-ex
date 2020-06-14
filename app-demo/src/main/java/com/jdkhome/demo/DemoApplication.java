@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
  * create by linkji on 11:06 上午 2020/3/27
  */
 @Slf4j
-@ComponentScan(basePackages = {"com.jdkhome.blzo.ex", "com.jdkhome.demo"})
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 

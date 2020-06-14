@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.3.0.RELEASE'
+//        blzeExVersion = '0.0.5.1.RELEASE'
     }
     repositories {
         //https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:case-for-maven-local

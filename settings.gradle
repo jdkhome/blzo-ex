@@ -43,5 +43,5 @@ include 'blzo-ex-mqtt'
 include 'blzo-ex-google-auth'
 include 'blzo-ex-mybatis-plus'
 include 'blzo-ex-mybatis'
-
+include 'blzo-ex-starter'
 
