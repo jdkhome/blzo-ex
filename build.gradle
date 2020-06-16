@@ -76,12 +76,12 @@ allprojects {
     // === 打包配置 === //
 
     task sourcesJar(type: Jar) {
-        // classifier = 'sources' // TODO 去掉了待测试
+        classifier = 'sources' // TODO 去掉了待测试
         from sourceSets.main.allJava
     }
     // 生成 javadoc jar
     task javadocJar(type: Jar) {
-        // classifier = 'javadoc' // TODO 去掉了待测试
+        classifier = 'javadoc' // TODO 去掉了待测试
         from javadoc.destinationDir
     }
 

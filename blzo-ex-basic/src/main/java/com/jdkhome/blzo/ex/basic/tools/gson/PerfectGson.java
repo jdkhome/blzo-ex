@@ -9,14 +9,12 @@ import java.math.BigDecimal;
 
 /**
  * @author YC 获取一个完美gson：
- * 
  */
 public class PerfectGson {
     private PerfectGson() {
     }
 
     /**
-     * 
      * YC 2017年8月1日 下午5:09:34
      * <p>
      * Title: getGson
@@ -34,7 +32,7 @@ public class PerfectGson {
      * <p>
      * 3、.setExclusionStrategies(new TargetStrategy())（排除策略 ）
      * </p>
-     * 
+     *
      * @return
      */
     public static Gson getGson() {
@@ -52,7 +50,6 @@ public class PerfectGson {
     }
 
     /**
-     * 
      * YC 2017年8月11日 下午2:39:33
      * <p>
      * Title: getGson
@@ -60,7 +57,7 @@ public class PerfectGson {
      * <p>
      * Description: 带参
      * </p>
-     * 
+     *
      * @param strs
      * @return
      */
