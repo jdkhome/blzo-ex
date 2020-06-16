@@ -1,7 +1,6 @@
 buildscript {
     ext {
         springBootVersion = '2.3.0.RELEASE'
-//        blzeExVersion = '0.0.5.1.RELEASE'
     }
     repositories {
         //https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:case-for-maven-local
@@ -21,7 +20,7 @@ buildscript {
 allprojects {
 
     // 版本号
-    version '0.5.0.1.RELEASE'
+    version '0.5.0.2.RELEASE'
     group 'com.jdkhome.blzo'
 
     apply plugin: "java"
