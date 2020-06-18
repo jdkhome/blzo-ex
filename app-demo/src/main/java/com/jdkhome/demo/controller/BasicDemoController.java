@@ -4,7 +4,7 @@ import com.jdkhome.blzo.ex.basic.aop.api.Api;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +35,7 @@ public class BasicDemoController {
 
     @Api("基础测试接口")
     @RequestMapping("/api1")
-    public ApiResponse apiBasicDemoApi1(@Valid BasicDemoApi1Params params, BindingResult validResult) {
+    public ApiResponse apiBasicDemoApi1(@Valid @RequestBody BasicDemoApi1Params params) {
         return ApiResponse.success();
     }
 }

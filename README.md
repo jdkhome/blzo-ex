@@ -1,15 +1,16 @@
-<p align="center">
-    <img src="https://www.jdkhome.com/file/FSEz" width="150">
-    <h3 align="center">BLZO！超级脚手架！扩展功能包</h3>
-    <p align="center">
-        基于springboot的企业级快速开发脚手架.<br><br>
-        <a href="https://github.com/jdkhome/blzo">
-            <img src="https://img.shields.io/badge/github-star-green.svg">
-        </a>
-        <a href="https://gitee.com/jdkhome/blzo">
-            <img src="https://img.shields.io/badge/gitee-star-green.svg">
-        </a>
-    </p>
-</p>
+# Blzo-ex v0.5.0.1.RELEASE, feature at 06/12 2020.
 
-# todo....
+run with:
+
+- jdk 1.11 (向下兼容1.8) 
+- spring-boot v2.3.x.RELEASE
+- gradle v6.x
+
+---
+
+## 0.5.x 计划
+
+- 细化和精简依赖
+- 集群服务增强(各种中间件集群模式)
+
+

@@ -1,5 +1,5 @@
 jar {
-    baseName = "blzo-ex-ip2region"
+    archiveBaseName = "blzo-ex-ip2region"
 }
 
 

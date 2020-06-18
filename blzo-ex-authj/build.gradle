@@ -1,5 +1,5 @@
 jar {
-    baseName = "blzo-ex-authj"
+    archiveBaseName = "blzo-ex-authj"
 }
 
 
@@ -14,6 +14,9 @@ dependencies {
     compile project(":blzo-ex-utils")
     compile project(":blzo-ex-google-auth")
     compile project(":blzo-ex-mybatis")
+    // https://mvnrepository.com/artifact/com.alibaba/druid
+    compile group: 'com.alibaba', name: 'druid', version: '1.1.22'
+
 }
 
 

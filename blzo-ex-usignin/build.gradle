@@ -1,5 +1,5 @@
 jar {
-    baseName = "blzo-ex-usignin"
+    archiveBaseName = "blzo-ex-usignin"
 }
 
 
@@ -10,7 +10,7 @@ dependencies {
 
     // redis
     compile('org.springframework.boot:spring-boot-starter-data-redis')
-    compile 'io.jsonwebtoken:jjwt:0.7.0'
+    compile 'io.jsonwebtoken:jjwt:0.9.1'
 
 }
 

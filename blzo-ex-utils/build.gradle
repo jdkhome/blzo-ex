@@ -1,5 +1,5 @@
 jar {
-    baseName = "blzo-ex-utils"
+    archiveBaseName = "blzo-ex-utils"
 }
 
 dependencies {
@@ -7,11 +7,9 @@ dependencies {
     compile project(":blzo-ex-basic")
     // 二维码
     compile 'com.google.zxing:core:3.4.0'
-    compile 'org.modelmapper:modelmapper:2.3.0'
+    compile 'org.modelmapper:modelmapper:2.3.8'
 
-    compile 'com.alibaba:fastjson:1.2.34'
-
-    compile 'io.github.openfeign:feign-core:10.1.0'
+    compile 'io.github.openfeign:feign-core:11.0'
 
 }
 

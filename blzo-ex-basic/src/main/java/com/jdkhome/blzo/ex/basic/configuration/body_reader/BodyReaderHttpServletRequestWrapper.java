@@ -14,13 +14,17 @@ import java.io.InputStreamReader;
 /**
  * 从请求体中获取参数请求包装类
  */
-public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper{
+public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     private byte[] requestBody = null;//用于将流保存下来
 
     public BodyReaderHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
         requestBody = StreamUtils.copyToByteArray(request.getInputStream());
+        if (requestBody.length == 0) {
+
+            requestBody = "{}".getBytes();
+        }
     }
 
     @Override
@@ -53,7 +57,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
     }
 
     @Override
-    public BufferedReader getReader() throws IOException{
+    public BufferedReader getReader() throws IOException {
         return new BufferedReader(new InputStreamReader(getInputStream()));
     }
 }

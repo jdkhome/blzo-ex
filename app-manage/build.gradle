@@ -1,5 +1,5 @@
 jar {
-    baseName = "app-manage"
+    archiveBaseName = "app-manage"
 }
 dependencies {
     compile project(":blzo-ex-basic")
@@ -14,6 +14,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-redis')
 
     // https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis
-    compile group: 'org.springframework.session', name: 'spring-session-data-redis', version: '2.1.6.RELEASE'
+    compile group: 'org.springframework.session', name: 'spring-session-data-redis', version: '2.3.0.RELEASE'
 
 }

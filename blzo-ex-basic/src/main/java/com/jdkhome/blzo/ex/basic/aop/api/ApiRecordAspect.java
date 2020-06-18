@@ -117,7 +117,6 @@ public class ApiRecordAspect {
         String ip = IpTools.getIp(request);
 
         if (api.log()) {
-
             StringBuilder headerSb = new StringBuilder();
             Enumeration<String> headerNames = request.getHeaderNames();
             if (headerNames.hasMoreElements()) {
@@ -136,22 +135,6 @@ public class ApiRecordAspect {
                     ((MethodSignature) joinPoint.getSignature()).getMethod().getName()
             );
         }
-
-        // 检查入参错误 抛参数不正确的异常
-        for (Object obj : joinPoint.getArgs()) {
-            if (obj instanceof BindingResult) {
-                if (((BindingResult) obj).hasErrors()) {
-                    throw new ServiceException(BasicResponseError.PARAMETER_ERROR, ((BindingResult) obj).getAllErrors().get(0).getDefaultMessage());
-                }
-            }
-
-            if (obj instanceof Errors) {
-                if (((Errors) obj).hasErrors()) {
-                    throw new ServiceException(BasicResponseError.PARAMETER_ERROR, ((Errors) obj).getAllErrors().get(0).getDefaultMessage());
-                }
-            }
-        }
-
     }
 
     //在方法执行完结后打印返回内容

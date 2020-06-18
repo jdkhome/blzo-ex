@@ -7,6 +7,8 @@ import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import com.jdkhome.blzo.ex.basic.tools.gson.PerfectGson;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -86,6 +88,25 @@ public class GlobalExceptionHandler {
     ApiResponse handleException(MethodArgumentNotValidException e, HttpServletRequest request, HttpServletResponse response) throws Exception {
         I18nEnums i18n = I18nEnums.getByCode(request.getHeader(BasicSystemConstants.i18n));
         ApiResponse result = ApiResponse.error(BasicResponseError.PARAMETER_ERROR, e.getBindingResult().getAllErrors().get(0).getDefaultMessage(), i18n);
+        this.errorPage(request, response, e);
+        return result;
+    }
+
+    /**
+     * 处理参数错误 转换成自定义结构体
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(BindException.class)
+    @ResponseBody
+    ApiResponse handleException(BindException e, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        I18nEnums i18n = I18nEnums.getByCode(request.getHeader(BasicSystemConstants.i18n));
+        String msg = (e.getBindingResult()).getAllErrors().get(0).getDefaultMessage();
+        ApiResponse result = ApiResponse.error(BasicResponseError.PARAMETER_ERROR,msg , i18n);
+        log.error("Controller(Err) => {} 参数校验不通过 msg:{}", request.getAttribute(BasicSystemConstants.controllerName),msg);
+        log.info("Controller(Out) => {}", PerfectGson.getGson().toJson(result));
+
         this.errorPage(request, response, e);
         return result;
     }

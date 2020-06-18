@@ -1,11 +1,13 @@
 jar {
-    baseName = "blzo-ex-mybatis-plus"
+    archiveBaseName = "blzo-ex-mybatis-plus"
 }
 
 
 
 dependencies {
     compile project(":blzo-ex-utils")
-    compile 'com.baomidou:mybatis-plus-boot-starter:3.0.5'
+    compile 'com.baomidou:mybatis-plus-boot-starter:3.3.2'
 
+    // 分页
+    compile group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.2.13'
 }

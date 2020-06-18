@@ -1,7 +1,9 @@
 package com.jdkhome.blzo.ex.basic.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -11,24 +13,18 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PageRequest {
 
     @Min(value = 1, message = "页码错误")
     @NotNull
-    public Integer page;
+    @Builder.Default
+    public Integer page = 1;
 
     @Min(value = 1, message = "页大小错误")
     @NotNull
-    public Integer size;
+    @Builder.Default
+    public Integer size = 20;
 
-    public PageRequest() {
-        // 默认获取第一页的20个数据
-        this.page = 1;
-        this.size = 20;
-    }
-
-    public PageRequest(Integer page, Integer size) {
-        this.page = page;
-        this.size = size;
-    }
 }

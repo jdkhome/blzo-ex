@@ -10,6 +10,7 @@ blzo-ex-mybatis
 blzo-ex-mybatis-plus
 blzo-ex-redission
 blzo-ex-risk
+blzo-ex-starter
 blzo-ex-usignin
 blzo-ex-utils
 blzo-ex-version

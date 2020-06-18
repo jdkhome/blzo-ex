@@ -1,8 +1,11 @@
 jar {
-    baseName = "app-demo"
+    archiveBaseName = "app-demo"
 }
 dependencies {
-    compile project(":blzo-ex-basic")
+
+    compile project(":blzo-ex-starter")
+
+//    compile project(":blzo-ex-basic")
 
     compile project(":blzo-ex-version")
 
