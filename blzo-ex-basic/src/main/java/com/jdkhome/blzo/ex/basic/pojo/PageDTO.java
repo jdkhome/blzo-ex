@@ -16,10 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 public class PageDTO<T> {
 
+    // list
+    List<T> list;
+
     // 总大小
     Long totalSize;
 
-    // list
-    List<T> list;
 
 }

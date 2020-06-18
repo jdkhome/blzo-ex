@@ -20,7 +20,7 @@ buildscript {
 allprojects {
 
     // 版本号
-    version '0.5.0.2.RELEASE'
+    version '0.5.0.3.RELEASE'
     group 'com.jdkhome.blzo'
 
     apply plugin: "java"
